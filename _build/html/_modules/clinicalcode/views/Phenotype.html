@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>clinicalcode.views.Phenotype &mdash; Concept Library 1.0 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> Concept Library
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">CodeListLibrary_project</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Concept Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      <li>clinicalcode.views.Phenotype</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for clinicalcode.views.Phenotype</h1><div class="highlight"><pre>
+<span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    ---------------------------------------------------------------------------</span>
+<span class="sd">    PHENOTYPE VIEW</span>
+<span class="sd">    ---------------------------------------------------------------------------</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="kn">from</span> <span class="nn">django</span> <span class="kn">import</span> <span class="n">forms</span>
+<span class="kn">from</span> <span class="nn">django.contrib.auth.decorators</span> <span class="kn">import</span> <span class="n">login_required</span>
+<span class="kn">from</span> <span class="nn">django.contrib.auth.mixins</span> <span class="kn">import</span> <span class="n">LoginRequiredMixin</span> <span class="c1">#, UserPassesTestMixin</span>
+<span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">messages</span>
+<span class="c1"># from django.contrib.messages import constants</span>
+<span class="kn">from</span> <span class="nn">django.core</span> <span class="kn">import</span> <span class="n">serializers</span>
+<span class="kn">from</span> <span class="nn">django.core.exceptions</span> <span class="kn">import</span> <span class="n">ObjectDoesNotExist</span><span class="p">,</span> <span class="n">PermissionDenied</span>
+<span class="kn">from</span> <span class="nn">django.core.paginator</span> <span class="kn">import</span> <span class="n">Paginator</span><span class="p">,</span> <span class="n">EmptyPage</span>
+<span class="c1">#from django.core.urlresolvers import reverse_lazy, reverse</span>
+<span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">reverse_lazy</span><span class="p">,</span> <span class="n">reverse</span>
+<span class="c1">#from django.db.models import Q</span>
+<span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">transaction</span> <span class="c1">#, models, IntegrityError</span>
+<span class="c1"># from django.forms.models import model_to_dict</span>
+<span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span> <span class="n">HttpResponseRedirect</span> <span class="c1">#, StreamingHttpResponse, HttpResponseForbidden</span>
+<span class="kn">from</span> <span class="nn">django.http.response</span> <span class="kn">import</span> <span class="n">JsonResponse</span><span class="p">,</span> <span class="n">HttpResponse</span>
+<span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">render</span><span class="p">,</span> <span class="n">redirect</span><span class="p">,</span> <span class="n">get_object_or_404</span> 
+<span class="kn">from</span> <span class="nn">django.template</span> <span class="kn">import</span> <span class="n">RequestContext</span>
+<span class="kn">from</span> <span class="nn">django.template.loader</span> <span class="kn">import</span> <span class="n">render_to_string</span>
+<span class="kn">from</span> <span class="nn">django.views.generic</span> <span class="kn">import</span> <span class="n">DetailView</span>
+<span class="kn">from</span> <span class="nn">django.views.generic.base</span> <span class="kn">import</span> <span class="n">TemplateResponseMixin</span><span class="p">,</span> <span class="n">View</span>
+<span class="kn">from</span> <span class="nn">django.views.generic.edit</span> <span class="kn">import</span> <span class="n">CreateView</span><span class="p">,</span> <span class="n">UpdateView</span><span class="p">,</span> <span class="n">DeleteView</span>
+<span class="kn">from</span> <span class="nn">django.conf</span> <span class="kn">import</span> <span class="n">settings</span>
+<span class="c1"># from rest_framework.permissions import BasePermission</span>
+
+<span class="kn">from</span> <span class="nn">..models.Tag</span> <span class="kn">import</span> <span class="n">Tag</span>
+<span class="kn">from</span> <span class="nn">..models.Phenotype</span> <span class="kn">import</span> <span class="n">Phenotype</span>
+<span class="kn">from</span> <span class="nn">..models.Brand</span> <span class="kn">import</span> <span class="n">Brand</span>
+<span class="kn">from</span> <span class="nn">..models.PublishedPhenotype</span> <span class="kn">import</span> <span class="n">PublishedPhenotype</span>
+<span class="kn">from</span> <span class="nn">..models.DataSource</span> <span class="kn">import</span> <span class="n">DataSource</span>
+<span class="kn">from</span> <span class="nn">..models.CodingSystem</span> <span class="kn">import</span> <span class="n">CodingSystem</span>
+<span class="kn">from</span> <span class="nn">django.contrib.auth.models</span> <span class="kn">import</span> <span class="n">User</span><span class="p">,</span> <span class="n">Group</span>
+
+<span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span> <span class="n">HttpResponseNotFound</span>
+<span class="kn">from</span> <span class="nn">django.templatetags.static</span> <span class="kn">import</span> <span class="n">static</span>
+
+<span class="kn">from</span> <span class="nn">.View</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">db_utils</span><span class="p">,</span> <span class="n">utils</span>
+<span class="kn">from</span> <span class="nn">..permissions</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span> <span class="k">as</span> <span class="n">ordr</span> 
+<span class="kn">import</span> <span class="nn">csv</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">clinicalcode.models.Phenotype</span> <span class="kn">import</span> <span class="n">Phenotype</span>
+
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<div class="viewcode-block" id="phenotype_list"><a class="viewcode-back" href="../../../clinicalcode.views.html#clinicalcode.views.Phenotype.phenotype_list">[docs]</a><span class="k">def</span> <span class="nf">phenotype_list</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Display the list of phenotypes. This view can be searched and contains paging.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+        
+    <span class="n">search_tag_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">tags</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="c1"># get page index variables from query or from session</span>
+    <span class="n">page_size</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">get_int_value</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">GET</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;page_size&#39;</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;phenotype_page_size&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">)),</span> <span class="mi">20</span><span class="p">)</span>
+    <span class="n">page</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">get_int_value</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">GET</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;page&#39;</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;phenotype_page&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">search</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">GET</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;search&#39;</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;phenotype_search&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">))</span>
+    <span class="n">show_my_phenotypes</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">GET</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;show_my_phenotypes&#39;</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;phenotype_show_my_phenotype&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+    <span class="n">show_deleted_phenotypes</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">GET</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;show_deleted_phenotypes&#39;</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;phenotype_show_deleted_phenotypes&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+    <span class="n">tag_ids</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">GET</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;tagids&#39;</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;phenotype_tagids&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">))</span>
+    <span class="n">owner</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">GET</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;owner&#39;</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;phenotype_owner&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">))</span>
+    <span class="n">author</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">GET</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;author&#39;</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;phenotype_author&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">))</span>
+    <span class="n">show_only_validated_phenotypes</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">GET</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;show_only_validated_phenotypes&#39;</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;show_only_validated_phenotypes&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+    <span class="n">phenotype_brand</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">GET</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;phenotype_brand&#39;</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;phenotype_brand&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">))</span> <span class="c1"># request.CURRENT_BRAND</span>
+    <span class="n">expand_published_versions</span> <span class="o">=</span> <span class="mi">0</span>   <span class="c1"># disable this option</span>
+    <span class="c1">#expand_published_versions = request.GET.get(&#39;expand_published_versions&#39;, request.session.get(&#39;expand_published_versions&#39;, 0))</span>
+    <span class="n">phenotype_must_have_published_versions</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">GET</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;phenotype_must_have_published_versions&#39;</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;phenotype_must_have_published_versions&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+    <span class="n">search_form</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">GET</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;search_form&#39;</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;phenotype_search_form&#39;</span><span class="p">,</span> <span class="s1">&#39;basic-form&#39;</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span><span class="p">:</span>
+        <span class="c1"># get posted parameters</span>
+        <span class="n">search</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;search&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="n">page_size</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;page_size&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+        <span class="n">page</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;page&#39;</span><span class="p">,</span> <span class="n">page</span><span class="p">)</span>
+        <span class="n">show_my_phenotypes</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;show_my_phenotypes&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">show_deleted_phenotypes</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;show_deleted_phenotypes&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">author</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;author&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="n">tag_ids</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;tagids&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="n">owner</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;owner&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="n">show_only_validated_phenotypes</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;show_only_validated_phenotypes&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">phenotype_brand</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;phenotype_brand&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>    <span class="c1">#    request.CURRENT_BRAND</span>
+        <span class="c1">#expand_published_versions = request.POST.get(&#39;expand_published_versions&#39;, 0)</span>
+        <span class="n">phenotype_must_have_published_versions</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;phenotype_must_have_published_versions&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">search_form</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;search_form&#39;</span><span class="p">,</span> <span class="s1">&#39;basic-form&#39;</span><span class="p">)</span>
+
+
+    <span class="c1"># store page index variables to session</span>
+    <span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="p">[</span><span class="s1">&#39;phenotype_page_size&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">page_size</span>
+    <span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="p">[</span><span class="s1">&#39;phenotype_page&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">page</span>
+    <span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="p">[</span><span class="s1">&#39;phenotype_search&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">search</span>
+    <span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="p">[</span><span class="s1">&#39;phenotype_show_my_phenotype&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">show_my_phenotypes</span>
+    <span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="p">[</span><span class="s1">&#39;phenotype_show_deleted_phenotypes&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">show_deleted_phenotypes</span>
+    <span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="p">[</span><span class="s1">&#39;phenotype_author&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">author</span>
+    <span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="p">[</span><span class="s1">&#39;phenotype_tagids&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tag_ids</span>
+    <span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="p">[</span><span class="s1">&#39;phenotype_owner&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">owner</span>
+    <span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="p">[</span><span class="s1">&#39;show_only_validated_phenotypes&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">show_only_validated_phenotypes</span>
+    <span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="p">[</span><span class="s1">&#39;phenotype_brand&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">phenotype_brand</span>
+    <span class="c1">#request.session[&#39;expand_published_versions&#39;] = expand_published_versions</span>
+    <span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="p">[</span><span class="s1">&#39;phenotype_must_have_published_versions&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">phenotype_must_have_published_versions</span>
+    <span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="p">[</span><span class="s1">&#39;phenotype_search_form&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">search_form</span>
+
+    <span class="n">filter_cond</span> <span class="o">=</span> <span class="s2">&quot; 1=1 &quot;</span>
+    <span class="n">exclude_deleted</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">get_live_and_or_published_ver</span> <span class="o">=</span> <span class="mi">3</span>   <span class="c1"># 1= live only, 2= published only, 3= live+published</span>
+    
+    <span class="k">if</span> <span class="n">tag_ids</span><span class="p">:</span>
+        <span class="c1"># split tag ids into list</span>
+        <span class="n">search_tag_list</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">tag_ids</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)]</span>
+        <span class="n">tags</span> <span class="o">=</span> <span class="n">Tag</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">id__in</span><span class="o">=</span><span class="n">search_tag_list</span><span class="p">)</span>
+        <span class="n">filter_cond</span> <span class="o">+=</span> <span class="s2">&quot; AND tags &amp;&amp; &#39;{&quot;</span> <span class="o">+</span> <span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">search_tag_list</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;}&#39; &quot;</span>
+        
+    <span class="c1"># check if it is the public site or not</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">is_authenticated</span><span class="p">:</span>
+        <span class="c1"># ensure that user is only allowed to view/edit the relevant phenotype</span>
+           
+        <span class="n">get_live_and_or_published_ver</span> <span class="o">=</span> <span class="mi">3</span>
+        <span class="k">if</span> <span class="n">phenotype_must_have_published_versions</span> <span class="o">==</span> <span class="s2">&quot;1&quot;</span><span class="p">:</span>
+            <span class="n">get_live_and_or_published_ver</span> <span class="o">=</span> <span class="mi">2</span>
+            
+        <span class="c1"># show only phenotype created by the current user</span>
+        <span class="k">if</span> <span class="n">show_my_phenotypes</span> <span class="o">==</span> <span class="s2">&quot;1&quot;</span><span class="p">:</span>
+            <span class="n">filter_cond</span> <span class="o">+=</span> <span class="s2">&quot; AND owner_id=&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+    
+        <span class="c1"># if show deleted phenotype is 1 then show deleted phenotype</span>
+        <span class="k">if</span> <span class="n">show_deleted_phenotypes</span> <span class="o">!=</span> <span class="s2">&quot;1&quot;</span><span class="p">:</span>
+            <span class="n">exclude_deleted</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">exclude_deleted</span> <span class="o">=</span> <span class="kc">False</span>    
+        
+      
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># show published phenotype</span>
+        <span class="n">get_live_and_or_published_ver</span> <span class="o">=</span> <span class="mi">2</span>
+
+
+    <span class="n">show_top_version_only</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">if</span> <span class="n">expand_published_versions</span> <span class="o">==</span> <span class="s2">&quot;1&quot;</span><span class="p">:</span>
+        <span class="n">show_top_version_only</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">if</span> <span class="n">owner</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">owner</span> <span class="o">!=</span><span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">username__iexact</span> <span class="o">=</span> <span class="n">owner</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+                <span class="n">owner_id</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">username__iexact</span> <span class="o">=</span> <span class="n">owner</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span><span class="o">.</span><span class="n">id</span>
+                <span class="n">filter_cond</span> <span class="o">+=</span> <span class="s2">&quot; AND owner_id=&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">owner_id</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># username not found</span>
+                <span class="n">filter_cond</span> <span class="o">+=</span> <span class="s2">&quot; AND owner_id= -1 &quot;</span>
+
+
+    <span class="c1"># if show_only_validated_phenotypes is 1 then show only phenotype with validation_performed=True</span>
+    <span class="k">if</span> <span class="n">show_only_validated_phenotypes</span> <span class="o">==</span> <span class="s2">&quot;1&quot;</span><span class="p">:</span>
+        <span class="n">filter_cond</span> <span class="o">+=</span> <span class="s2">&quot; AND COALESCE(validation_performed, FALSE) IS TRUE &quot;</span>
+
+    <span class="c1"># show phenotype for a specific brand</span>
+    <span class="k">if</span> <span class="n">phenotype_brand</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+        <span class="n">current_brand</span> <span class="o">=</span> <span class="n">Brand</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="n">phenotype_brand</span><span class="p">)</span>
+        <span class="n">group_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">current_brand</span><span class="o">.</span><span class="n">values_list</span><span class="p">(</span><span class="s1">&#39;groups&#39;</span><span class="p">,</span> <span class="n">flat</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+        <span class="n">filter_cond</span> <span class="o">+=</span> <span class="s2">&quot; AND group_id IN(&quot;</span><span class="o">+</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">group_list</span><span class="p">))</span> <span class="o">+</span><span class="s2">&quot;) &quot;</span>
+
+       
+    <span class="n">phenotype_srch</span> <span class="o">=</span> <span class="n">db_utils</span><span class="o">.</span><span class="n">get_visible_live_or_published_phenotype_versions</span><span class="p">(</span><span class="n">request</span>
+                                                <span class="p">,</span> <span class="n">get_live_and_or_published_ver</span> <span class="o">=</span> <span class="n">get_live_and_or_published_ver</span> 
+                                                <span class="p">,</span> <span class="n">searchByName</span> <span class="o">=</span> <span class="n">search</span>
+                                                <span class="p">,</span> <span class="n">author</span> <span class="o">=</span> <span class="n">author</span>
+                                                <span class="p">,</span> <span class="n">exclude_deleted</span> <span class="o">=</span> <span class="n">exclude_deleted</span>
+                                                <span class="p">,</span> <span class="n">filter_cond</span> <span class="o">=</span> <span class="n">filter_cond</span>
+                                                <span class="p">,</span> <span class="n">show_top_version_only</span> <span class="o">=</span> <span class="n">show_top_version_only</span>
+                                                <span class="p">)</span>
+    <span class="c1"># create pagination</span>
+    <span class="n">paginator</span> <span class="o">=</span> <span class="n">Paginator</span><span class="p">(</span><span class="n">phenotype_srch</span><span class="p">,</span> <span class="n">page_size</span><span class="p">,</span> <span class="n">allow_empty_first_page</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">paginator</span><span class="o">.</span><span class="n">page</span><span class="p">(</span><span class="n">page</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">EmptyPage</span><span class="p">:</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">paginator</span><span class="o">.</span><span class="n">page</span><span class="p">(</span><span class="n">paginator</span><span class="o">.</span><span class="n">num_pages</span><span class="p">)</span>
+
+    <span class="n">p_btns</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">get_paginator_pages</span><span class="p">(</span><span class="n">paginator</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+    
+    <span class="n">tag_ids2</span> <span class="o">=</span> <span class="n">tag_ids</span>
+    <span class="n">tag_ids_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="n">tag_ids</span><span class="p">:</span>
+        <span class="n">tag_ids_list</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tag_ids</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)]</span>
+        
+    <span class="n">brand_associated_collections</span> <span class="o">=</span> <span class="n">db_utils</span><span class="o">.</span><span class="n">get_brand_associated_collections</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">concept_or_phenotype</span> <span class="o">=</span> <span class="s1">&#39;phenotype&#39;</span><span class="p">)</span>
+    <span class="n">brand_associated_collections_ids</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">brand_associated_collections</span><span class="o">.</span><span class="n">values_list</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="n">flat</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+        
+        
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;clinicalcode/phenotype/index.html&#39;</span><span class="p">,</span> <span class="p">{</span>
+        <span class="s1">&#39;page&#39;</span><span class="p">:</span> <span class="n">page</span><span class="p">,</span>
+        <span class="s1">&#39;page_size&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">page_size</span><span class="p">),</span>
+        <span class="s1">&#39;page_obj&#39;</span><span class="p">:</span> <span class="n">p</span><span class="p">,</span>
+        <span class="s1">&#39;search&#39;</span><span class="p">:</span> <span class="n">search</span><span class="p">,</span>
+        <span class="s1">&#39;author&#39;</span><span class="p">:</span> <span class="n">author</span><span class="p">,</span>
+        <span class="s1">&#39;show_my_phenotypes&#39;</span><span class="p">:</span> <span class="n">show_my_phenotypes</span><span class="p">,</span>
+        <span class="s1">&#39;show_deleted_phenotypes&#39;</span><span class="p">:</span> <span class="n">show_deleted_phenotypes</span><span class="p">,</span>
+        <span class="s1">&#39;tags&#39;</span><span class="p">:</span> <span class="n">tags</span><span class="p">,</span>
+        <span class="s1">&#39;tag_ids&#39;</span><span class="p">:</span> <span class="n">tag_ids2</span><span class="p">,</span>
+        <span class="s1">&#39;tag_ids_list&#39;</span><span class="p">:</span> <span class="n">tag_ids_list</span><span class="p">,</span>        
+        <span class="s1">&#39;owner&#39;</span><span class="p">:</span> <span class="n">owner</span><span class="p">,</span>
+        <span class="s1">&#39;show_only_validated_phenotypes&#39;</span><span class="p">:</span> <span class="n">show_only_validated_phenotypes</span><span class="p">,</span>
+        <span class="s1">&#39;allowed_to_create&#39;</span><span class="p">:</span> <span class="ow">not</span> <span class="n">settings</span><span class="o">.</span><span class="n">CLL_READ_ONLY</span><span class="p">,</span>
+        <span class="s1">&#39;phenotype_brand&#39;</span><span class="p">:</span> <span class="n">phenotype_brand</span><span class="p">,</span>
+        <span class="s1">&#39;phenotype_must_have_published_versions&#39;</span><span class="p">:</span> <span class="n">phenotype_must_have_published_versions</span><span class="p">,</span>
+        <span class="s1">&#39;allTags&#39;</span><span class="p">:</span> <span class="n">Tag</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s1">&#39;description&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;all_CodingSystems&#39;</span><span class="p">:</span> <span class="n">CodingSystem</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;search_form&#39;</span><span class="p">:</span> <span class="n">search_form</span><span class="p">,</span>
+        <span class="s1">&#39;p_btns&#39;</span><span class="p">:</span> <span class="n">p_btns</span><span class="p">,</span>
+        <span class="s1">&#39;brand_associated_collections&#39;</span><span class="p">:</span> <span class="n">brand_associated_collections</span><span class="p">,</span>
+        <span class="s1">&#39;brand_associated_collections_ids&#39;</span><span class="p">:</span> <span class="n">brand_associated_collections_ids</span><span class="p">,</span>
+        <span class="s1">&#39;all_collections_selected&#39;</span><span class="p">:</span> <span class="nb">all</span><span class="p">(</span><span class="n">item</span> <span class="ow">in</span> <span class="n">tag_ids_list</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">brand_associated_collections_ids</span><span class="p">)</span>
+        <span class="c1">#&#39;expand_published_versions&#39;: expand_published_versions,</span>
+        <span class="c1">#&#39;published_count&#39;: PublishedPhenotype.objects.all().count()</span>
+    <span class="p">})</span></div>
+
+
+
+
+<div class="viewcode-block" id="PhenotypeDetail_combined"><a class="viewcode-back" href="../../../clinicalcode.views.html#clinicalcode.views.Phenotype.PhenotypeDetail_combined">[docs]</a><span class="k">def</span> <span class="nf">PhenotypeDetail_combined</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">pk</span><span class="p">,</span> <span class="n">phenotype_history_id</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">        Display the detail of a phenotype at a point in time.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="c1"># validate access for login and public site</span>
+    <span class="n">validate_access_to_view</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">Phenotype</span><span class="p">,</span> <span class="n">pk</span><span class="p">,</span> <span class="n">set_history_id</span><span class="o">=</span><span class="n">phenotype_history_id</span><span class="p">)</span>
+
+        
+    <span class="k">if</span> <span class="n">phenotype_history_id</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># get the latest version</span>
+        <span class="n">phenotype_history_id</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">Phenotype</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">pk</span><span class="p">)</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">latest</span><span class="p">()</span><span class="o">.</span><span class="n">history_id</span><span class="p">)</span> 
+        
+    <span class="n">is_published</span> <span class="o">=</span> <span class="n">checkIfPublished</span><span class="p">(</span><span class="n">Phenotype</span><span class="p">,</span> <span class="n">pk</span><span class="p">,</span> <span class="n">phenotype_history_id</span><span class="p">)</span>
+    
+    <span class="c1">#----------------------------------------------------------------------</span>
+  
+    <span class="n">phenotype</span> <span class="o">=</span> <span class="n">db_utils</span><span class="o">.</span><span class="n">getHistoryPhenotype</span><span class="p">(</span><span class="n">phenotype_history_id</span><span class="p">)</span>
+    <span class="c1"># The history phenotype contains the owner_id, to provide the owner name, we</span>
+    <span class="c1"># need to access the user object with that ID and add that to the phenotype.</span>
+    <span class="k">if</span> <span class="n">phenotype</span><span class="p">[</span><span class="s1">&#39;owner_id&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">phenotype</span><span class="p">[</span><span class="s1">&#39;owner&#39;</span><span class="p">]</span> <span class="o">=</span>  <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">phenotype</span><span class="p">[</span><span class="s1">&#39;owner_id&#39;</span><span class="p">]))</span>
+
+    <span class="k">if</span> <span class="n">phenotype</span><span class="p">[</span><span class="s1">&#39;group_id&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span> 
+        <span class="n">phenotype</span><span class="p">[</span><span class="s1">&#39;group&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Group</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">phenotype</span><span class="p">[</span><span class="s1">&#39;group_id&#39;</span><span class="p">]))</span>
+
+    <span class="n">phenotype_history_date</span> <span class="o">=</span> <span class="n">phenotype</span><span class="p">[</span><span class="s1">&#39;history_date&#39;</span><span class="p">]</span>
+        
+    <span class="n">tags</span> <span class="o">=</span>  <span class="n">Tag</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">pk</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">phenotype_tags</span> <span class="o">=</span> <span class="n">phenotype</span><span class="p">[</span><span class="s1">&#39;tags&#39;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">phenotype_tags</span><span class="p">:</span>
+        <span class="n">tags</span> <span class="o">=</span> <span class="n">Tag</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">pk__in</span><span class="o">=</span><span class="n">phenotype_tags</span><span class="p">)</span>
+
+
+        
+    <span class="n">data_sources</span> <span class="o">=</span> <span class="n">DataSource</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">pk</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">data_sources_comp</span> <span class="o">=</span> <span class="n">db_utils</span><span class="o">.</span><span class="n">getHistoryDataSource_Phenotype</span><span class="p">(</span><span class="n">pk</span><span class="p">,</span> <span class="n">phenotype_history_date</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">data_sources_comp</span><span class="p">:</span>
+        <span class="n">ds_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="s1">&#39;datasource_id&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">data_sources_comp</span> <span class="k">if</span> <span class="s1">&#39;datasource_id&#39;</span> <span class="ow">in</span> <span class="n">i</span><span class="p">]</span>
+        <span class="n">data_sources</span> <span class="o">=</span> <span class="n">DataSource</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">pk__in</span><span class="o">=</span><span class="n">ds_list</span><span class="p">)</span>
+        
+    <span class="c1">#----------------------------------------------------------------------</span>
+    <span class="n">concept_id_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">concept_hisoryid_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">concepts</span> <span class="o">=</span> <span class="n">Concept</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">pk</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;history_id&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;group&#39;</span><span class="p">)</span>
+                                                                                                                   
+    <span class="k">if</span> <span class="n">phenotype</span><span class="p">[</span><span class="s1">&#39;concept_informations&#39;</span><span class="p">]:</span>
+        <span class="n">concept_id_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;concept_id&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">phenotype</span><span class="p">[</span><span class="s1">&#39;concept_informations&#39;</span><span class="p">])]</span> 
+        <span class="n">concept_hisoryid_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;concept_version_id&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">phenotype</span><span class="p">[</span><span class="s1">&#39;concept_informations&#39;</span><span class="p">])]</span> 
+        <span class="n">concepts</span> <span class="o">=</span> <span class="n">Concept</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">id__in</span><span class="o">=</span><span class="n">concept_id_list</span><span class="p">,</span> <span class="n">history_id__in</span><span class="o">=</span><span class="n">concept_hisoryid_list</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;history_id&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;group&#39;</span><span class="p">)</span>
+        
+    <span class="n">concepts_id_name</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">concepts</span><span class="p">))</span>
+    
+    <span class="n">clinicalTerminologies</span> <span class="o">=</span> <span class="n">CodingSystem</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">pk</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">CodingSystem_ids</span> <span class="o">=</span> <span class="n">phenotype</span><span class="p">[</span><span class="s1">&#39;clinical_terminologies&#39;</span><span class="p">]</span> 
+    <span class="k">if</span> <span class="n">CodingSystem_ids</span><span class="p">:</span>
+        <span class="n">clinicalTerminologies</span> <span class="o">=</span> <span class="n">CodingSystem</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">pk__in</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">CodingSystem_ids</span><span class="p">))</span>
+
+    
+    <span class="n">is_latest_version</span> <span class="o">=</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">phenotype_history_id</span><span class="p">)</span> <span class="o">==</span> <span class="n">Phenotype</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">pk</span><span class="p">)</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">latest</span><span class="p">()</span><span class="o">.</span><span class="n">history_id</span><span class="p">)</span>
+          
+    <span class="n">children_permitted_and_not_deleted</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">error_dic</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">are_concepts_latest_version</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">version_alerts</span> <span class="o">=</span> <span class="p">{}</span>
+        
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">is_authenticated</span><span class="p">:</span>
+        <span class="n">can_edit</span> <span class="o">=</span> <span class="p">(</span><span class="ow">not</span> <span class="n">Phenotype</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">pk</span><span class="p">)</span><span class="o">.</span><span class="n">is_deleted</span><span class="p">)</span> <span class="ow">and</span> <span class="n">allowed_to_edit</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">Phenotype</span><span class="p">,</span> <span class="n">pk</span><span class="p">)</span>
+        
+        <span class="n">user_can_export</span> <span class="o">=</span> <span class="p">(</span><span class="n">allowed_to_view_children</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">Phenotype</span><span class="p">,</span> <span class="n">pk</span><span class="p">,</span> <span class="n">set_history_id</span><span class="o">=</span><span class="n">phenotype_history_id</span><span class="p">)</span>
+                          <span class="ow">and</span>
+                          <span class="n">db_utils</span><span class="o">.</span><span class="n">chk_deleted_children</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">Phenotype</span><span class="p">,</span> <span class="n">pk</span><span class="p">,</span> <span class="n">returnErrors</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">set_history_id</span><span class="o">=</span><span class="n">phenotype_history_id</span><span class="p">)</span>
+                          <span class="ow">and</span> 
+                          <span class="ow">not</span> <span class="n">Phenotype</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">pk</span><span class="p">)</span><span class="o">.</span><span class="n">is_deleted</span>
+                          <span class="p">)</span>
+        <span class="n">user_allowed_to_create</span> <span class="o">=</span> <span class="n">allowed_to_create</span><span class="p">()</span>
+        
+        <span class="n">children_permitted_and_not_deleted</span><span class="p">,</span> <span class="n">error_dic</span> <span class="o">=</span> <span class="n">db_utils</span><span class="o">.</span><span class="n">chk_children_permission_and_deletion</span><span class="p">(</span><span class="n">request</span><span class="p">,</span>
+                                                                                                <span class="n">Phenotype</span><span class="p">,</span>
+                                                                                                <span class="n">pk</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">is_latest_version</span><span class="p">:</span>
+            <span class="n">are_concepts_latest_version</span><span class="p">,</span> <span class="n">version_alerts</span> <span class="o">=</span> <span class="n">checkConceptVersionIsTheLatest</span><span class="p">(</span><span class="n">pk</span><span class="p">)</span>
+        
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">can_edit</span> <span class="o">=</span> <span class="kc">False</span>        
+        <span class="n">user_can_export</span> <span class="o">=</span> <span class="n">is_published</span>
+        <span class="n">user_allowed_to_create</span> <span class="o">=</span> <span class="kc">False</span>
+        
+
+      
+    <span class="n">publish_date</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="n">is_published</span><span class="p">:</span>
+        <span class="n">publish_date</span> <span class="o">=</span> <span class="n">PublishedPhenotype</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">phenotype_id</span><span class="o">=</span><span class="n">pk</span><span class="p">,</span> <span class="n">phenotype_history_id</span><span class="o">=</span><span class="n">phenotype_history_id</span><span class="p">)</span><span class="o">.</span><span class="n">created</span>
+  
+    
+    <span class="k">if</span> <span class="n">Phenotype</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">pk</span><span class="p">)</span><span class="o">.</span><span class="n">is_deleted</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">messages</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s2">&quot;This phenotype has been deleted.&quot;</span><span class="p">)</span>
+
+    
+    
+    <span class="c1"># published versions</span>
+    <span class="n">published_historical_ids</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">PublishedPhenotype</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">phenotype_id</span><span class="o">=</span><span class="n">pk</span><span class="p">)</span><span class="o">.</span><span class="n">values_list</span><span class="p">(</span><span class="s1">&#39;phenotype_history_id&#39;</span><span class="p">,</span> <span class="n">flat</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+         
+    <span class="c1"># history</span>
+    <span class="n">other_versions</span> <span class="o">=</span> <span class="n">Phenotype</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">pk</span><span class="p">)</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="n">other_historical_versions</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">ov</span> <span class="ow">in</span> <span class="n">other_versions</span><span class="p">:</span>
+        <span class="n">ver</span> <span class="o">=</span> <span class="n">db_utils</span><span class="o">.</span><span class="n">getHistoryPhenotype</span><span class="p">(</span><span class="n">ov</span><span class="o">.</span><span class="n">history_id</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">ver</span><span class="p">[</span><span class="s1">&#39;owner_id&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">ver</span><span class="p">[</span><span class="s1">&#39;owner&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">ver</span><span class="p">[</span><span class="s1">&#39;owner_id&#39;</span><span class="p">]))</span>
+            
+        <span class="k">if</span> <span class="n">ver</span><span class="p">[</span><span class="s1">&#39;created_by_id&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">ver</span><span class="p">[</span><span class="s1">&#39;created_by&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">ver</span><span class="p">[</span><span class="s1">&#39;created_by_id&#39;</span><span class="p">]))</span>
+                
+        <span class="k">if</span> <span class="n">ver</span><span class="p">[</span><span class="s1">&#39;updated_by_id&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">ver</span><span class="p">[</span><span class="s1">&#39;updated_by&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">ver</span><span class="p">[</span><span class="s1">&#39;updated_by_id&#39;</span><span class="p">])</span>
+
+        <span class="n">is_this_version_published</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">is_this_version_published</span> <span class="o">=</span> <span class="n">PublishedPhenotype</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">phenotype_id</span><span class="o">=</span><span class="n">ver</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span> <span class="n">phenotype_history_id</span><span class="o">=</span><span class="n">ver</span><span class="p">[</span><span class="s1">&#39;history_id&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">is_this_version_published</span><span class="p">:</span>
+            <span class="n">ver</span><span class="p">[</span><span class="s1">&#39;publish_date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">PublishedPhenotype</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">phenotype_id</span><span class="o">=</span><span class="n">ver</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span> <span class="n">phenotype_history_id</span><span class="o">=</span><span class="n">ver</span><span class="p">[</span><span class="s1">&#39;history_id&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">created</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ver</span><span class="p">[</span><span class="s1">&#39;publish_date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+            
+        <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">is_authenticated</span><span class="p">:</span> 
+            <span class="k">if</span> <span class="n">allowed_to_edit</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">Phenotype</span><span class="p">,</span> <span class="n">pk</span><span class="p">)</span> <span class="ow">or</span> <span class="n">allowed_to_view</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">Phenotype</span><span class="p">,</span> <span class="n">pk</span><span class="p">):</span>
+                <span class="n">other_historical_versions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ver</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">is_this_version_published</span><span class="p">:</span>
+                    <span class="n">other_historical_versions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ver</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">is_this_version_published</span><span class="p">:</span>
+                <span class="n">other_historical_versions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ver</span><span class="p">)</span>
+           
+    <span class="c1"># how to show codelist tab</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">is_authenticated</span><span class="p">:</span>        
+        <span class="n">component_tab_active</span> <span class="o">=</span> <span class="s2">&quot;active&quot;</span>
+        <span class="n">codelist_tab_active</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="n">codelist</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">codelist_loaded</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># published</span>
+        <span class="n">component_tab_active</span> <span class="o">=</span> <span class="s2">&quot;active&quot;</span>     <span class="c1">#&quot;&quot; </span>
+        <span class="n">codelist_tab_active</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>            <span class="c1">#&quot;active&quot;</span>
+        <span class="n">codelist</span> <span class="o">=</span> <span class="n">db_utils</span><span class="o">.</span><span class="n">get_phenotype_conceptcodesByVersion</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">pk</span><span class="p">,</span> <span class="n">phenotype_history_id</span><span class="p">)</span>
+        <span class="n">codelist_loaded</span> <span class="o">=</span> <span class="mi">1</span>
+        
+    <span class="c1">#rmd</span>
+    <span class="k">if</span> <span class="n">phenotype</span><span class="p">[</span><span class="s1">&#39;implementation&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">phenotype</span><span class="p">[</span><span class="s1">&#39;implementation&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">if</span> <span class="n">phenotype</span><span class="p">[</span><span class="s1">&#39;secondary_publication_links&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">phenotype</span><span class="p">[</span><span class="s1">&#39;secondary_publication_links&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    
+    
+    <span class="n">conceptBrands</span> <span class="o">=</span> <span class="n">db_utils</span><span class="o">.</span><span class="n">getConceptBrands</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">concept_id_list</span><span class="p">)</span>
+    <span class="n">concept_data</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="n">phenotype</span><span class="p">[</span><span class="s1">&#39;concept_informations&#39;</span><span class="p">]:</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">phenotype</span><span class="p">[</span><span class="s1">&#39;concept_informations&#39;</span><span class="p">]):</span>
+            <span class="n">c</span><span class="p">[</span><span class="s1">&#39;codingsystem&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">CodingSystem</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span> <span class="o">=</span> <span class="n">Concept</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;concept_id&#39;</span><span class="p">],</span> <span class="n">history_id</span><span class="o">=</span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;concept_version_id&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">coding_system_id</span><span class="p">)</span>
+            <span class="n">c</span><span class="p">[</span><span class="s1">&#39;code_attribute_header&#39;</span><span class="p">]</span> <span class="o">=</span>  <span class="n">Concept</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;concept_id&#39;</span><span class="p">],</span> <span class="n">history_id</span><span class="o">=</span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;concept_version_id&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">code_attribute_header</span>
+            
+            <span class="n">c</span><span class="p">[</span><span class="s1">&#39;alerts&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">are_concepts_latest_version</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">c</span><span class="p">[</span><span class="s1">&#39;concept_version_id&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="n">version_alerts</span><span class="p">:</span> 
+                    <span class="n">c</span><span class="p">[</span><span class="s1">&#39;alerts&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">version_alerts</span><span class="p">[</span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;concept_version_id&#39;</span><span class="p">]]</span>
+            
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">children_permitted_and_not_deleted</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">c</span><span class="p">[</span><span class="s1">&#39;concept_id&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="n">error_dic</span><span class="p">:</span>
+                    <span class="n">c</span><span class="p">[</span><span class="s1">&#39;alerts&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="s2">&quot;&lt;BR&gt;- &quot;</span> <span class="o">+</span> <span class="s2">&quot;&lt;BR&gt;- &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">error_dic</span><span class="p">[</span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;concept_id&#39;</span><span class="p">]])</span> 
+             
+            <span class="n">c</span><span class="p">[</span><span class="s1">&#39;alerts&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;Child &quot;</span> <span class="p">,</span> <span class="s2">&quot;&quot;</span> <span class="p">,</span>  <span class="n">c</span><span class="p">[</span><span class="s1">&#39;alerts&#39;</span><span class="p">]</span> <span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">)</span>
+            
+            <span class="n">c</span><span class="p">[</span><span class="s1">&#39;brands&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+            <span class="k">if</span> <span class="n">c</span><span class="p">[</span><span class="s1">&#39;concept_id&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="n">conceptBrands</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">brand</span> <span class="ow">in</span> <span class="n">conceptBrands</span><span class="p">[</span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;concept_id&#39;</span><span class="p">]]:</span>
+                    <span class="n">c</span><span class="p">[</span><span class="s1">&#39;brands&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="s2">&quot;&lt;img src=&#39;&quot;</span> <span class="o">+</span> <span class="n">static</span><span class="p">(</span><span class="s1">&#39;img/brands/&#39;</span> <span class="o">+</span> <span class="n">brand</span> <span class="o">+</span> <span class="s1">&#39;/logo.png&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;&#39; height=&#39;10px&#39; title=&#39;&quot;</span> <span class="o">+</span> <span class="n">brand</span> <span class="o">+</span> <span class="s2">&quot;&#39; alt=&#39;&quot;</span> <span class="o">+</span> <span class="n">brand</span> <span class="o">+</span> <span class="s2">&quot;&#39; /&gt; &quot;</span>
+               
+            <span class="n">c</span><span class="p">[</span><span class="s1">&#39;is_published&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">checkIfPublished</span><span class="p">(</span><span class="n">Concept</span><span class="p">,</span> <span class="n">c</span><span class="p">[</span><span class="s1">&#39;concept_id&#39;</span><span class="p">],</span> <span class="n">c</span><span class="p">[</span><span class="s1">&#39;concept_version_id&#39;</span><span class="p">])</span>
+            <span class="n">c</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">concepts</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;concept_id&#39;</span><span class="p">],</span> <span class="n">history_id</span><span class="o">=</span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;concept_version_id&#39;</span><span class="p">])[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+            
+            <span class="n">c</span><span class="p">[</span><span class="s1">&#39;codesCount&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">if</span> <span class="n">codelist</span><span class="p">:</span>
+                <span class="n">c</span><span class="p">[</span><span class="s1">&#39;codesCount&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;code&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">codelist</span> <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;concept_id&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;C&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;concept_id&#39;</span><span class="p">])</span> <span class="ow">and</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;concept_version_id&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">c</span><span class="p">[</span><span class="s1">&#39;concept_version_id&#39;</span><span class="p">]</span> <span class="p">])</span>
+            
+            <span class="n">c</span><span class="p">[</span><span class="s1">&#39;concept_friendly_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;C&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;concept_id&#39;</span><span class="p">])</span>  
+            <span class="n">concept_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+         
+    <span class="k">if</span> <span class="n">phenotype</span><span class="p">[</span><span class="s1">&#39;is_deleted&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">messages</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s2">&quot;This phenotype has been deleted.&quot;</span><span class="p">)</span>
+
+    <span class="n">context</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;phenotype&#39;</span><span class="p">:</span> <span class="n">phenotype</span><span class="p">,</span> 
+               <span class="s1">&#39;concept_informations&#39;</span><span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">phenotype</span><span class="p">[</span><span class="s1">&#39;concept_informations&#39;</span><span class="p">]),</span>
+               <span class="s1">&#39;tags&#39;</span><span class="p">:</span> <span class="n">tags</span><span class="p">,</span>
+               <span class="s1">&#39;data_sources&#39;</span><span class="p">:</span> <span class="n">data_sources</span><span class="p">,</span>
+               <span class="s1">&#39;clinicalTerminologies&#39;</span><span class="p">:</span> <span class="n">clinicalTerminologies</span><span class="p">,</span>
+               <span class="s1">&#39;user_can_edit&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>  <span class="c1"># for now  #can_edit,</span>
+               <span class="s1">&#39;allowed_to_create&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>  <span class="c1"># for now  #user_allowed_to_create,    # not settings.CLL_READ_ONLY,</span>
+               <span class="s1">&#39;user_can_export&#39;</span><span class="p">:</span> <span class="n">user_can_export</span><span class="p">,</span>
+               <span class="s1">&#39;history&#39;</span><span class="p">:</span> <span class="n">other_historical_versions</span><span class="p">,</span>
+               <span class="s1">&#39;live_ver_is_deleted&#39;</span><span class="p">:</span> <span class="n">Phenotype</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">pk</span><span class="p">)</span><span class="o">.</span><span class="n">is_deleted</span><span class="p">,</span>
+               <span class="s1">&#39;published_historical_ids&#39;</span><span class="p">:</span> <span class="n">published_historical_ids</span><span class="p">,</span>
+               <span class="s1">&#39;is_published&#39;</span><span class="p">:</span> <span class="n">is_published</span><span class="p">,</span>
+               <span class="s1">&#39;publish_date&#39;</span><span class="p">:</span> <span class="n">publish_date</span><span class="p">,</span>
+               <span class="s1">&#39;is_latest_version&#39;</span><span class="p">:</span><span class="n">is_latest_version</span><span class="p">,</span>
+               <span class="s1">&#39;current_phenotype_history_id&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">phenotype_history_id</span><span class="p">),</span>
+               <span class="s1">&#39;component_tab_active&#39;</span><span class="p">:</span> <span class="n">component_tab_active</span><span class="p">,</span>
+               <span class="s1">&#39;codelist_tab_active&#39;</span><span class="p">:</span> <span class="n">codelist_tab_active</span><span class="p">,</span>
+               <span class="s1">&#39;codelist&#39;</span><span class="p">:</span> <span class="n">codelist</span><span class="p">,</span> <span class="c1">#json.dumps(codelist)</span>
+               <span class="s1">&#39;codelist_loaded&#39;</span><span class="p">:</span> <span class="n">codelist_loaded</span> <span class="p">,</span>               
+               <span class="s1">&#39;concepts_id_name&#39;</span><span class="p">:</span> <span class="n">concepts_id_name</span><span class="p">,</span>              
+               <span class="s1">&#39;concept_data&#39;</span><span class="p">:</span> <span class="n">concept_data</span>
+
+            <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;clinicalcode/phenotype/detail_combined.html&#39;</span><span class="p">,</span>
+                <span class="n">context</span>
+                <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="checkConceptVersionIsTheLatest"><a class="viewcode-back" href="../../../clinicalcode.views.html#clinicalcode.views.Phenotype.checkConceptVersionIsTheLatest">[docs]</a><span class="k">def</span> <span class="nf">checkConceptVersionIsTheLatest</span><span class="p">(</span><span class="n">phenotypeID</span><span class="p">):</span>
+    <span class="c1"># check live version</span>
+    
+    <span class="n">phenotype</span> <span class="o">=</span> <span class="n">Phenotype</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">phenotypeID</span><span class="p">)</span>
+    
+    <span class="n">is_ok</span> <span class="o">=</span> <span class="kc">True</span>    
+    <span class="n">version_alerts</span> <span class="o">=</span> <span class="p">{}</span>
+    
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">phenotype</span><span class="o">.</span><span class="n">concept_informations</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">is_ok</span><span class="p">,</span> <span class="n">version_alerts</span>
+    
+    
+    <span class="n">concepts_id_versionID</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">phenotype</span><span class="o">.</span><span class="n">concept_informations</span><span class="p">)</span>
+        
+    <span class="c1"># loop for concept versions</span>
+    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">concepts_id_versionID</span><span class="p">:</span>
+        <span class="n">c_id</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="s1">&#39;concept_id&#39;</span><span class="p">]</span>
+        <span class="n">c_ver_id</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="s1">&#39;concept_version_id&#39;</span><span class="p">]</span>
+        <span class="n">latest_history_id</span> <span class="o">=</span> <span class="n">Concept</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">c_id</span><span class="p">)</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">latest</span><span class="p">(</span><span class="s1">&#39;history_id&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">history_id</span>
+        <span class="k">if</span> <span class="n">latest_history_id</span> <span class="o">!=</span> <span class="n">c_ver_id</span><span class="p">:</span>
+            <span class="n">version_alerts</span><span class="p">[</span><span class="n">c_ver_id</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;newer version available&quot;</span>
+            <span class="n">is_ok</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="c1">#         else:</span>
+    <span class="c1">#             version_alerts[c_id] = &quot;&quot;</span>
+    <span class="k">return</span> <span class="n">is_ok</span><span class="p">,</span> <span class="n">version_alerts</span></div>
+    
+<div class="viewcode-block" id="phenotype_conceptcodesByVersion"><a class="viewcode-back" href="../../../clinicalcode.views.html#clinicalcode.views.Phenotype.phenotype_conceptcodesByVersion">[docs]</a><span class="nd">@login_required</span>
+<span class="k">def</span> <span class="nf">phenotype_conceptcodesByVersion</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">pk</span><span class="p">,</span> <span class="n">phenotype_history_id</span><span class="p">,</span> <span class="n">target_concept_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">target_concept_history_id</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Get the codes of the phenotype concepts</span>
+<span class="sd">        for a specific version</span>
+<span class="sd">        for a specific concept</span>
+<span class="sd">        Parameters:     request    The request.</span>
+<span class="sd">                        pk         The phenotype id.</span>
+<span class="sd">                        phenotype_history_id  The version id</span>
+<span class="sd">                        target_concept_id</span>
+<span class="sd">                        target_concept_history_id</span>
+<span class="sd">        Returns:        data       Dict with the codes. </span>
+<span class="sd">    &#39;&#39;&#39;</span>
+            
+    <span class="n">validate_access_to_view</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">Phenotype</span><span class="p">,</span> <span class="n">pk</span><span class="p">,</span> <span class="n">set_history_id</span><span class="o">=</span><span class="n">phenotype_history_id</span><span class="p">)</span>
+
+    <span class="c1"># here, check live version</span>
+    <span class="n">current_ph</span> <span class="o">=</span> <span class="n">Phenotype</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">pk</span><span class="p">)</span>
+
+<span class="c1">#     children_permitted_and_not_deleted, error_dic = db_utils.chk_children_permission_and_deletion(request,</span>
+<span class="c1">#                                                                                                 Phenotype, pk,</span>
+<span class="c1">#                                                                                                 set_history_id=phenotype_history_id)</span>
+<span class="c1">#     if not children_permitted_and_not_deleted:</span>
+<span class="c1">#         raise PermissionDenied</span>
+
+    <span class="k">if</span> <span class="n">current_ph</span><span class="o">.</span><span class="n">is_deleted</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">PermissionDenied</span>
+
+                        
+    <span class="c1">#--------------------------------------------------</span>
+    
+    <span class="n">codes</span> <span class="o">=</span> <span class="n">db_utils</span><span class="o">.</span><span class="n">get_phenotype_conceptcodesByVersion</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">pk</span><span class="p">,</span> <span class="n">phenotype_history_id</span><span class="p">,</span> <span class="n">target_concept_id</span><span class="p">,</span> <span class="n">target_concept_history_id</span><span class="p">)</span>
+       
+    <span class="n">data</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;form_is_valid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+    
+    <span class="c1"># codes_count = &quot;0&quot;</span>
+    <span class="c1"># try:</span>
+    <span class="c1">#     codes_count = str(len(codes))</span>
+    <span class="c1"># except:</span>
+    <span class="c1">#     codes_count = &quot;0&quot;</span>
+    <span class="c1"># data[&#39;codes_count&#39;] = codes_count</span>
+    <span class="c1"># data[&#39;html_uniquecodes_list&#39;] = render_to_string(</span>
+    <span class="c1">#                                                 &#39;clinicalcode/phenotype/get_concept_codes.html&#39;,</span>
+    <span class="c1">#                                                 {&#39;codes&#39;: codes,</span>
+    <span class="c1">#                                                 &#39;showConcept&#39;: True </span>
+    <span class="c1">#                                                 }</span>
+    <span class="c1">#                                                 )</span>
+    
+    
+    <span class="c1"># Get the list of concepts in the phenotype data</span>
+    <span class="n">concept_ids_historyIDs</span> <span class="o">=</span> <span class="n">db_utils</span><span class="o">.</span><span class="n">getGroupOfConceptsByPhenotypeId_historical</span><span class="p">(</span><span class="n">pk</span><span class="p">,</span> <span class="n">phenotype_history_id</span><span class="p">)</span>
+    
+    <span class="n">concept_codes_html</span> <span class="o">=</span><span class="p">[]</span>
+    <span class="k">for</span> <span class="n">concept</span> <span class="ow">in</span> <span class="n">concept_ids_historyIDs</span><span class="p">:</span>
+        <span class="n">concept_id</span> <span class="o">=</span> <span class="n">concept</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">concept_version_id</span> <span class="o">=</span> <span class="n">concept</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        
+        <span class="c1"># check if the sent concept id/ver are valid</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">target_concept_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">target_concept_history_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">target_concept_id</span> <span class="o">!=</span> <span class="nb">str</span><span class="p">(</span><span class="n">concept_id</span><span class="p">)</span> <span class="ow">and</span> <span class="n">target_concept_history_id</span> <span class="o">!=</span> <span class="nb">str</span><span class="p">(</span><span class="n">concept_version_id</span><span class="p">)</span> <span class="p">:</span>
+                <span class="k">continue</span>
+            
+        <span class="n">c_codes</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># for c in c:</span>
+        <span class="c1">#     if c[&#39;concept_id&#39;] == &#39;C&#39;+str(concept_id) and c[&#39;concept_version_id&#39;] == concept_version_id:</span>
+        <span class="c1">#         c_codes.append(c)</span>
+                
+        <span class="n">c_codes</span> <span class="o">=</span> <span class="n">codes</span>
+        
+        <span class="n">c_codes_count</span> <span class="o">=</span> <span class="s2">&quot;0&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">c_codes_count</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">c_codes</span><span class="p">))</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">c_codes_count</span> <span class="o">=</span> <span class="s2">&quot;0&quot;</span>
+           
+        <span class="c1">#c_codes_count_2 = len([c[&#39;code&#39;] for c in codes if c[&#39;concept_id&#39;] == concept_id and c[&#39;concept_version_id&#39;] == concept_version_id ]) </span>
+        
+        <span class="n">c_code_attribute_header</span> <span class="o">=</span>  <span class="n">Concept</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">concept_id</span><span class="p">,</span> <span class="n">history_id</span><span class="o">=</span><span class="n">concept_version_id</span><span class="p">)</span><span class="o">.</span><span class="n">code_attribute_header</span>
+        <span class="n">concept_codes_html</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;concept_id&#39;</span><span class="p">:</span> <span class="n">concept_id</span><span class="p">,</span>
+                                   <span class="s1">&#39;concept_version_id&#39;</span><span class="p">:</span> <span class="n">concept_version_id</span><span class="p">,</span>
+                                   <span class="s1">&#39;c_codes_count&#39;</span><span class="p">:</span> <span class="n">c_codes_count</span><span class="p">,</span>
+                                   <span class="s1">&#39;c_html&#39;</span><span class="p">:</span> <span class="n">render_to_string</span><span class="p">(</span>
+                                                    <span class="s1">&#39;clinicalcode/phenotype/get_concept_codes.html&#39;</span><span class="p">,</span>
+                                                    <span class="p">{</span><span class="s1">&#39;codes&#39;</span><span class="p">:</span> <span class="n">c_codes</span><span class="p">,</span>
+                                                     <span class="s1">&#39;code_attribute_header&#39;</span><span class="p">:</span> <span class="n">c_code_attribute_header</span><span class="p">,</span>
+                                                    <span class="s1">&#39;showConcept&#39;</span><span class="p">:</span> <span class="kc">False</span> 
+                                                    <span class="p">}</span>
+                                                    <span class="p">)</span>
+                                   <span class="p">})</span>
+     
+    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;concept_codes_html&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">concept_codes_html</span>   
+                                     
+    <span class="c1">#data[&#39;codes&#39;] = codes</span>
+
+    <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>    </div>
+    
+
+     
+<div class="viewcode-block" id="phenotype_create"><a class="viewcode-back" href="../../../clinicalcode.views.html#clinicalcode.views.Phenotype.phenotype_create">[docs]</a><span class="nd">@login_required</span>
+<span class="k">def</span> <span class="nf">phenotype_create</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>      
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        create a phenotype</span>
+<span class="sd">    &quot;&quot;&quot;</span>     
+    <span class="c1"># TODO: implement this</span>
+    <span class="k">pass</span></div>
+
+
+
+
+<div class="viewcode-block" id="PhenotypeUpdate"><a class="viewcode-back" href="../../../clinicalcode.views.html#clinicalcode.views.Phenotype.PhenotypeUpdate">[docs]</a><span class="k">class</span> <span class="nc">PhenotypeUpdate</span><span class="p">(</span><span class="n">LoginRequiredMixin</span><span class="p">,</span> <span class="n">HasAccessToEditPhenotypeCheckMixin</span><span class="p">,</span> <span class="n">UpdateView</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Update the current phenotype.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># ToDo</span>
+    <span class="k">pass</span></div>
+
+
+
+
+<div class="viewcode-block" id="PhenotypeDelete"><a class="viewcode-back" href="../../../clinicalcode.views.html#clinicalcode.views.Phenotype.PhenotypeDelete">[docs]</a><span class="k">class</span> <span class="nc">PhenotypeDelete</span><span class="p">(</span><span class="n">LoginRequiredMixin</span><span class="p">,</span> <span class="n">HasAccessToEditPhenotypeCheckMixin</span><span class="p">,</span> <span class="n">TemplateResponseMixin</span><span class="p">,</span> <span class="n">View</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Delete a phenotype.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># ToDo</span>
+    <span class="k">pass</span></div>
+
+
+
+<div class="viewcode-block" id="history_phenotype_codes_to_csv"><a class="viewcode-back" href="../../../clinicalcode.views.html#clinicalcode.views.Phenotype.history_phenotype_codes_to_csv">[docs]</a><span class="k">def</span> <span class="nf">history_phenotype_codes_to_csv</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">pk</span><span class="p">,</span> <span class="n">phenotype_history_id</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return a csv file of codes for a phenotype for a specific historical version.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># validate access for login and public site</span>
+    <span class="n">validate_access_to_view</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">Phenotype</span><span class="p">,</span> <span class="n">pk</span><span class="p">,</span> <span class="n">set_history_id</span><span class="o">=</span><span class="n">phenotype_history_id</span><span class="p">)</span>
+
+    <span class="n">is_published</span> <span class="o">=</span> <span class="n">PublishedPhenotype</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">phenotype_id</span><span class="o">=</span><span class="n">pk</span><span class="p">,</span> <span class="n">phenotype_history_id</span><span class="o">=</span><span class="n">phenotype_history_id</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span>
+                    
+    <span class="c1">#----------------------------------------------------------------------</span>
+    
+    <span class="c1"># exclude(is_deleted=True)</span>
+    <span class="k">if</span> <span class="n">Phenotype</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">pk</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">HttpResponseNotFound</span><span class="p">(</span><span class="s2">&quot;Not found.&quot;</span><span class="p">)</span>
+        <span class="c1"># raise permission_denied # although 404 is more relevant</span>
+
+    <span class="c1"># exclude(is_deleted=True)</span>
+    <span class="k">if</span> <span class="n">Phenotype</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">pk</span><span class="p">,</span> <span class="n">history_id</span><span class="o">=</span><span class="n">phenotype_history_id</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">HttpResponseNotFound</span><span class="p">(</span><span class="s2">&quot;Not found.&quot;</span><span class="p">)</span>
+        <span class="c1"># raise permission_denied # although 404 is more relevant</span>
+
+    <span class="c1"># here, check live version</span>
+    <span class="n">current_ph</span> <span class="o">=</span> <span class="n">Phenotype</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">pk</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">is_published</span><span class="p">:</span>
+        <span class="n">children_permitted_and_not_deleted</span><span class="p">,</span> <span class="n">error_dic</span> <span class="o">=</span> <span class="n">db_utils</span><span class="o">.</span><span class="n">chk_children_permission_and_deletion</span><span class="p">(</span><span class="n">request</span><span class="p">,</span>
+                                                                                                <span class="n">Phenotype</span><span class="p">,</span> <span class="n">pk</span><span class="p">,</span>
+                                                                                                <span class="n">set_history_id</span><span class="o">=</span><span class="n">phenotype_history_id</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">children_permitted_and_not_deleted</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">PermissionDenied</span>
+
+    <span class="k">if</span> <span class="n">current_ph</span><span class="o">.</span><span class="n">is_deleted</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">PermissionDenied</span>
+
+    <span class="n">current_ph_version</span> <span class="o">=</span> <span class="n">Phenotype</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">pk</span><span class="p">,</span> <span class="n">history_id</span><span class="o">=</span><span class="n">phenotype_history_id</span><span class="p">)</span>
+
+
+    <span class="c1"># Get the list of concepts in the phenotype data</span>
+    <span class="n">concept_ids_historyIDs</span> <span class="o">=</span> <span class="n">db_utils</span><span class="o">.</span><span class="n">getGroupOfConceptsByPhenotypeId_historical</span><span class="p">(</span><span class="n">pk</span><span class="p">,</span> <span class="n">phenotype_history_id</span><span class="p">)</span>
+
+    <span class="n">my_params</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;phenotype_id&#39;</span><span class="p">:</span> <span class="n">pk</span><span class="p">,</span>
+        <span class="s1">&#39;phenotype_history_id&#39;</span><span class="p">:</span> <span class="n">phenotype_history_id</span><span class="p">,</span>
+        <span class="s1">&#39;creation_date&#39;</span><span class="p">:</span> <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y%m</span><span class="si">%d</span><span class="s2">T%H%M%S&quot;</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="n">content_type</span><span class="o">=</span><span class="s1">&#39;text/csv&#39;</span><span class="p">)</span>
+    <span class="n">response</span><span class="p">[</span><span class="s1">&#39;Content-Disposition&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="s1">&#39;attachment; filename=&quot;phenotype_PH</span><span class="si">%(phenotype_id)s</span><span class="s1">_ver_</span><span class="si">%(phenotype_history_id)s</span><span class="s1">_concepts_</span><span class="si">%(creation_date)s</span><span class="s1">.csv&quot;&#39;</span> <span class="o">%</span> <span class="n">my_params</span><span class="p">)</span>
+
+    <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+
+    <span class="n">final_titles</span> <span class="o">=</span> <span class="p">([</span><span class="s1">&#39;code&#39;</span><span class="p">,</span> <span class="s1">&#39;description&#39;</span><span class="p">,</span> <span class="s1">&#39;coding_system&#39;</span><span class="p">,</span> <span class="s1">&#39;concept_id&#39;</span><span class="p">,</span> <span class="s1">&#39;concept_version_id&#39;</span><span class="p">]</span>
+                    <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;concept_name&#39;</span><span class="p">]</span>
+                    <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;phenotype_id&#39;</span><span class="p">,</span> <span class="s1">&#39;phenotype_version_id&#39;</span><span class="p">,</span> <span class="s1">&#39;phenotype_name&#39;</span><span class="p">]</span>
+                    <span class="p">)</span>
+
+    <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="n">final_titles</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">concept</span> <span class="ow">in</span> <span class="n">concept_ids_historyIDs</span><span class="p">:</span>
+        <span class="n">concept_id</span> <span class="o">=</span> <span class="n">concept</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">concept_version_id</span> <span class="o">=</span> <span class="n">concept</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">concept_coding_system</span> <span class="o">=</span> <span class="n">Concept</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">concept_id</span><span class="p">,</span> <span class="n">history_id</span><span class="o">=</span><span class="n">concept_version_id</span><span class="p">)</span><span class="o">.</span><span class="n">coding_system</span><span class="o">.</span><span class="n">name</span>
+        
+        <span class="n">rows_no</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">codes</span> <span class="o">=</span> <span class="n">db_utils</span><span class="o">.</span><span class="n">getGroupOfCodesByConceptId_HISTORICAL</span><span class="p">(</span><span class="n">concept_id</span><span class="p">,</span> <span class="n">concept_version_id</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">cc</span> <span class="ow">in</span> <span class="n">codes</span><span class="p">:</span>
+            <span class="n">rows_no</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">([</span>
+                                <span class="n">cc</span><span class="p">[</span><span class="s1">&#39;code&#39;</span><span class="p">],</span>
+                                <span class="n">cc</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">,</span> <span class="s1">&#39;ignore&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">),</span>
+                                <span class="n">concept_coding_system</span><span class="p">,</span>
+                                <span class="s1">&#39;C&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">concept_id</span><span class="p">),</span>
+                                <span class="n">concept_version_id</span>
+                            <span class="p">]</span>
+                            <span class="o">+</span> <span class="p">[</span><span class="n">Concept</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">concept_id</span><span class="p">,</span> <span class="n">history_id</span><span class="o">=</span><span class="n">concept_version_id</span><span class="p">)</span><span class="o">.</span><span class="n">name</span><span class="p">]</span>
+                            <span class="o">+</span> <span class="p">[</span><span class="n">current_ph_version</span><span class="o">.</span><span class="n">friendly_id</span><span class="p">,</span> 
+                               <span class="n">current_ph_version</span><span class="o">.</span><span class="n">history_id</span><span class="p">,</span>
+                               <span class="n">current_ph_version</span><span class="o">.</span><span class="n">name</span><span class="p">]</span>
+                            <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">rows_no</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">([</span>
+                                <span class="s1">&#39;&#39;</span><span class="p">,</span>
+                                <span class="s1">&#39;&#39;</span><span class="p">,</span>
+                                <span class="n">concept_coding_system</span><span class="p">,</span>
+                                <span class="s1">&#39;C&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">concept_id</span><span class="p">),</span>
+                                <span class="n">concept_version_id</span>
+                            <span class="p">]</span>
+                            <span class="o">+</span> <span class="p">[</span><span class="n">Concept</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">concept_id</span><span class="p">,</span> <span class="n">history_id</span><span class="o">=</span><span class="n">concept_version_id</span><span class="p">)</span><span class="o">.</span><span class="n">name</span><span class="p">]</span>
+                            <span class="o">+</span> <span class="p">[</span><span class="n">current_ph_version</span><span class="o">.</span><span class="n">friendly_id</span><span class="p">,</span> 
+                               <span class="n">current_ph_version</span><span class="o">.</span><span class="n">history_id</span><span class="p">,</span> 
+                               <span class="n">current_ph_version</span><span class="o">.</span><span class="n">name</span><span class="p">]</span>
+                            <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">response</span></div>
+
+
+<div class="viewcode-block" id="PhenotypePublish"><a class="viewcode-back" href="../../../clinicalcode.views.html#clinicalcode.views.Phenotype.PhenotypePublish">[docs]</a><span class="k">class</span> <span class="nc">PhenotypePublish</span><span class="p">(</span><span class="n">LoginRequiredMixin</span><span class="p">,</span> <span class="n">HasAccessToViewPhenotypeCheckMixin</span><span class="p">,</span> <span class="n">TemplateResponseMixin</span><span class="p">,</span> <span class="n">View</span><span class="p">):</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">Phenotype</span>
+    <span class="n">template_name</span> <span class="o">=</span> <span class="s1">&#39;clinicalcode/phenotype/publish.html&#39;</span>
+    
+
+    <span class="n">errors</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">allow_to_publish</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">phenotype_is_deleted</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">is_owner</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">phenotype_has_codes</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">AllnotDeleted</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">AllarePublished</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">isAllowedtoViewChildren</span> <span class="o">=</span> <span class="kc">True</span>
+    
+<div class="viewcode-block" id="PhenotypePublish.checkPhenotypeTobePublished"><a class="viewcode-back" href="../../../clinicalcode.views.html#clinicalcode.views.Phenotype.PhenotypePublish.checkPhenotypeTobePublished">[docs]</a>    <span class="k">def</span> <span class="nf">checkPhenotypeTobePublished</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">pk</span><span class="p">,</span> <span class="n">phenotype_history_id</span><span class="p">):</span>
+        <span class="k">global</span> <span class="n">errors</span><span class="p">,</span> <span class="n">allow_to_publish</span><span class="p">,</span> <span class="n">phenotype_is_deleted</span><span class="p">,</span> <span class="n">is_owner</span>
+        <span class="k">global</span> <span class="n">phenotype_has_codes</span><span class="p">,</span> <span class="n">AllnotDeleted</span><span class="p">,</span> <span class="n">AllarePublished</span><span class="p">,</span> <span class="n">isAllowedtoViewChildren</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">            Allow to publish if:</span>
+<span class="sd">            - Phenotype is not deleted</span>
+<span class="sd">            - user is an owner</span>
+<span class="sd">            - Phenotype contains codes</span>
+<span class="sd">            - all conceots are published</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">errors</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">allow_to_publish</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">phenotype_is_deleted</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">is_owner</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">phenotype_has_codes</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">AllnotDeleted</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">AllarePublished</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">isAllowedtoViewChildren</span> <span class="o">=</span> <span class="kc">True</span>
+        
+        <span class="k">if</span><span class="p">(</span><span class="n">Phenotype</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">pk</span><span class="p">)</span><span class="o">.</span><span class="n">is_deleted</span> <span class="o">==</span> <span class="kc">True</span><span class="p">):</span> 
+            <span class="n">allow_to_publish</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">phenotype_is_deleted</span> <span class="o">=</span> <span class="kc">True</span>
+         
+        <span class="k">if</span><span class="p">(</span><span class="n">Phenotype</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Q</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">pk</span><span class="p">),</span> <span class="n">Q</span><span class="p">(</span><span class="n">owner</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">))</span><span class="o">.</span><span class="n">count</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+            <span class="n">allow_to_publish</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">is_owner</span> <span class="o">=</span> <span class="kc">False</span>
+             
+        <span class="k">if</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">db_utils</span><span class="o">.</span><span class="n">get_phenotype_conceptcodesByVersion</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="p">,</span> <span class="n">pk</span><span class="p">,</span> <span class="n">phenotype_history_id</span><span class="p">))</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+            <span class="n">allow_to_publish</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">phenotype_has_codes</span> <span class="o">=</span> <span class="kc">False</span>
+         
+        <span class="n">has_child_concepts</span><span class="p">,</span> <span class="n">isOK</span><span class="p">,</span> <span class="n">AllnotDeleted</span><span class="p">,</span> <span class="n">AllarePublished</span><span class="p">,</span> <span class="n">isAllowedtoViewChildren</span><span class="p">,</span> <span class="n">errors</span> <span class="o">=</span> <span class="n">checkAllChildConcepts4Publish_Historical</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">pk</span><span class="p">,</span> <span class="n">phenotype_history_id</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">isOK</span><span class="p">:</span>
+            <span class="n">allow_to_publish</span> <span class="o">=</span> <span class="kc">False</span></div>
+         
+<div class="viewcode-block" id="PhenotypePublish.get"><a class="viewcode-back" href="../../../clinicalcode.views.html#clinicalcode.views.Phenotype.PhenotypePublish.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">pk</span><span class="p">,</span> <span class="n">phenotype_history_id</span><span class="p">):</span>
+         
+        <span class="k">global</span> <span class="n">errors</span><span class="p">,</span> <span class="n">allow_to_publish</span><span class="p">,</span> <span class="n">phenotype_is_deleted</span><span class="p">,</span> <span class="n">is_owner</span>
+        <span class="k">global</span> <span class="n">phenotype_has_codes</span><span class="p">,</span> <span class="n">AllnotDeleted</span><span class="p">,</span> <span class="n">AllarePublished</span><span class="p">,</span> <span class="n">isAllowedtoViewChildren</span>
+        <span class="n">errors</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">allow_to_publish</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">phenotype_is_deleted</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">is_owner</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">phenotype_has_codes</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">AllnotDeleted</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">AllarePublished</span> <span class="o">=</span> <span class="kc">True</span>
+         
+        <span class="n">phenotype_ver</span> <span class="o">=</span> <span class="n">Phenotype</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">pk</span><span class="p">,</span> <span class="n">history_id</span><span class="o">=</span><span class="n">phenotype_history_id</span><span class="p">)</span>
+        <span class="n">is_published</span> <span class="o">=</span> <span class="n">checkIfPublished</span><span class="p">(</span><span class="n">Phenotype</span><span class="p">,</span> <span class="n">pk</span><span class="p">,</span> <span class="n">phenotype_history_id</span><span class="p">)</span>
+         
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">is_published</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">checkPhenotypeTobePublished</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">pk</span><span class="p">,</span> <span class="n">phenotype_history_id</span><span class="p">)</span>
+        <span class="c1">#--------------------------------------------</span>
+ 
+         
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">render_to_response</span><span class="p">({</span><span class="s1">&#39;pk&#39;</span><span class="p">:</span> <span class="n">pk</span><span class="p">,</span> 
+                                        <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">phenotype_ver</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> 
+                                        <span class="s1">&#39;phenotype_history_id&#39;</span><span class="p">:</span> <span class="n">phenotype_history_id</span><span class="p">,</span> 
+                                        <span class="s1">&#39;is_published&#39;</span><span class="p">:</span> <span class="n">is_published</span><span class="p">,</span> 
+                                        <span class="s1">&#39;allowed_to_publish&#39;</span><span class="p">:</span> <span class="n">allow_to_publish</span><span class="p">,</span>
+                                        <span class="s1">&#39;is_owner&#39;</span><span class="p">:</span> <span class="n">is_owner</span><span class="p">,</span>
+                                        <span class="s1">&#39;phenotype_is_deleted&#39;</span><span class="p">:</span> <span class="n">phenotype_is_deleted</span><span class="p">,</span>
+                                        <span class="s1">&#39;phenotype_has_codes&#39;</span><span class="p">:</span> <span class="n">phenotype_has_codes</span><span class="p">,</span>
+                                        <span class="s1">&#39;AllnotDeleted&#39;</span><span class="p">:</span> <span class="n">AllnotDeleted</span><span class="p">,</span>
+                                        <span class="s1">&#39;AllarePublished&#39;</span><span class="p">:</span> <span class="n">AllarePublished</span><span class="p">,</span>
+                                        <span class="s1">&#39;isAllowedtoViewChildren&#39;</span><span class="p">:</span> <span class="n">isAllowedtoViewChildren</span><span class="p">,</span>
+                                        <span class="s1">&#39;errors&#39;</span><span class="p">:</span> <span class="n">errors</span>
+                                        <span class="p">})</span></div>
+     
+<div class="viewcode-block" id="PhenotypePublish.post"><a class="viewcode-back" href="../../../clinicalcode.views.html#clinicalcode.views.Phenotype.PhenotypePublish.post">[docs]</a>    <span class="k">def</span> <span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">pk</span><span class="p">,</span> <span class="n">phenotype_history_id</span><span class="p">):</span>
+        <span class="k">global</span> <span class="n">errors</span><span class="p">,</span> <span class="n">allow_to_publish</span><span class="p">,</span> <span class="n">phenotype_is_deleted</span><span class="p">,</span> <span class="n">is_owner</span><span class="p">,</span> <span class="n">phenotype_has_codes</span>
+        <span class="k">global</span> <span class="n">AllnotDeleted</span><span class="p">,</span> <span class="n">AllarePublished</span><span class="p">,</span> <span class="n">isAllowedtoViewChildren</span>
+        <span class="n">errors</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">allow_to_publish</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">phenotype_is_deleted</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">is_owner</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">phenotype_has_codes</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">AllnotDeleted</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">AllarePublished</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">isAllowedtoViewChildren</span> <span class="o">=</span> <span class="kc">True</span>
+        
+        <span class="n">is_published</span> <span class="o">=</span> <span class="n">checkIfPublished</span><span class="p">(</span><span class="n">Phenotype</span><span class="p">,</span> <span class="n">pk</span><span class="p">,</span> <span class="n">phenotype_history_id</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">is_published</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">checkPhenotypeTobePublished</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">pk</span><span class="p">,</span> <span class="n">phenotype_history_id</span><span class="p">)</span>
+ 
+        <span class="n">data</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+         
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">allow_to_publish</span> <span class="ow">or</span> <span class="n">is_published</span><span class="p">:</span>
+            <span class="n">data</span><span class="p">[</span><span class="s1">&#39;form_is_valid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">data</span><span class="p">[</span><span class="s1">&#39;message&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">render_to_string</span><span class="p">(</span><span class="s1">&#39;clinicalcode/error.html&#39;</span><span class="p">,</span>
+                                               <span class="p">{},</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="p">)</span>            
+            <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+         
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">allow_to_publish</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">is_published</span><span class="p">:</span>
+                <span class="c1"># start a transaction</span>
+                <span class="k">with</span> <span class="n">transaction</span><span class="o">.</span><span class="n">atomic</span><span class="p">():</span>
+                    <span class="n">phenotype</span> <span class="o">=</span> <span class="n">Phenotype</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">pk</span><span class="p">)</span>
+                    <span class="n">published_phenotype</span> <span class="o">=</span> <span class="n">PublishedPhenotype</span><span class="p">(</span><span class="n">phenotype</span><span class="o">=</span><span class="n">phenotype</span><span class="p">,</span> 
+                                                        <span class="n">phenotype_history_id</span><span class="o">=</span><span class="n">phenotype_history_id</span><span class="p">,</span> 
+                                                        <span class="n">created_by</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">)</span>
+                    <span class="n">published_phenotype</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+                    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;form_is_valid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+                    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;latest_history_ID&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">phenotype_history_id</span>  <span class="c1">#phenotype.history.latest().pk</span>
+ 
+         
+         
+                    <span class="c1"># update history list </span>
+                    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;html_history_list&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">render_to_string</span><span class="p">(</span>
+                            <span class="s1">&#39;clinicalcode/phenotype/partial_history_list.html&#39;</span><span class="p">,</span>
+                            <span class="p">{</span><span class="s1">&#39;history&#39;</span><span class="p">:</span> <span class="n">phenotype</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">all</span><span class="p">(),</span>
+                             <span class="s1">&#39;current_phenotype_history_id&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">phenotype_history_id</span><span class="p">),</span>  <span class="c1">#phenotype.history.latest().pk,</span>
+                             <span class="s1">&#39;published_historical_ids&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">PublishedPhenotype</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">phenotype_id</span><span class="o">=</span><span class="n">pk</span><span class="p">)</span><span class="o">.</span><span class="n">values_list</span><span class="p">(</span><span class="s1">&#39;phenotype_history_id&#39;</span><span class="p">,</span> <span class="n">flat</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+                            <span class="p">},</span>
+                            <span class="n">request</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span>
+                        <span class="p">)</span>
+
+             
+                    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;message&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">render_to_string</span><span class="p">(</span><span class="s1">&#39;clinicalcode/phenotype/published.html&#39;</span><span class="p">,</span>
+                                                       <span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">pk</span><span class="p">,</span> <span class="s1">&#39;phenotype_history_id&#39;</span><span class="p">:</span> <span class="n">phenotype_history_id</span><span class="p">}</span>
+                                                       <span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="p">)</span>
+                     
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">data</span><span class="p">[</span><span class="s1">&#39;form_is_valid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">data</span><span class="p">[</span><span class="s1">&#39;message&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">render_to_string</span><span class="p">(</span><span class="s1">&#39;clinicalcode/error.html&#39;</span><span class="p">,</span>
+                                               <span class="p">{},</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="p">)</span>
+         
+        <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></div></div>
+ 
+<span class="c1">#---------------------------------------------------------------------------</span>
+<div class="viewcode-block" id="checkAllChildConcepts4Publish_Historical"><a class="viewcode-back" href="../../../clinicalcode.views.html#clinicalcode.views.Phenotype.checkAllChildConcepts4Publish_Historical">[docs]</a><span class="k">def</span> <span class="nf">checkAllChildConcepts4Publish_Historical</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">phenotype_id</span><span class="p">,</span> <span class="n">phenotype_history_id</span><span class="p">):</span>
+
+    <span class="c1"># get historical phenotype concepts</span>
+    <span class="n">phenotype</span> <span class="o">=</span> <span class="n">db_utils</span><span class="o">.</span><span class="n">getHistoryPhenotype</span><span class="p">(</span><span class="n">phenotype_history_id</span><span class="p">)</span>
+    <span class="n">child_concepts_versions</span> <span class="o">=</span> <span class="p">[(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;concept_id&#39;</span><span class="p">]</span> <span class="p">,</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;concept_version_id&#39;</span><span class="p">])</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">phenotype</span><span class="p">[</span><span class="s1">&#39;concept_informations&#39;</span><span class="p">])]</span> 
+    
+    <span class="c1"># Now check all the child concepts for deletion(from live version) and Publish(from historical version)</span>
+    <span class="c1"># we check access(from live version) here.</span>
+
+    <span class="n">errors</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">has_child_concepts</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">if</span> <span class="n">child_concepts_versions</span><span class="p">:</span>
+        <span class="n">has_child_concepts</span> <span class="o">=</span> <span class="kc">True</span>
+        
+    <span class="n">AllnotDeleted</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">for</span> <span class="n">cc</span> <span class="ow">in</span> <span class="n">child_concepts_versions</span><span class="p">:</span>
+        <span class="n">isDeleted</span> <span class="o">=</span> <span class="kc">False</span>         
+        <span class="n">isDeleted</span> <span class="o">=</span> <span class="p">(</span><span class="n">Concept</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Q</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">cc</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span><span class="o">.</span><span class="n">exclude</span><span class="p">(</span><span class="n">is_deleted</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">isDeleted</span><span class="p">):</span>
+            <span class="n">errors</span><span class="p">[</span><span class="n">cc</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="s1">&#39;Child concept (&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">cc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">+</span><span class="s1">&#39;) is deleted&#39;</span>
+            <span class="n">AllnotDeleted</span> <span class="o">=</span> <span class="kc">False</span>
+            
+    <span class="n">AllarePublished</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">for</span> <span class="n">cc</span> <span class="ow">in</span> <span class="n">child_concepts_versions</span><span class="p">:</span>
+        <span class="n">is_published</span> <span class="o">=</span> <span class="kc">False</span>         
+        <span class="n">is_published</span> <span class="o">=</span> <span class="n">checkIfPublished</span><span class="p">(</span><span class="n">Concept</span><span class="p">,</span> <span class="n">cc</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">cc</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">if</span><span class="p">(</span><span class="ow">not</span> <span class="n">is_published</span><span class="p">):</span>
+            <span class="n">errors</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">cc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">cc</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span> <span class="o">=</span> <span class="s1">&#39;Child concept (&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">cc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">cc</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">+</span><span class="s1">&#39;) is not published&#39;</span>
+            <span class="n">AllarePublished</span> <span class="o">=</span> <span class="kc">False</span>
+            
+            
+    <span class="c1"># Now check all for access.</span>
+    <span class="n">isAllowedtoViewChildren</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">for</span> <span class="n">cc</span> <span class="ow">in</span> <span class="n">child_concepts_versions</span><span class="p">:</span>
+        <span class="n">permitted</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">permitted</span> <span class="o">=</span> <span class="n">allowed_to_view</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">Concept</span><span class="p">,</span> <span class="n">set_id</span><span class="o">=</span><span class="n">cc</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">set_history_id</span><span class="o">=</span><span class="n">cc</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">permitted</span><span class="p">):</span>
+            <span class="n">errors</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">cc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">+</span><span class="s1">&#39;_view&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Child concept (&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">cc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">+</span><span class="s1">&#39;) is not permitted.&#39;</span>             
+            <span class="n">isAllowedtoViewChildren</span> <span class="o">=</span> <span class="kc">False</span>
+                    
+
+
+    <span class="n">isOK</span> <span class="o">=</span> <span class="p">(</span><span class="n">AllnotDeleted</span> <span class="ow">and</span> <span class="n">AllarePublished</span> <span class="ow">and</span> <span class="n">isAllowedtoViewChildren</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">has_child_concepts</span><span class="p">,</span> <span class="n">isOK</span><span class="p">,</span> <span class="n">AllnotDeleted</span><span class="p">,</span> <span class="n">AllarePublished</span><span class="p">,</span> <span class="n">isAllowedtoViewChildren</span><span class="p">,</span> <span class="n">errors</span></div>
+
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, alex.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

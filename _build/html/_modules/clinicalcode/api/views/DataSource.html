@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>clinicalcode.api.views.DataSource &mdash; Concept Library 1.0 documentation</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../index.html" class="icon icon-home"> Concept Library
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../modules.html">CodeListLibrary_project</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Concept Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../../index.html">Module code</a> &raquo;</li>
+      <li>clinicalcode.api.views.DataSource</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for clinicalcode.api.views.DataSource</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">rest_framework</span> <span class="kn">import</span> <span class="n">viewsets</span><span class="p">,</span> <span class="n">status</span>
+<span class="kn">from</span> <span class="nn">rest_framework.decorators</span> <span class="kn">import</span> <span class="n">api_view</span><span class="p">,</span> <span class="n">permission_classes</span><span class="p">,</span> <span class="n">authentication_classes</span>
+<span class="kn">from</span> <span class="nn">rest_framework.response</span> <span class="kn">import</span> <span class="n">Response</span>
+<span class="kn">from</span> <span class="nn">django.http.response</span> <span class="kn">import</span> <span class="n">Http404</span>
+<span class="kn">from</span> <span class="nn">django.db.models</span> <span class="kn">import</span> <span class="n">Q</span>
+
+<span class="kn">from</span> <span class="nn">..serializers</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="kn">from</span> <span class="nn">...models</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="kn">from</span> <span class="nn">django.contrib.auth.models</span> <span class="kn">import</span> <span class="n">User</span>
+
+<span class="kn">from</span> <span class="nn">...db_utils</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">...permissions</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
+<span class="kn">from</span> <span class="nn">django.core.exceptions</span> <span class="kn">import</span> <span class="n">PermissionDenied</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="c1"># from clinicalcode.context_processors import clinicalcode</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span> <span class="k">as</span> <span class="n">ordr</span>
+<span class="kn">from</span> <span class="nn">...utils</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="c1"># from numpy.distutils.fcompiler import none</span>
+
+<span class="kn">from</span> <span class="nn">django.core</span> <span class="kn">import</span> <span class="n">serializers</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span> <span class="nn">django.core.validators</span> <span class="kn">import</span> <span class="n">URLValidator</span>
+<span class="kn">from</span> <span class="nn">.View</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">django.db.models.aggregates</span> <span class="kn">import</span> <span class="n">Max</span>
+
+
+<div class="viewcode-block" id="api_datasource_create"><a class="viewcode-back" href="../../../../clinicalcode.api.views.html#clinicalcode.api.views.DataSource.api_datasource_create">[docs]</a><span class="nd">@api_view</span><span class="p">([</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">api_datasource_create</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">is_superuser</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">PermissionDenied</span>
+    <span class="k">if</span> <span class="n">is_member</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">,</span> <span class="n">group_name</span><span class="o">=</span><span class="s1">&#39;ReadOnlyUsers&#39;</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">PermissionDenied</span>
+
+    <span class="n">validate_access_to_create</span><span class="p">()</span>
+    <span class="n">user_groups</span> <span class="o">=</span> <span class="n">getGroups</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span><span class="p">:</span>
+        <span class="n">new_datasource</span> <span class="o">=</span> <span class="n">DataSource</span><span class="p">()</span>
+        <span class="n">new_datasource</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span>
+        <span class="n">new_datasource</span><span class="o">.</span><span class="n">uid</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;uid&#39;</span><span class="p">)</span>
+        <span class="n">new_datasource</span><span class="o">.</span><span class="n">url</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;url&#39;</span><span class="p">)</span>
+        <span class="n">new_datasource</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;description&#39;</span><span class="p">)</span>
+        
+        <span class="c1"># remove brand from ds</span>
+        <span class="c1">#brand_id = request.data.get(&#39;brand_id&#39;)</span>
+        <span class="c1">#new_datasource.brand = Brand.objects.get(id=brand_id)</span>
+
+        <span class="n">new_datasource</span><span class="o">.</span><span class="n">created_by</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
+
+        <span class="n">is_valid</span><span class="p">,</span> <span class="n">errors_dict</span> <span class="o">=</span> <span class="n">isValidDataSource</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">new_datasource</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">is_valid</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span>
+              <span class="n">data</span> <span class="o">=</span> <span class="n">errors_dict</span><span class="p">,</span> 
+              <span class="n">content_type</span><span class="o">=</span><span class="s2">&quot;json&quot;</span><span class="p">,</span> 
+              <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_406_NOT_ACCEPTABLE</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1">#    check if already exists </span>
+            <span class="c1">#if not DataSource.objects.filter(name=new_datasource.name, uid=new_datasource.uid, url=new_datasource.url, description=new_datasource.description).exists():            </span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">DataSource</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">name__iexact</span> <span class="o">=</span> <span class="n">new_datasource</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>            
+                <span class="n">new_datasource</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+                <span class="n">created_ds</span> <span class="o">=</span> <span class="n">DataSource</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">new_datasource</span><span class="o">.</span><span class="n">pk</span><span class="p">)</span>
+                <span class="n">created_ds</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">latest</span><span class="p">()</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span> 
+    
+                <span class="c1"># created_ds.changeReason = &quot;Created from API&quot;</span>
+                <span class="c1"># created_ds.save()   </span>
+                <span class="n">save_Entity_With_ChangeReason</span><span class="p">(</span><span class="n">DataSource</span><span class="p">,</span> <span class="n">created_ds</span><span class="o">.</span><span class="n">pk</span><span class="p">,</span> <span class="s2">&quot;Created from API&quot;</span><span class="p">)</span>
+                                              
+                <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+                  <span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="s1">&#39;DataSource created successfully&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">created_ds</span><span class="o">.</span><span class="n">pk</span>
+                <span class="p">}</span>
+                <span class="k">return</span> <span class="n">Response</span><span class="p">(</span>
+                  <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">,</span> 
+                  <span class="n">content_type</span><span class="o">=</span><span class="s2">&quot;text/json-comment-filtered&quot;</span><span class="p">,</span> 
+                  <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_201_CREATED</span>
+                <span class="p">)</span>
+                
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1">#existed_id = DataSource.objects.get(name=new_datasource.name, uid=new_datasource.uid, url=new_datasource.url, description=new_datasource.description).id</span>
+                <span class="n">existed_id</span> <span class="o">=</span> <span class="n">DataSource</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name__iexact</span> <span class="o">=</span> <span class="n">new_datasource</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span><span class="o">.</span><span class="n">id</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+                  <span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="s1">&#39;DataSource created successfully&#39;</span><span class="p">,</span> <span class="c1"># left the msg as it in create case not to confuse the scraper</span>
+                  <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">existed_id</span>
+                <span class="p">}</span>
+                <span class="k">return</span> <span class="n">Response</span><span class="p">(</span>
+                  <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">,</span> 
+                  <span class="n">content_type</span><span class="o">=</span><span class="s2">&quot;text/json-comment-filtered&quot;</span><span class="p">,</span> 
+                  <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_201_CREATED</span>
+                <span class="p">)</span></div>
+                
+                
+<span class="c1">#--------------------------------------------------------------------------</span>
+<span class="c1">#disable authentication for this function</span>
+<div class="viewcode-block" id="published_data_sources"><a class="viewcode-back" href="../../../../clinicalcode.api.views.html#clinicalcode.api.views.DataSource.published_data_sources">[docs]</a><span class="nd">@api_view</span><span class="p">([</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span>
+<span class="nd">@authentication_classes</span><span class="p">([])</span>
+<span class="nd">@permission_classes</span><span class="p">([])</span> 
+<span class="k">def</span> <span class="nf">published_data_sources</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">pk</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">get_live_phenotypes</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">show_published_data_only</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>   
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Get the API output for the list of data sources included in published phenotypes.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span>  <span class="n">get_data_sources</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">pk</span><span class="o">=</span><span class="n">pk</span><span class="p">,</span> <span class="n">get_live_phenotypes</span><span class="o">=</span><span class="n">get_live_phenotypes</span><span class="p">,</span> <span class="n">show_published_data_only</span><span class="o">=</span><span class="n">show_published_data_only</span><span class="p">,</span> <span class="n">is_authenticated_user</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
+    
+<span class="c1">#--------------------------------------------------------------------------</span>
+<div class="viewcode-block" id="data_sources"><a class="viewcode-back" href="../../../../clinicalcode.api.views.html#clinicalcode.api.views.DataSource.data_sources">[docs]</a><span class="nd">@api_view</span><span class="p">([</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">data_sources</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">pk</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">get_live_phenotypes</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">show_published_data_only</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>   
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Get the API output for the list of user data sources.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span>  <span class="n">get_data_sources</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">pk</span><span class="o">=</span><span class="n">pk</span><span class="p">,</span> <span class="n">get_live_phenotypes</span><span class="o">=</span><span class="n">get_live_phenotypes</span><span class="p">,</span> <span class="n">show_published_data_only</span><span class="o">=</span><span class="n">show_published_data_only</span><span class="p">,</span> <span class="n">is_authenticated_user</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+    
+                
+
+<span class="c1">#--------------------------------------------------------------------------</span>
+<div class="viewcode-block" id="get_data_sources"><a class="viewcode-back" href="../../../../clinicalcode.api.views.html#clinicalcode.api.views.DataSource.get_data_sources">[docs]</a><span class="k">def</span> <span class="nf">get_data_sources</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">pk</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">get_live_phenotypes</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">show_published_data_only</span><span class="o">=</span><span class="kc">False</span> <span class="p">,</span> <span class="n">is_authenticated_user</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>   
+    
+    <span class="k">if</span> <span class="n">pk</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">data_source_id</span> <span class="o">=</span> <span class="n">pk</span>
+    <span class="k">else</span><span class="p">:</span>   
+        <span class="n">data_source_id</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">query_params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        
+
+    <span class="c1"># set phenotype search status</span>
+    <span class="c1"># 1= live only, 2= published only, 3= live+published</span>
+    <span class="c1"># based on show_published_data_only / get_live_phenotypes</span>
+    <span class="n">live_and_or_published_ver</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="k">if</span> <span class="n">show_published_data_only</span><span class="p">:</span>
+        <span class="n">live_and_or_published_ver</span> <span class="o">=</span> <span class="mi">2</span>
+    
+    <span class="c1"># --- when in a brand, show only this brand&#39;s data</span>
+    <span class="c1"># get only brands used inside the phenotypes of the current brand (or all, if no brand)</span>
+    <span class="n">phenotypes</span> <span class="o">=</span> <span class="n">get_visible_live_or_published_phenotype_versions</span><span class="p">(</span><span class="n">request</span>
+                                            <span class="p">,</span> <span class="n">get_live_and_or_published_ver</span> <span class="o">=</span> <span class="n">live_and_or_published_ver</span> <span class="c1"># 1= live only, 2= published only, 3= live+published </span>
+                                            <span class="p">,</span> <span class="n">exclude_deleted</span> <span class="o">=</span> <span class="kc">True</span>
+                                            <span class="p">,</span> <span class="n">show_top_version_only</span> <span class="o">=</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">][</span><span class="n">get_live_phenotypes</span><span class="p">]</span>
+                                            <span class="p">,</span> <span class="n">force_get_live_and_or_published_ver</span> <span class="o">=</span> <span class="n">live_and_or_published_ver</span>
+                                            <span class="p">)</span>
+    
+    <span class="n">phenotypes_ids</span> <span class="o">=</span> <span class="n">get_list_of_visible_entity_ids</span><span class="p">(</span><span class="n">phenotypes</span><span class="p">,</span> <span class="n">return_id_or_history_id</span> <span class="o">=</span> <span class="s2">&quot;id&quot;</span><span class="p">)</span>
+    
+    
+    <span class="n">datasource_ids</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span>
+                            <span class="nb">list</span><span class="p">(</span><span class="n">PhenotypeDataSourceMap</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">phenotype_id__in</span> <span class="o">=</span> <span class="n">phenotypes_ids</span><span class="p">)</span><span class="o">.</span><span class="n">values_list</span><span class="p">(</span><span class="s1">&#39;datasource_id&#39;</span><span class="p">,</span> <span class="n">flat</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+                            <span class="p">)</span>
+                        <span class="p">)</span>
+    
+    <span class="n">queryset</span> <span class="o">=</span> <span class="n">DataSource</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">id__in</span> <span class="o">=</span> <span class="n">datasource_ids</span><span class="p">)</span>
+
+ 
+    <span class="n">keyword_search</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">query_params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;search&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">keyword_search</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">queryset</span> <span class="o">=</span> <span class="n">queryset</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">name__icontains</span><span class="o">=</span><span class="n">keyword_search</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">data_source_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">queryset</span> <span class="o">=</span> <span class="n">queryset</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">data_source_id</span><span class="p">)</span>
+
+    <span class="n">queryset</span> <span class="o">=</span> <span class="n">queryset</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span>
+   
+        
+    <span class="n">rows_to_return</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">titles</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;url&#39;</span><span class="p">,</span> <span class="s1">&#39;uid&#39;</span><span class="p">,</span> <span class="s1">&#39;description&#39;</span><span class="p">,</span> <span class="s1">&#39;phenotypes&#39;</span><span class="p">]</span>
+        
+    <span class="k">for</span> <span class="n">ds</span> <span class="ow">in</span> <span class="n">queryset</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="n">ds</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>  
+                <span class="n">ds</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">,</span> <span class="s1">&#39;ignore&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">),</span>
+                <span class="n">ds</span><span class="o">.</span><span class="n">url</span><span class="p">,</span>
+                <span class="n">ds</span><span class="o">.</span><span class="n">uid</span><span class="p">,</span>
+                <span class="n">ds</span><span class="o">.</span><span class="n">description</span>
+            <span class="p">]</span>
+        <span class="k">if</span> <span class="n">get_live_phenotypes</span><span class="p">:</span>
+            <span class="n">ret</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">get_LIVE_phenotypes_associated_with_data_source</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">phenotypes_ids</span><span class="p">,</span> <span class="n">show_published_data_only</span><span class="o">=</span><span class="n">show_published_data_only</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ret</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">get_HISTORICAl_phenotypes_associated_with_data_source</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">phenotypes_ids</span><span class="p">,</span> <span class="n">show_published_data_only</span><span class="o">=</span><span class="n">show_published_data_only</span><span class="p">))</span>
+            
+        <span class="n">rows_to_return</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ordr</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">titles</span><span class="p">,</span>  <span class="n">ret</span> <span class="p">))))</span>
+        
+          
+    <span class="k">if</span> <span class="n">rows_to_return</span><span class="p">:</span>                    
+        <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="n">rows_to_return</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_200_OK</span><span class="p">)</span> 
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">Http404</span></div>
+        <span class="c1">#return Response(rows_to_return, status=status.HTTP_404_NOT_FOUND)</span>
+         
+<div class="viewcode-block" id="get_LIVE_phenotypes_associated_with_data_source"><a class="viewcode-back" href="../../../../clinicalcode.api.views.html#clinicalcode.api.views.DataSource.get_LIVE_phenotypes_associated_with_data_source">[docs]</a><span class="k">def</span> <span class="nf">get_LIVE_phenotypes_associated_with_data_source</span><span class="p">(</span><span class="n">data_source_id</span><span class="p">,</span> <span class="n">brand_phenotypes_ids</span><span class="p">,</span> <span class="n">show_published_data_only</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>   
+    
+    <span class="c1"># return LIVE phenotypes associated with data_source</span>
+    <span class="n">phenotype_ids</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span>
+                            <span class="nb">list</span><span class="p">(</span><span class="n">PhenotypeDataSourceMap</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">datasource_id</span><span class="o">=</span><span class="n">data_source_id</span><span class="p">,</span> <span class="n">phenotype_id__in</span><span class="o">=</span><span class="n">brand_phenotypes_ids</span><span class="p">)</span><span class="o">.</span><span class="n">values_list</span><span class="p">(</span><span class="s1">&#39;phenotype_id&#39;</span><span class="p">,</span> <span class="n">flat</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+                            <span class="p">)</span>
+                        <span class="p">)</span>
+    <span class="n">phenotypes</span> <span class="o">=</span> <span class="n">Phenotype</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">id__in</span> <span class="o">=</span> <span class="n">phenotype_ids</span><span class="p">)</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span> 
+    
+    <span class="n">rows_to_return</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">titles</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;phenotype_id&#39;</span><span class="p">,</span> <span class="s1">&#39;phenotype_version_id&#39;</span><span class="p">,</span> <span class="s1">&#39;phenotype_name&#39;</span><span class="p">,</span> <span class="s1">&#39;phenotype_uuid&#39;</span><span class="p">,</span> <span class="s1">&#39;phenotype_author&#39;</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">phenotypes</span><span class="p">:</span>
+        <span class="n">phenotype_latest_history_id</span> <span class="o">=</span> <span class="n">Phenotype</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">p</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">latest</span><span class="p">()</span><span class="o">.</span><span class="n">history_id</span>
+        
+        <span class="k">if</span> <span class="n">show_published_data_only</span><span class="p">:</span> 
+            <span class="n">is_published</span> <span class="o">=</span> <span class="n">checkIfPublished</span><span class="p">(</span><span class="n">Phenotype</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">phenotype_latest_history_id</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">is_published</span><span class="p">:</span>
+                <span class="k">continue</span>
+            
+        <span class="n">ret</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="n">p</span><span class="o">.</span><span class="n">friendly_id</span><span class="p">,</span>  
+                <span class="n">phenotype_latest_history_id</span><span class="p">,</span>
+                <span class="n">p</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">,</span> <span class="s1">&#39;ignore&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">),</span>
+                <span class="n">p</span><span class="o">.</span><span class="n">phenotype_uuid</span><span class="p">,</span>
+                <span class="n">p</span><span class="o">.</span><span class="n">author</span>
+            <span class="p">]</span>
+        <span class="n">rows_to_return</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ordr</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">titles</span><span class="p">,</span>  <span class="n">ret</span> <span class="p">))))</span>
+        
+    <span class="k">return</span> <span class="n">rows_to_return</span></div>
+
+    
+<div class="viewcode-block" id="get_HISTORICAl_phenotypes_associated_with_data_source"><a class="viewcode-back" href="../../../../clinicalcode.api.views.html#clinicalcode.api.views.DataSource.get_HISTORICAl_phenotypes_associated_with_data_source">[docs]</a><span class="k">def</span> <span class="nf">get_HISTORICAl_phenotypes_associated_with_data_source</span><span class="p">(</span><span class="n">data_source_id</span><span class="p">,</span> <span class="n">brand_phenotypes_ids</span><span class="p">,</span> <span class="n">show_published_data_only</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>   
+    
+    <span class="c1"># return HISTORICAl phenotypes associated with data_source</span>
+    <span class="n">associated_phenotype_ids</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span>
+                                        <span class="nb">list</span><span class="p">(</span><span class="n">PhenotypeDataSourceMap</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">datasource_id</span><span class="o">=</span><span class="n">data_source_id</span><span class="p">,</span> <span class="n">phenotype_id__in</span><span class="o">=</span><span class="n">brand_phenotypes_ids</span><span class="p">)</span><span class="o">.</span><span class="n">values_list</span><span class="p">(</span><span class="s1">&#39;phenotype_id&#39;</span><span class="p">,</span> <span class="n">flat</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+                                        <span class="p">)</span>
+                                    <span class="p">)</span>
+    
+    <span class="n">ver_to_return</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">rows_to_return</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">ph_titles</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;phenotype_id&#39;</span><span class="p">,</span> <span class="s1">&#39;versions&#39;</span><span class="p">]</span>
+    <span class="n">ver_titles</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;phenotype_id&#39;</span><span class="p">,</span> <span class="s1">&#39;phenotype_version_id&#39;</span><span class="p">,</span> <span class="s1">&#39;phenotype_name&#39;</span><span class="p">,</span> <span class="s1">&#39;phenotype_uuid&#39;</span><span class="p">,</span> <span class="s1">&#39;phenotype_author&#39;</span><span class="p">,</span> <span class="s1">&#39;is_latest&#39;</span><span class="p">]</span>
+    
+    <span class="k">for</span> <span class="n">p_id</span> <span class="ow">in</span> <span class="n">associated_phenotype_ids</span><span class="p">:</span>
+        <span class="n">ver_to_return</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># get versions obj</span>
+        <span class="n">associated_phenotype_versions</span> <span class="o">=</span> <span class="n">Phenotype</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">p_id</span><span class="p">)</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">all</span><span class="p">()</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s1">&#39;-history_id&#39;</span><span class="p">)</span>
+        <span class="n">max_version_id</span> <span class="o">=</span> <span class="n">associated_phenotype_versions</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">Max</span><span class="p">(</span><span class="s1">&#39;history_id&#39;</span><span class="p">))[</span><span class="s1">&#39;history_id__max&#39;</span><span class="p">]</span>
+        <span class="n">include_this_phenotype</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">for</span> <span class="n">ver</span> <span class="ow">in</span> <span class="n">associated_phenotype_versions</span><span class="p">:</span>  
+            <span class="k">if</span> <span class="n">show_published_data_only</span><span class="p">:</span>
+                <span class="n">is_published</span> <span class="o">=</span> <span class="n">checkIfPublished</span><span class="p">(</span><span class="n">Phenotype</span><span class="p">,</span> <span class="n">p_id</span><span class="p">,</span> <span class="n">ver</span><span class="o">.</span><span class="n">history_id</span><span class="p">)</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">is_published</span><span class="p">:</span>
+                    <span class="k">continue</span>
+            
+            <span class="n">data_sources_history</span> <span class="o">=</span> <span class="n">getHistoryDataSource_Phenotype</span><span class="p">(</span><span class="n">p_id</span><span class="p">,</span> <span class="n">ver</span><span class="o">.</span><span class="n">history_date</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">data_sources_history</span><span class="p">:</span>
+                <span class="n">phenotype_ds_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="s1">&#39;datasource_id&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">data_sources_history</span> <span class="k">if</span> <span class="s1">&#39;datasource_id&#39;</span> <span class="ow">in</span> <span class="n">i</span><span class="p">]</span>
+                
+                <span class="k">if</span> <span class="n">data_source_id</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="n">phenotype_ds_list</span><span class="p">):</span>
+                    <span class="n">ret</span> <span class="o">=</span> <span class="p">[</span>
+                            <span class="n">ver</span><span class="o">.</span><span class="n">friendly_id</span><span class="p">,</span>  
+                            <span class="n">ver</span><span class="o">.</span><span class="n">history_id</span><span class="p">,</span>
+                            <span class="n">ver</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">,</span> <span class="s1">&#39;ignore&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">),</span>
+                            <span class="n">ver</span><span class="o">.</span><span class="n">phenotype_uuid</span><span class="p">,</span>
+                            <span class="n">ver</span><span class="o">.</span><span class="n">author</span><span class="p">,</span>
+                            <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">][</span><span class="n">ver</span><span class="o">.</span><span class="n">history_id</span> <span class="o">==</span> <span class="n">max_version_id</span><span class="p">]</span>
+                        <span class="p">]</span>
+                    <span class="n">ver_to_return</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ordr</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">ver_titles</span><span class="p">,</span>  <span class="n">ret</span> <span class="p">))))</span>
+                    <span class="n">include_this_phenotype</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">pass</span>      
+        <span class="k">if</span> <span class="n">include_this_phenotype</span><span class="p">:</span>
+            <span class="n">rows_to_return</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ordr</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">ph_titles</span><span class="p">,</span>  <span class="p">[</span><span class="s1">&#39;PH&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">p_id</span><span class="p">),</span> <span class="n">ver_to_return</span><span class="p">]</span> <span class="p">))))</span>
+         
+    <span class="k">return</span> <span class="n">rows_to_return</span></div>
+
+
+
+
+
+    
+    
+    
+        
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, alex.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

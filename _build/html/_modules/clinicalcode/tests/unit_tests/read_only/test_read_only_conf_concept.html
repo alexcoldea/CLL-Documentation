@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>clinicalcode.tests.unit_tests.read_only.test_read_only_conf_concept &mdash; Concept Library 1.0 documentation</title>
+      <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../_static/jquery.js"></script>
+        <script src="../../../../../_static/underscore.js"></script>
+        <script src="../../../../../_static/doctools.js"></script>
+    <script src="../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../../index.html" class="icon icon-home"> Concept Library
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../modules.html">CodeListLibrary_project</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">Concept Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../../../index.html">Module code</a> &raquo;</li>
+      <li>clinicalcode.tests.unit_tests.read_only.test_read_only_conf_concept</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for clinicalcode.tests.unit_tests.read_only.test_read_only_conf_concept</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">django.test</span> <span class="kn">import</span> <span class="n">TestCase</span><span class="p">,</span> <span class="n">override_settings</span>
+<span class="kn">from</span> <span class="nn">django.conf</span> <span class="kn">import</span> <span class="n">settings</span>
+<span class="kn">from</span> <span class="nn">clinicalcode.tests.test_base</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">clinicalcode.tests.unit_test_base</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">clinicalcode.permissions</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">clinicalcode.models.Concept</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">clinicalcode.models.WorkingSet</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span> <span class="nn">decouple</span> <span class="kn">import</span> <span class="n">Config</span><span class="p">,</span> <span class="n">RepositoryEnv</span>
+<span class="kn">from</span> <span class="nn">unittest</span> <span class="kn">import</span> <span class="n">skip</span><span class="p">,</span> <span class="n">skipIf</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">    If arguments does not contain read_only substring then skip the test</span>
+<span class="sd">    because it means that read only settings are not used and tests will fail.</span>
+<span class="sd">    See manage.py to see how it works.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<div class="viewcode-block" id="ReadOnlyTest"><a class="viewcode-back" href="../../../../../clinicalcode.tests.unit_tests.read_only.html#clinicalcode.tests.unit_tests.read_only.test_read_only_conf_concept.ReadOnlyTest">[docs]</a><span class="nd">@skipIf</span><span class="p">(</span><span class="s1">&#39;read_only&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;READ ONLY TEST SKIPPED&quot;</span><span class="p">)</span>        
+<span class="k">class</span> <span class="nc">ReadOnlyTest</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+    
+<div class="viewcode-block" id="ReadOnlyTest.setUpTestData"><a class="viewcode-back" href="../../../../../clinicalcode.tests.unit_tests.read_only.html#clinicalcode.tests.unit_tests.read_only.test_read_only_conf_concept.ReadOnlyTest.setUpTestData">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">setUpTestData</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        
+        <span class="c1"># Users: a normal user and a super_user.</span>
+        <span class="n">super_user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create_superuser</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="n">su_user</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="n">su_password</span><span class="p">,</span> <span class="n">email</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+        <span class="n">normal_user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create_user</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="n">nm_user</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="n">nm_password</span><span class="p">,</span> <span class="n">email</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+        <span class="n">owner_user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create_user</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="n">ow_user</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="n">ow_password</span><span class="p">,</span> <span class="n">email</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+        <span class="n">group_user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create_user</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="n">gp_user</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="n">gp_password</span><span class="p">,</span> <span class="n">email</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+        <span class="n">view_group_user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create_user</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="n">vgp_user</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="n">vgp_password</span><span class="p">,</span> <span class="n">email</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+        <span class="n">edit_group_user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create_user</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="n">egp_user</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="n">egp_password</span><span class="p">,</span> <span class="n">email</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+        
+        <span class="c1"># Groups: a group that is not permitted and one that is.</span>
+        <span class="n">permitted_group</span> <span class="o">=</span> <span class="n">Group</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;permitted_group&quot;</span><span class="p">)</span>
+        <span class="n">forbidden_group</span> <span class="o">=</span> <span class="n">Group</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;forbidden_group&quot;</span><span class="p">)</span>
+        <span class="n">view_group</span> <span class="o">=</span> <span class="n">Group</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;view_group&quot;</span><span class="p">)</span>
+        <span class="n">edit_group</span> <span class="o">=</span> <span class="n">Group</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;edit_group&quot;</span><span class="p">)</span>
+        <span class="c1"># Add the group to the group-user&#39;s groups.</span>
+        <span class="n">group_user</span><span class="o">.</span><span class="n">groups</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">permitted_group</span><span class="p">)</span>
+        <span class="n">view_group_user</span><span class="o">.</span><span class="n">groups</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">view_group</span><span class="p">)</span>
+        <span class="n">edit_group_user</span><span class="o">.</span><span class="n">groups</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">edit_group</span><span class="p">)</span>
+        
+        
+        <span class="n">coding_system</span> <span class="o">=</span> <span class="n">CodingSystem</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+             <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Lookup table&quot;</span><span class="p">,</span>
+             <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Lookup Codes for testing purposes&quot;</span><span class="p">,</span>
+             <span class="n">link</span><span class="o">=</span><span class="n">Google_website</span><span class="p">,</span>
+             <span class="n">database_connection_name</span><span class="o">=</span><span class="s2">&quot;default&quot;</span><span class="p">,</span>
+             <span class="n">table_name</span><span class="o">=</span><span class="s2">&quot;clinicalcode_lookup&quot;</span><span class="p">,</span>
+             <span class="n">code_column_name</span><span class="o">=</span><span class="s2">&quot;code&quot;</span><span class="p">,</span>
+             <span class="n">desc_column_name</span><span class="o">=</span><span class="s2">&quot;description&quot;</span><span class="p">)</span>
+        <span class="n">coding_system</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        
+        <span class="bp">cls</span><span class="o">.</span><span class="n">concept_everybody_can_edit</span> <span class="o">=</span> <span class="n">Concept</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;concept_noone_can_access&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;concept_noone_can_access&quot;</span><span class="p">,</span>
+            <span class="n">author</span><span class="o">=</span><span class="s2">&quot;the_test_goat&quot;</span><span class="p">,</span>
+            <span class="n">entry_date</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(),</span>
+            <span class="n">validation_performed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">validation_description</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="n">publication_doi</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="n">publication_link</span><span class="o">=</span><span class="n">Google_website</span><span class="p">,</span>
+            <span class="n">paper_published</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">source_reference</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="n">citation_requirements</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="n">created_by</span><span class="o">=</span><span class="n">super_user</span><span class="p">,</span>
+            <span class="n">modified_by</span><span class="o">=</span><span class="n">super_user</span><span class="p">,</span>
+            <span class="n">coding_system</span><span class="o">=</span><span class="n">coding_system</span><span class="p">,</span>
+            <span class="n">is_deleted</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">owner</span><span class="o">=</span><span class="n">owner_user</span><span class="p">,</span>
+            <span class="n">group</span><span class="o">=</span><span class="n">permitted_group</span><span class="p">,</span>
+            <span class="n">group_access</span><span class="o">=</span><span class="n">Permissions</span><span class="o">.</span><span class="n">NONE</span><span class="p">,</span>
+            <span class="n">owner_access</span><span class="o">=</span><span class="n">Permissions</span><span class="o">.</span><span class="n">NONE</span><span class="p">,</span>
+            <span class="n">world_access</span><span class="o">=</span><span class="n">Permissions</span><span class="o">.</span><span class="n">EDIT</span>
+        <span class="p">)</span></div>
+    
+        
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    A concept owner cannot edit.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+<div class="viewcode-block" id="ReadOnlyTest.test_owner_not_allowed_to_edit"><a class="viewcode-back" href="../../../../../clinicalcode.tests.unit_tests.read_only.html#clinicalcode.tests.unit_tests.read_only.test_read_only_conf_concept.ReadOnlyTest.test_owner_not_allowed_to_edit">[docs]</a>    <span class="k">def</span> <span class="nf">test_owner_not_allowed_to_edit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">owner</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="n">ow_user</span><span class="p">);</span>
+        <span class="n">permitted</span> <span class="o">=</span> <span class="n">allowed_to_edit</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">Concept</span><span class="p">,</span>
+                        <span class="n">ReadOnlyTest</span><span class="o">.</span><span class="n">concept_everybody_can_edit</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">owner</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="n">permitted</span><span class="p">)</span></div>
+    
+    
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    A user cannot create a new concept.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+<div class="viewcode-block" id="ReadOnlyTest.test_user_not_allowed_to_create"><a class="viewcode-back" href="../../../../../clinicalcode.tests.unit_tests.read_only.html#clinicalcode.tests.unit_tests.read_only.test_read_only_conf_concept.ReadOnlyTest.test_user_not_allowed_to_create">[docs]</a>    <span class="k">def</span> <span class="nf">test_user_not_allowed_to_create</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">permitted</span> <span class="o">=</span> <span class="n">allowed_to_create</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="n">permitted</span><span class="p">)</span></div>
+        
+    
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    A super user CANNOT create, edit, revert, or fork a concept.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+<div class="viewcode-block" id="ReadOnlyTest.test_super_user_not_allowed_to_edit"><a class="viewcode-back" href="../../../../../clinicalcode.tests.unit_tests.read_only.html#clinicalcode.tests.unit_tests.read_only.test_read_only_conf_concept.ReadOnlyTest.test_super_user_not_allowed_to_edit">[docs]</a>    <span class="k">def</span> <span class="nf">test_super_user_not_allowed_to_edit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="n">su_user</span><span class="p">);</span>
+        <span class="n">permitted</span> <span class="o">=</span> <span class="n">allowed_to_edit</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">Concept</span><span class="p">,</span>
+                        <span class="n">ReadOnlyTest</span><span class="o">.</span><span class="n">concept_everybody_can_edit</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="nb">super</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="n">permitted</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, alex.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

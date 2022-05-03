@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>clinicalcode.migrations.0005_get_concept_structure_live_sql &mdash; Concept Library 1.0 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> Concept Library
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">CodeListLibrary_project</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Concept Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      <li>clinicalcode.migrations.0005_get_concept_structure_live_sql</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for clinicalcode.migrations.0005_get_concept_structure_live_sql</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+
+
+<span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">migrations</span>
+
+<div class="viewcode-block" id="Migration"><a class="viewcode-back" href="../../../clinicalcode.migrations.html#clinicalcode.migrations.0005_get_concept_structure_live_sql.Migration">[docs]</a><span class="k">class</span> <span class="nc">Migration</span><span class="p">(</span><span class="n">migrations</span><span class="o">.</span><span class="n">Migration</span><span class="p">):</span>
+
+    <span class="n">dependencies</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s1">&#39;clinicalcode&#39;</span><span class="p">,</span> <span class="s1">&#39;0004_concept_unique_codes_sql&#39;</span><span class="p">),</span>
+    <span class="p">]</span>
+
+    <span class="n">operations</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">migrations</span><span class="o">.</span><span class="n">RunSQL</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">            DO $$</span>
+<span class="s2">			BEGIN</span>
+<span class="s2">			</span>
+<span class="s2">-- ===========================================================================</span>
+<span class="s2">-- Function: public.get_concept_structure_Live(integer)</span>
+
+<span class="s2">-- Returns concept_component_structure</span>
+<span class="s2">                                        </span>
+<span class="s2">-- created: Muhammad Elmessary</span>
+<span class="s2">--           21/02/2020</span>
+
+<span class="s2">--DROP FUNCTION public.get_concept_structure_Live(integer);</span>
+
+
+
+<span class="s2">CREATE OR REPLACE FUNCTION public.get_concept_structure_Live(IN root_concept_id integer)</span>
+<span class="s2">  RETURNS TABLE(code character varying, description character varying</span>
+<span class="s2">  ,concept_ref_id INT ,</span>
+<span class="s2">        concept_id INT ,</span>
+<span class="s2">        logical_type INT,</span>
+<span class="s2">        component_type INT,</span>
+<span class="s2">        level_depth INT,</span>
+<span class="s2">        pkt INT</span>
+<span class="s2">        </span>
+<span class="s2">  ) AS</span>
+<span class="s2">$BODY$</span>
+<span class="s2">  DECLARE </span>
+<span class="s2">    max_depth INT :=0;</span>
+<span class="s2">    counter INT :=0;</span>
+<span class="s2">    i INT :=0;</span>
+<span class="s2">    j INT :=0;</span>
+<span class="s2">    t RECORD;</span>
+<span class="s2">BEGIN</span>
+<span class="s2">    -- define temp. table  </span>
+
+<span class="s2">    DROP TABLE IF EXISTS Codes;</span>
+<span class="s2">    CREATE TEMPORARY TABLE Codes </span>
+<span class="s2">    (</span>
+<span class="s2">        code character varying(100),</span>
+<span class="s2">        description character varying(1000),</span>
+<span class="s2">        concept_ref_id  INT NULL,</span>
+<span class="s2">        concept_id INT,</span>
+<span class="s2">        logical_type INT,</span>
+<span class="s2">        component_type INT,</span>
+<span class="s2">        level_depth INT</span>
+<span class="s2">    );</span>
+<span class="s2">    ---------------------------------------------------------------------</span>
+
+<span class="s2">    -- Table to contain the final concept tree structure</span>
+<span class="s2">    -- (these include all component&#39;s code to be processed to get the final code list).</span>
+<span class="s2">    </span>
+<span class="s2">    DROP TABLE IF EXISTS ConceptCodes;</span>
+<span class="s2">    CREATE TEMPORARY TABLE ConceptCodes AS</span>
+<span class="s2">        SELECT *</span>
+<span class="s2">        FROM Codes;    </span>
+
+<span class="s2">    ALTER TABLE ConceptCodes ADD pkt SERIAL;</span>
+<span class="s2">    ---------------------------------------------------------------------</span>
+
+<span class="s2">    -- check if root concept has been deleted </span>
+<span class="s2">    IF (SELECT COUNT(*) </span>
+<span class="s2">        FROM clinicalcode_historicalconcept c </span>
+<span class="s2">        WHERE c.id = root_concept_id AND c.is_deleted IS NOT True) &gt; 0 THEN</span>
+<span class="s2">-----------------------------------------------------------------------</span>
+<span class="s2">        -- Get a table of all the codes involved in the concepts in the tree.</span>
+<span class="s2">        -----------------------------------------------------------------------</span>
+
+<span class="s2">        WITH RECURSIVE get_codes(concept_ref_id, concept_id, concept_name,</span>
+<span class="s2">                     logical_type, component_name, component_id, unique_id,</span>
+<span class="s2">                     component_type, code, code_description, level_depth,</span>
+<span class="s2">                     all_parents) AS </span>
+<span class="s2">        (</span>
+
+<span class="s2">        SELECT * </span>
+<span class="s2">        FROM (</span>
+<span class="s2">            SELECT  com.concept_ref_id, </span>
+<span class="s2">                c.id AS concept_id,</span>
+<span class="s2">                c.name AS concept_name, </span>
+<span class="s2">                com.logical_type,</span>
+<span class="s2">                com.name AS component_name, </span>
+<span class="s2">                com.id AS component_id,</span>
+<span class="s2">                cr.id AS unique_id, </span>
+<span class="s2">                com.component_type, </span>
+<span class="s2">                cd.code,</span>
+<span class="s2">                cd.description AS code_description, </span>
+<span class="s2">                1 AS level_depth,</span>
+<span class="s2">                array[c.id] AS all_parents</span>
+<span class="s2">            FROM clinicalcode_concept c</span>
+<span class="s2">                JOIN clinicalcode_component com ON com.concept_id = c.id</span>
+<span class="s2">                JOIN clinicalcode_coderegex cr ON cr.component_id = com.id</span>
+<span class="s2">                JOIN clinicalcode_codelist cl ON cr.code_list_id = cl.id</span>
+<span class="s2">                JOIN clinicalcode_code cd ON cd.code_list_id = cl.id</span>
+<span class="s2">            WHERE c.id = root_concept_id AND (com.component_type = 3 OR com.component_type = 4)    AND c.is_deleted IS NOT TRUE</span>
+<span class="s2">            UNION ALL</span>
+<span class="s2">            SELECT  com.concept_ref_id, </span>
+<span class="s2">                c.id AS concept_id,</span>
+<span class="s2">                c.name AS concept_name, </span>
+<span class="s2">                com.logical_type,</span>
+<span class="s2">                com.name AS component_name, </span>
+<span class="s2">                com.id AS component_id,</span>
+<span class="s2">                cl.id AS unique_id, </span>
+<span class="s2">                com.component_type, </span>
+<span class="s2">                cd.code, </span>
+<span class="s2">                cd.description AS code_description, </span>
+<span class="s2">                1 AS level_depth,</span>
+<span class="s2">                array[c.id] AS all_parents</span>
+<span class="s2">            FROM clinicalcode_concept c</span>
+<span class="s2">                JOIN clinicalcode_component com ON com.concept_id = c.id</span>
+<span class="s2">                JOIN clinicalcode_codelist cl ON cl.component_id = com.id</span>
+<span class="s2">                JOIN clinicalcode_code cd ON cd.code_list_id = cl.id</span>
+<span class="s2">            WHERE c.id = root_concept_id AND com.component_type = 2 AND c.is_deleted IS NOT TRUE</span>
+<span class="s2">            UNION ALL</span>
+<span class="s2">            SELECT     com.concept_ref_id, </span>
+<span class="s2">                c.id AS concept_id,</span>
+<span class="s2">                c.name AS concept_name, </span>
+<span class="s2">                com.logical_type,</span>
+<span class="s2">                com.name AS component_name, </span>
+<span class="s2">                com.id AS component_id,</span>
+<span class="s2">                c.id AS unique_id, </span>
+<span class="s2">                com.component_type, </span>
+<span class="s2">                &#39;&#39; AS code,</span>
+<span class="s2">                &#39;&#39; AS code_description, </span>
+<span class="s2">                1 AS level_depth, </span>
+<span class="s2">                array[c.id] AS all_parents</span>
+<span class="s2">            FROM clinicalcode_concept c</span>
+<span class="s2">                JOIN clinicalcode_component com on com.concept_id = c.id</span>
+<span class="s2">            WHERE c.id = root_concept_id AND com.component_type = 1 AND c.is_deleted IS NOT TRUE</span>
+<span class="s2">        ) AS unused_alias</span>
+<span class="s2">        UNION ALL</span>
+<span class="s2">        -- now get child nodes from the root, this is done recursively call</span>
+<span class="s2">        -- back to get_codes</span>
+<span class="s2">        SELECT  child_codes.concept_ref_id, child_codes.concept_id,</span>
+<span class="s2">            child_codes.concept_name, child_codes.logical_type,</span>
+<span class="s2">            child_codes.component_name, child_codes.component_id,</span>
+<span class="s2">            child_codes.unique_id, child_codes.component_type,</span>
+<span class="s2">            child_codes.code, child_codes.code_description,</span>
+<span class="s2">            parent_codes.level_depth + 1,</span>
+<span class="s2">            parent_codes.all_parents||child_codes.concept_id</span>
+<span class="s2">        FROM (    </span>
+<span class="s2">            SELECT  com.concept_ref_id, c.id AS concept_id,</span>
+<span class="s2">                c.name AS concept_name, com.logical_type,</span>
+<span class="s2">                com.name AS component_name, com.id AS component_id,</span>
+<span class="s2">                cr.id AS unique_id, com.component_type, cd.code AS code,</span>
+<span class="s2">                cd.description AS code_description, 1 as level_depth</span>
+<span class="s2">            FROM clinicalcode_concept c</span>
+<span class="s2">                JOIN clinicalcode_component com ON com.concept_id = c.id</span>
+<span class="s2">                JOIN clinicalcode_coderegex cr ON cr.component_id = com.id</span>
+<span class="s2">                JOIN clinicalcode_codelist cl ON cr.code_list_id = cl.id</span>
+<span class="s2">                JOIN clinicalcode_code cd ON cd.code_list_id = cl.id</span>
+<span class="s2">            WHERE (com.component_type = 3 OR com.component_type = 4)</span>
+<span class="s2">                AND c.is_deleted IS NOT TRUE</span>
+<span class="s2">            UNION ALL</span>
+<span class="s2">            SELECT  com.concept_ref_id, c.id AS concept_id,</span>
+<span class="s2">                c.name AS concept_name, com.logical_type,</span>
+<span class="s2">                com.name AS component_name, com.id AS component_id,</span>
+<span class="s2">                cl.id AS unique_id, com.component_type, cd.code, </span>
+<span class="s2">                cd.description AS code_description, 1 as level_depth</span>
+<span class="s2">            FROM clinicalcode_concept c</span>
+<span class="s2">                JOIN clinicalcode_component com ON com.concept_id = c.id</span>
+<span class="s2">                JOIN clinicalcode_codelist cl ON cl.component_id = com.id </span>
+<span class="s2">                JOIN clinicalcode_code cd ON cd.code_list_id = cl.id</span>
+<span class="s2">            WHERE com.component_type = 2 AND c.is_deleted IS NOT TRUE</span>
+<span class="s2">            UNION ALL</span>
+<span class="s2">            SELECT  com.concept_ref_id, c.id AS concept_id,</span>
+<span class="s2">                c.name AS concept_name, com.logical_type,</span>
+<span class="s2">                com.name AS component_name, com.id AS component_id,</span>
+<span class="s2">                c.id AS unique_id, com.component_type, &#39;&#39; AS code,</span>
+<span class="s2">                &#39;&#39; AS code_description, 1 as level_depth</span>
+<span class="s2">            FROM clinicalcode_concept c</span>
+<span class="s2">                JOIN clinicalcode_component com ON com.concept_id = c.id</span>
+<span class="s2">            WHERE com.component_type = 1 AND c.is_deleted IS NOT TRUE</span>
+<span class="s2">        ) AS child_codes, get_codes parent_codes</span>
+<span class="s2">        WHERE child_codes.concept_id = parent_codes.concept_ref_id</span>
+<span class="s2">              AND  child_codes.concept_id &lt;&gt; ALL(parent_codes.all_parents)</span>
+<span class="s2">        )</span>
+<span class="s2">        INSERT INTO Codes(code, description, concept_ref_id, concept_id,</span>
+<span class="s2">                  logical_type, component_type, level_depth)</span>
+<span class="s2">        SELECT  rec.code, rec.code_description, rec.concept_ref_id,</span>
+<span class="s2">            rec.concept_id, rec.logical_type, rec.component_type,</span>
+<span class="s2">            rec.level_depth </span>
+<span class="s2">        FROM get_codes AS rec;</span>
+
+<span class="s2">        -- Add all codes from components (both inclusion and exclusion).</span>
+<span class="s2">        INSERT INTO ConceptCodes(code, description, concept_ref_id,</span>
+<span class="s2">                concept_id, logical_type, component_type, level_depth)</span>
+<span class="s2">        SELECT     c.code, c.description, c.concept_ref_id,</span>
+<span class="s2">            c.concept_id, c.logical_type, c.component_type , c.level_depth</span>
+<span class="s2">        FROM Codes c;</span>
+
+
+<span class="s2"> END IF;</span>
+<span class="s2">        </span>
+<span class="s2">    -- Returns concept_component_structure.</span>
+<span class="s2">    RETURN QUERY SELECT *</span>
+<span class="s2">            FROM ConceptCodes c           </span>
+<span class="s2">            ORDER BY c.pkt;</span>
+
+
+<span class="s2"> END;</span>
+
+<span class="s2">$BODY$</span>
+<span class="s2">  LANGUAGE plpgsql VOLATILE</span>
+<span class="s2">  COST 100</span>
+<span class="s2">  ROWS 1000;</span>
+
+<span class="s2">-- ===========================================================================</span>
+<span class="s2">	END</span>
+<span class="s2">    $$</span>
+<span class="s2">        &quot;&quot;&quot;</span><span class="p">)</span>
+    <span class="p">]</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, alex.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
