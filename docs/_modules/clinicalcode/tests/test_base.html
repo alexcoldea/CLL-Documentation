@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>clinicalcode.tests.test_base &mdash; Concept Library 1.0 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> Concept Library
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">CodeListLibrary_project</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Concept Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      <li>clinicalcode.tests.test_base</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for clinicalcode.tests.test_base</h1><div class="highlight"><pre>
+<span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Test base class</span>
+
+<span class="sd">    Set-up and tear-down etc. which are common for unit and functional tests.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">connection</span><span class="p">,</span> <span class="n">connections</span>  <span class="c1"># , transaction</span>
+<span class="kn">import</span> <span class="nn">urllib3</span>
+
+<span class="n">SCREEN_DUMP_LOCATION</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)),</span> <span class="s1">&#39;screendumps&#39;</span>
+<span class="p">)</span>
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Global test parameters.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="n">su_user</span> <span class="o">=</span> <span class="s1">&#39;superuser&#39;</span>
+<span class="n">su_password</span> <span class="o">=</span> <span class="s1">&#39;superuserPassword&#39;</span>
+<span class="n">ow_user</span> <span class="o">=</span> <span class="s1">&#39;owneruser&#39;</span>
+<span class="n">ow_password</span> <span class="o">=</span> <span class="s1">&#39;owneruserPassword&#39;</span>
+<span class="n">gp_user</span> <span class="o">=</span> <span class="s1">&#39;groupuser&#39;</span>
+<span class="n">gp_password</span> <span class="o">=</span> <span class="s1">&#39;groupuserPassword&#39;</span>
+<span class="n">vgp_user</span> <span class="o">=</span> <span class="s1">&#39;viewGroupUser&#39;</span>
+<span class="n">vgp_password</span> <span class="o">=</span> <span class="s1">&#39;viewGroupUserPassword&#39;</span>
+<span class="n">egp_user</span> <span class="o">=</span> <span class="s1">&#39;editGroupUser&#39;</span>
+<span class="n">egp_password</span> <span class="o">=</span> <span class="s1">&#39;editGroupUserPassword&#39;</span>
+<span class="n">nm_user</span> <span class="o">=</span> <span class="s1">&#39;reginald&#39;</span>
+<span class="n">nm_password</span> <span class="o">=</span> <span class="s1">&#39;reginaldspassword&#39;</span>
+<span class="n">Google_website</span> <span class="o">=</span> <span class="s2">&quot;https://www.google.com&quot;</span>
+
+
+<div class="viewcode-block" id="update_friendly_id"><a class="viewcode-back" href="../../../clinicalcode.tests.html#clinicalcode.tests.test_base.update_friendly_id">[docs]</a><span class="k">def</span> <span class="nf">update_friendly_id</span><span class="p">():</span>
+    <span class="n">update_sqls</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s2">&quot;UPDATE clinicalcode_historicalconcept       SET       friendly_id = concat(&#39;C&#39;, cast(id as text));&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;UPDATE clinicalcode_concept                 SET       friendly_id = concat(&#39;C&#39;, cast(id as text));&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;UPDATE clinicalcode_historicalphenotype     SET       friendly_id = concat(&#39;PH&#39;, cast(id as text));&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;UPDATE clinicalcode_phenotype               SET       friendly_id = concat(&#39;PH&#39;, cast(id as text));&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;UPDATE clinicalcode_historicalworkingset    SET       friendly_id = concat(&#39;WS&#39;, cast(id as text));&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;UPDATE clinicalcode_workingset              SET       friendly_id = concat(&#39;WS&#39;, cast(id as text));&quot;</span>
+    <span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">sql</span> <span class="ow">in</span> <span class="n">update_sqls</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span> <span class="k">as</span> <span class="n">cursor</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">pass</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;######  update_friendly_id   #############################&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="save_stat"><a class="viewcode-back" href="../../../clinicalcode.tests.html#clinicalcode.tests.test_base.save_stat">[docs]</a><span class="k">def</span> <span class="nf">save_stat</span><span class="p">(</span><span class="n">host</span><span class="p">):</span>
+    <span class="n">url_run</span> <span class="o">=</span> <span class="n">host</span> <span class="o">+</span> <span class="s2">&quot;/admin/run-stat&quot;</span>
+    <span class="n">http</span> <span class="o">=</span> <span class="n">urllib3</span><span class="o">.</span><span class="n">PoolManager</span><span class="p">()</span>
+    <span class="n">resp_stat</span> <span class="o">=</span> <span class="n">http</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="n">url_run</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">((</span><span class="nb">str</span><span class="p">(</span><span class="n">resp_stat</span><span class="o">.</span><span class="n">status</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;#### Run-stat ####&quot;</span><span class="p">))</span>
+
+    <span class="n">url_save</span> <span class="o">=</span> <span class="n">host</span> <span class="o">+</span> <span class="s2">&quot;/admin/run-stat-collections&quot;</span>
+    <span class="n">resp_stat</span> <span class="o">=</span> <span class="n">http</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="n">url_save</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">((</span><span class="nb">str</span><span class="p">(</span><span class="n">resp_stat</span><span class="o">.</span><span class="n">status</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;#### Run-stat-collections save ####&quot;</span><span class="p">))</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, alex.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
