@@ -1,0 +1,160 @@
+(0.009) 
+            SELECT c.relname,
+            CASE WHEN FALSE THEN 'p' WHEN c.relkind IN ('m', 'v') THEN 'v' ELSE 't' END
+            FROM pg_catalog.pg_class c
+            LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+            WHERE c.relkind IN ('f', 'm', 'p', 'r', 'v')
+                AND n.nspname NOT IN ('pg_catalog', 'pg_toast')
+                AND pg_catalog.pg_table_is_visible(c.oid)
+        ; args=None
+(0.004) SELECT "clinicalcode_brand"."name" FROM "clinicalcode_brand" ORDER BY "clinicalcode_brand"."name" ASC; args=()
+(0.008) 
+            SELECT c.relname,
+            CASE WHEN FALSE THEN 'p' WHEN c.relkind IN ('m', 'v') THEN 'v' ELSE 't' END
+            FROM pg_catalog.pg_class c
+            LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+            WHERE c.relkind IN ('f', 'm', 'p', 'r', 'v')
+                AND n.nspname NOT IN ('pg_catalog', 'pg_toast')
+                AND pg_catalog.pg_table_is_visible(c.oid)
+        ; args=None
+(0.003) SELECT "clinicalcode_brand"."name" FROM "clinicalcode_brand" ORDER BY "clinicalcode_brand"."name" ASC; args=()
+(0.009) 
+            SELECT c.relname,
+            CASE WHEN FALSE THEN 'p' WHEN c.relkind IN ('m', 'v') THEN 'v' ELSE 't' END
+            FROM pg_catalog.pg_class c
+            LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+            WHERE c.relkind IN ('f', 'm', 'p', 'r', 'v')
+                AND n.nspname NOT IN ('pg_catalog', 'pg_toast')
+                AND pg_catalog.pg_table_is_visible(c.oid)
+        ; args=None
+(0.003) SELECT "clinicalcode_brand"."name" FROM "clinicalcode_brand" ORDER BY "clinicalcode_brand"."name" ASC; args=()
+(0.006) 
+            SELECT c.relname,
+            CASE WHEN FALSE THEN 'p' WHEN c.relkind IN ('m', 'v') THEN 'v' ELSE 't' END
+            FROM pg_catalog.pg_class c
+            LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+            WHERE c.relkind IN ('f', 'm', 'p', 'r', 'v')
+                AND n.nspname NOT IN ('pg_catalog', 'pg_toast')
+                AND pg_catalog.pg_table_is_visible(c.oid)
+        ; args=None
+(0.004) SELECT "clinicalcode_brand"."name" FROM "clinicalcode_brand" ORDER BY "clinicalcode_brand"."name" ASC; args=()
+(0.006) 
+            SELECT c.relname,
+            CASE WHEN FALSE THEN 'p' WHEN c.relkind IN ('m', 'v') THEN 'v' ELSE 't' END
+            FROM pg_catalog.pg_class c
+            LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+            WHERE c.relkind IN ('f', 'm', 'p', 'r', 'v')
+                AND n.nspname NOT IN ('pg_catalog', 'pg_toast')
+                AND pg_catalog.pg_table_is_visible(c.oid)
+        ; args=None
+(0.003) SELECT "clinicalcode_brand"."name" FROM "clinicalcode_brand" ORDER BY "clinicalcode_brand"."name" ASC; args=()
+(0.007) 
+            SELECT c.relname,
+            CASE WHEN FALSE THEN 'p' WHEN c.relkind IN ('m', 'v') THEN 'v' ELSE 't' END
+            FROM pg_catalog.pg_class c
+            LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+            WHERE c.relkind IN ('f', 'm', 'p', 'r', 'v')
+                AND n.nspname NOT IN ('pg_catalog', 'pg_toast')
+                AND pg_catalog.pg_table_is_visible(c.oid)
+        ; args=None
+(0.003) SELECT "clinicalcode_brand"."name" FROM "clinicalcode_brand" ORDER BY "clinicalcode_brand"."name" ASC; args=()
+(0.009) 
+            SELECT c.relname,
+            CASE WHEN FALSE THEN 'p' WHEN c.relkind IN ('m', 'v') THEN 'v' ELSE 't' END
+            FROM pg_catalog.pg_class c
+            LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+            WHERE c.relkind IN ('f', 'm', 'p', 'r', 'v')
+                AND n.nspname NOT IN ('pg_catalog', 'pg_toast')
+                AND pg_catalog.pg_table_is_visible(c.oid)
+        ; args=None
+(0.003) SELECT "clinicalcode_brand"."name" FROM "clinicalcode_brand" ORDER BY "clinicalcode_brand"."name" ASC; args=()
+(0.007) 
+            SELECT c.relname,
+            CASE WHEN FALSE THEN 'p' WHEN c.relkind IN ('m', 'v') THEN 'v' ELSE 't' END
+            FROM pg_catalog.pg_class c
+            LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+            WHERE c.relkind IN ('f', 'm', 'p', 'r', 'v')
+                AND n.nspname NOT IN ('pg_catalog', 'pg_toast')
+                AND pg_catalog.pg_table_is_visible(c.oid)
+        ; args=None
+(0.003) SELECT "clinicalcode_brand"."name" FROM "clinicalcode_brand" ORDER BY "clinicalcode_brand"."name" ASC; args=()
+(0.007) 
+            SELECT c.relname,
+            CASE WHEN FALSE THEN 'p' WHEN c.relkind IN ('m', 'v') THEN 'v' ELSE 't' END
+            FROM pg_catalog.pg_class c
+            LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+            WHERE c.relkind IN ('f', 'm', 'p', 'r', 'v')
+                AND n.nspname NOT IN ('pg_catalog', 'pg_toast')
+                AND pg_catalog.pg_table_is_visible(c.oid)
+        ; args=None
+(0.003) SELECT "clinicalcode_brand"."name" FROM "clinicalcode_brand" ORDER BY "clinicalcode_brand"."name" ASC; args=()
+(0.007) 
+            SELECT c.relname,
+            CASE WHEN FALSE THEN 'p' WHEN c.relkind IN ('m', 'v') THEN 'v' ELSE 't' END
+            FROM pg_catalog.pg_class c
+            LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+            WHERE c.relkind IN ('f', 'm', 'p', 'r', 'v')
+                AND n.nspname NOT IN ('pg_catalog', 'pg_toast')
+                AND pg_catalog.pg_table_is_visible(c.oid)
+        ; args=None
+(0.004) SELECT "clinicalcode_brand"."name" FROM "clinicalcode_brand" ORDER BY "clinicalcode_brand"."name" ASC; args=()
+(0.007) 
+            SELECT c.relname,
+            CASE WHEN FALSE THEN 'p' WHEN c.relkind IN ('m', 'v') THEN 'v' ELSE 't' END
+            FROM pg_catalog.pg_class c
+            LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+            WHERE c.relkind IN ('f', 'm', 'p', 'r', 'v')
+                AND n.nspname NOT IN ('pg_catalog', 'pg_toast')
+                AND pg_catalog.pg_table_is_visible(c.oid)
+        ; args=None
+(0.004) SELECT "clinicalcode_brand"."name" FROM "clinicalcode_brand" ORDER BY "clinicalcode_brand"."name" ASC; args=()
+(0.008) 
+            SELECT c.relname,
+            CASE WHEN FALSE THEN 'p' WHEN c.relkind IN ('m', 'v') THEN 'v' ELSE 't' END
+            FROM pg_catalog.pg_class c
+            LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+            WHERE c.relkind IN ('f', 'm', 'p', 'r', 'v')
+                AND n.nspname NOT IN ('pg_catalog', 'pg_toast')
+                AND pg_catalog.pg_table_is_visible(c.oid)
+        ; args=None
+(0.004) SELECT "clinicalcode_brand"."name" FROM "clinicalcode_brand" ORDER BY "clinicalcode_brand"."name" ASC; args=()
+(0.006) 
+            SELECT c.relname,
+            CASE WHEN FALSE THEN 'p' WHEN c.relkind IN ('m', 'v') THEN 'v' ELSE 't' END
+            FROM pg_catalog.pg_class c
+            LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+            WHERE c.relkind IN ('f', 'm', 'p', 'r', 'v')
+                AND n.nspname NOT IN ('pg_catalog', 'pg_toast')
+                AND pg_catalog.pg_table_is_visible(c.oid)
+        ; args=None
+(0.003) SELECT "clinicalcode_brand"."name" FROM "clinicalcode_brand" ORDER BY "clinicalcode_brand"."name" ASC; args=()
+(0.010) 
+            SELECT c.relname,
+            CASE WHEN FALSE THEN 'p' WHEN c.relkind IN ('m', 'v') THEN 'v' ELSE 't' END
+            FROM pg_catalog.pg_class c
+            LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+            WHERE c.relkind IN ('f', 'm', 'p', 'r', 'v')
+                AND n.nspname NOT IN ('pg_catalog', 'pg_toast')
+                AND pg_catalog.pg_table_is_visible(c.oid)
+        ; args=None
+(0.006) SELECT "clinicalcode_brand"."name" FROM "clinicalcode_brand" ORDER BY "clinicalcode_brand"."name" ASC; args=()
+(0.007) 
+            SELECT c.relname,
+            CASE WHEN FALSE THEN 'p' WHEN c.relkind IN ('m', 'v') THEN 'v' ELSE 't' END
+            FROM pg_catalog.pg_class c
+            LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+            WHERE c.relkind IN ('f', 'm', 'p', 'r', 'v')
+                AND n.nspname NOT IN ('pg_catalog', 'pg_toast')
+                AND pg_catalog.pg_table_is_visible(c.oid)
+        ; args=None
+(0.004) SELECT "clinicalcode_brand"."name" FROM "clinicalcode_brand" ORDER BY "clinicalcode_brand"."name" ASC; args=()
+(0.006) 
+            SELECT c.relname,
+            CASE WHEN FALSE THEN 'p' WHEN c.relkind IN ('m', 'v') THEN 'v' ELSE 't' END
+            FROM pg_catalog.pg_class c
+            LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+            WHERE c.relkind IN ('f', 'm', 'p', 'r', 'v')
+                AND n.nspname NOT IN ('pg_catalog', 'pg_toast')
+                AND pg_catalog.pg_table_is_visible(c.oid)
+        ; args=None
+(0.004) SELECT "clinicalcode_brand"."name" FROM "clinicalcode_brand" ORDER BY "clinicalcode_brand"."name" ASC; args=()

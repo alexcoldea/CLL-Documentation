@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{% endblock title %}
+{% block description %} HDR-UK BREATHE {% endblock description %}
+{% block keywords %}, hdr-uk, Phenotype, Phenotypes, BREATHE, Data Science Centre, Health Data, Research Hub {% endblock keywords %}
+{% block head %}
+<link href="{% static 'css/brands/HDRUK/aboutPageStyle.css' %}" rel="stylesheet" />
+{% endblock head %}
+{% block container %}
+<div class="row">
+   <div class="rubric-box col-sm-2 hideleft-navbar" >
+      <div class="leftnavbar-position">
+         <ul class="left-navbar text-rubric-design pointer" onclick="showSelection(event)" id='navList'>
+            <li> <a href="#Terms-Conditions" id="header">Terms & Conditions
+               </a>
+            </li>
+            <li> <a href="#Terms of Use">Terms of Use
+            </a>
+            </li>
+            <li><a href="#Use-Of-Content">Use of Content
+               </a>
+            </li>
+            <li><a href="#Privacy-Policy">Privacy Policy
+               </a>
+            </li>
+         </ul>
+      </div>
+   </div>
+   <h3><span id="Terms-Conditions"></span></h3>
+   <div style="width:70%;" class="column" >
+      <div class="header-content-design" style="padding-bottom:30px;">
+         Terms & Conditions
+      </div>
+      <div class="post-content">
+         <div id="Terms of Use"  class="medium-header-design" >
+            Terms of Use
+         </div>
+         <div class="sm-header-design">
+            <p>
+            By accessing this website you agree to be bound by the terms and conditions below. Your use of the Website constitutes your agreement to the Terms.
+            </p>
+         </div>
+         <div id="Use-Of-Content" class="medium-header-design" >
+            Use of Content
+         </div>
+         <div class="sm-header-design">
+            <p>
+
+            <li style="  list-style-type: circle;">The content of the pages of this website is for your general information and use only. It is subject to change without notice.</li>
+            <li style="  list-style-type: circle;">Neither we nor any third parties provide any warranty or guarantee as to the accuracy, timeliness, performance, completeness or suitability of the information and materials found or offered on this website for any particular purpose. You acknowledge that such information and materials may contain inaccuracies or errors and we expressly exclude liability for any such inaccuracies or errors to the fullest extent permitted by law.</li>
+            <li style="  list-style-type: circle;">Your use of any information or materials on this website is entirely at your own risk, for which we shall not be liable.</li>
+            <li style="  list-style-type: circle;">This website contains material which is owned by or licensed to us. This material includes, but is not limited to, the design, layout, look, appearance and graphics. Reproduction is prohibited other than in accordance with the copyright notice, which forms part of these terms and conditions.</li>
+            <li style="  list-style-type: circle;">Unauthorised use of this website may give rise to a claim for damages and/or be a criminal offence.</li>
+            <li style="  list-style-type: circle;">From time to time this website may also include links to other websites. These links are provided for your convenience to provide further information. They do not signify that we endorse the website(s). We have no responsibility for the content of the linked website(s).</li>
+            <li style="  list-style-type: circle;">Your use of this website and any dispute arising out of such use of the website is subject to the laws of England, Northern Ireland, Scotland and Wales.</li>
+            </p>
+            </div>
+            <div class="medium-header-design" id="Privacy-Policy">
+               Privacy Policy
+            </div>
+            <p>
+            This website is hosted by SAIL for the purposes of collecting, processing and storing data from individuals employed by or working with SAIL. Swansea University is the Data Controller and is committed to protecting the rights of individuals in line with the Data Protection Act 1998 (DPA) and the new General Data Protection Regulation (GDPR).
+            Our Website respects your right to the privacy of any personal information you provide us with.
+            </p>
+
+
+         </div>
+      </div>
+   </div>
+</div>
+{% endblock container %}
+{% block scripts  %}
+<script type="text/javascript">
+   function showSelection(e) {
+   		if (document.querySelector('#navList a.active') !== null) {
+     		document.querySelector('#navList a.active').classList.remove('active');
+   		}
+   e.target.className = "active";
+   }
+</script>
+<script type="text/javascript">
+   window.onload=function(){
+   		document.getElementById("breatheHeader").click();
+   };
+</script>
+{% endblock scripts %}
+
