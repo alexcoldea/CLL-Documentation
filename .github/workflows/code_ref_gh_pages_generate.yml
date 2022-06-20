@@ -25,7 +25,6 @@ jobs:
               python -m pip install -U sphinx
               python -m pip install furo
               python -m pip install django
-              python -m pip install sys
               python -m pip install mock
 
       - name: Make the Codebase Reference sphinx docs
