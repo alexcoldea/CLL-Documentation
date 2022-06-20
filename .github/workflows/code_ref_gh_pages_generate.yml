@@ -45,7 +45,7 @@ jobs:
 
 
       - name: Push to destination branch
-        uses: ad-m/github-push-action@0.6.0
+        uses: ad-m/github-push-action@master
         with: 
             github_token: ${{ secrets.GITHUB_TOKEN }}
             branch: gh_pages
