@@ -27,7 +27,7 @@ jobs:
               python -m pip install django
               python -m pip install mock
               cd requirements
-              pip install python_ldap-3.3.1-cp39-cp39-win_amd64.whl
+              pip install python_ldap-3.4.0-cp39-cp39-win_amd64.whl
               pip install -r base.txt
 
       - name: Make the Codebase Reference sphinx docs
