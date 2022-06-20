@@ -27,6 +27,7 @@ jobs:
               python -m pip install django
               python -m pip install mock
               cd requirements
+              python -m pip install --upgrade pip
               pip install python_ldap-3.3.1-cp39-cp39-win_amd64.whl
               pip install -r base.txt
 
