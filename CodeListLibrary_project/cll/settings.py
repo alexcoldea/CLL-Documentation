@@ -142,15 +142,11 @@ AUTH_LDAP_BIND_DN = ""
 
 AUTH_LDAP_BIND_PASSWORD = ""
 
-AUTH_LDAP_USER_SEARCH = LDAPSearchUnion(
-    LDAPSearch(get_env_value('AUTH_LDAP_USER_SEARCH'), ldap.SCOPE_SUBTREE,
-               "(sAMAccountName=%(user)s)"), )
+AUTH_LDAP_USER_SEARCH = ""
 
 # Set up the basic group parameters.
-AUTH_LDAP_GROUP_SEARCH = LDAPSearch(get_env_value('AUTH_LDAP_GROUP_SEARCH'),
-                                    ldap.SCOPE_SUBTREE,
-                                    "(objectClass=groupOfNames)")
-AUTH_LDAP_GROUP_TYPE = GroupOfNamesType(name_attr="cn")
+AUTH_LDAP_GROUP_SEARCH = ""
+AUTH_LDAP_GROUP_TYPE = ""
 
 # Simple group restrictions
 AUTH_LDAP_REQUIRE_GROUP = ""
