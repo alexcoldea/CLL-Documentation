@@ -87,7 +87,7 @@ if IS_DEVELOPMENT_PC:
     print("SRV_IP=" + SRV_IP)
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = ""
+SECRET_KEY = get_env_value('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
