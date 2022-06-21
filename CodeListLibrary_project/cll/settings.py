@@ -74,20 +74,20 @@ if path_prj not in sys.path:
 #==========================================================================
 # separate settings for different environments
 # general variables
-IS_DEMO = get_env_value('IS_DEMO', cast='bool')
+IS_DEMO = ""
 
-CLL_READ_ONLY = get_env_value('CLL_READ_ONLY', cast='bool')
-ENABLE_PUBLISH = get_env_value('ENABLE_PUBLISH', cast='bool')
-SHOWADMIN = get_env_value('SHOWADMIN', cast='bool')
-BROWSABLEAPI = get_env_value('BROWSABLEAPI', cast='bool')
+CLL_READ_ONLY = ""
+ENABLE_PUBLISH = ""
+SHOWADMIN = ""
+BROWSABLEAPI = ""
 
-IS_INSIDE_GATEWAY = get_env_value('IS_INSIDE_GATEWAY', cast='bool')
-IS_DEVELOPMENT_PC = get_env_value('IS_DEVELOPMENT_PC', cast='bool')
+IS_INSIDE_GATEWAY = ""
+IS_DEVELOPMENT_PC = ""
 if IS_DEVELOPMENT_PC:
     print("SRV_IP=" + SRV_IP)
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = get_env_value('SECRET_KEY')
+SECRET_KEY = ""
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -96,7 +96,7 @@ DEBUG = True
 ADMIN = [('Muhammad', 'Muhammad.Elmessary@Swansea.ac.uk'),
          ('Dan', 'd.s.thayer@swansea.ac.uk')]
 
-ALLOWED_HOSTS = [i.strip() for i in get_env_value('ALLOWED_HOSTS').split(",")]
+ALLOWED_HOSTS = ""
 
 ROOT_URLCONF = 'cll.urls'
 DATA_UPLOAD_MAX_MEMORY_SIZE = None
@@ -132,46 +132,6 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
-
-# Binding and connection options
-# LDAP authentication  =======================================================
-ENABLE_LDAP_AUTH = get_env_value('ENABLE_LDAP_AUTH', cast='bool')
-
-AUTH_LDAP_SERVER_URI = get_env_value('AUTH_LDAP_SERVER_URI')
-AUTH_LDAP_BIND_DN = get_env_value('AUTH_LDAP_BIND_DN')
-
-AUTH_LDAP_BIND_PASSWORD = get_env_value('AUTH_LDAP_BIND_PASSWORD')
-
-AUTH_LDAP_USER_SEARCH = LDAPSearchUnion(
-    LDAPSearch(get_env_value('AUTH_LDAP_USER_SEARCH'), ldap.SCOPE_SUBTREE,
-               "(sAMAccountName=%(user)s)"), )
-
-# Set up the basic group parameters.
-AUTH_LDAP_GROUP_SEARCH = LDAPSearch(get_env_value('AUTH_LDAP_GROUP_SEARCH'),
-                                    ldap.SCOPE_SUBTREE,
-                                    "(objectClass=groupOfNames)")
-AUTH_LDAP_GROUP_TYPE = GroupOfNamesType(name_attr="cn")
-
-# Simple group restrictions
-AUTH_LDAP_REQUIRE_GROUP = get_env_value('AUTH_LDAP_REQUIRE_GROUP')
-
-# Populate the django user from the LDAP directory.
-AUTH_LDAP_USER_ATTR_MAP = {
-    "first_name": "givenName",
-    "last_name": "sn",
-    "email": "mail"
-}
-
-# This is the default, but I like to be explicit.
-AUTH_LDAP_ALWAYS_UPDATE_USER = True
-
-# Use LDAP group membership to calculate group permissions.
-AUTH_LDAP_FIND_GROUP_PERMS = True
-
-# Cache group memberships for an hour to minimize LDAP traffic
-AUTH_LDAP_CACHE_GROUPS = True
-AUTH_LDAP_GROUP_CACHE_TIMEOUT = 3600
-#==============================================================================
 
 # Application definition
 INSTALLED_APPS = []
