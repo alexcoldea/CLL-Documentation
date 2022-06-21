@@ -3,7 +3,7 @@ name: Codebase Sphinx Documentation
 on:
   push:
     branches: [ cll-test ]
-    # change to on merge when complete
+    # change to on merge when completed
 jobs:
   build_docs_job:
     name: Code Reference Generator
