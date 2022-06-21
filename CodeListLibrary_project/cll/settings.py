@@ -82,7 +82,6 @@ DEBUG = True
 ADMIN = [('Muhammad', 'Muhammad.Elmessary@Swansea.ac.uk'),
          ('Dan', 'd.s.thayer@swansea.ac.uk')]
 
-ALLOWED_HOSTS = [i.strip() for i in get_env_value('ALLOWED_HOSTS').split(",")]
 
 ROOT_URLCONF = 'cll.urls'
 DATA_UPLOAD_MAX_MEMORY_SIZE = None
