@@ -73,7 +73,6 @@ if path_prj not in sys.path:
 #==========================================================================
 # separate settings for different environments
 # general variables
-IS_DEMO = get_env_value('IS_DEMO', cast='bool')
 
 CLL_READ_ONLY = get_env_value('CLL_READ_ONLY', cast='bool')
 ENABLE_PUBLISH = get_env_value('ENABLE_PUBLISH', cast='bool')
