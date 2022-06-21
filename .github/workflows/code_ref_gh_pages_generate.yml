@@ -47,12 +47,13 @@ jobs:
               git add -A
               git config --local user.email "alex_coldea@yahoo.com"
               git config --local user.name "alexcoldea"
+              git commit -m "deployed documentation"
 
 
       - name: Push to destination branch
         uses: ad-m/github-push-action@master
         with: 
             github_token: ${{ secrets.GITHUB_TOKEN }}
-            branch: ${{ gh-pages }}
+            branch: gh-pages
             force: true
 
