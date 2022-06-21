@@ -74,18 +74,6 @@ if path_prj not in sys.path:
 # separate settings for different environments
 # general variables
 
-CLL_READ_ONLY = get_env_value('CLL_READ_ONLY', cast='bool')
-ENABLE_PUBLISH = get_env_value('ENABLE_PUBLISH', cast='bool')
-SHOWADMIN = get_env_value('SHOWADMIN', cast='bool')
-BROWSABLEAPI = get_env_value('BROWSABLEAPI', cast='bool')
-
-IS_INSIDE_GATEWAY = get_env_value('IS_INSIDE_GATEWAY', cast='bool')
-IS_DEVELOPMENT_PC = get_env_value('IS_DEVELOPMENT_PC', cast='bool')
-if IS_DEVELOPMENT_PC:
-    print("SRV_IP=" + SRV_IP)
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = get_env_value('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
