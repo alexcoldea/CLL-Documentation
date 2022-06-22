@@ -41,8 +41,6 @@ jobs:
 
       - name: Init new codebase docs repo
         run: |
-              cd docs/
-              git init
               touch .nojekyll
               git add -A
               git config --local user.email "alex_coldea@yahoo.com"
@@ -54,6 +52,6 @@ jobs:
         uses: ad-m/github-push-action@master
         with: 
             github_token: ${{ secrets.GITHUB_TOKEN }}
-            branch: gh-pages
+            branch: ${{ github.ref }}
             force: true
 
