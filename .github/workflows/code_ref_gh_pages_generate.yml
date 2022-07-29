@@ -37,7 +37,11 @@ jobs:
       - name: Make the Codebase Reference sphinx docs
         run: |
               cd docs/codebase_docs/
+              sphinx-apidoc -o source ../../CodeListLibrary_project              
               sphinx-build -b html source ..
+              import os 
+              cd source
+              os.remove("clinicalcode.migrations.rst")
 
       - name: Init new codebase docs repo
         run: |
