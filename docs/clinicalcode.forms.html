@@ -1,14 +1,14 @@
 <!doctype html>
-<html class="no-js">
+<html class="no-js" lang="en">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="clinicalcode.migrations package" href="clinicalcode.migrations.html" /><link rel="prev" title="clinicalcode.api.views package" href="clinicalcode.api.views.html" />
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="clinicalcode.models package" href="clinicalcode.models.html" /><link rel="prev" title="clinicalcode.api.views package" href="clinicalcode.api.views.html" />
 
-    <meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/>
+    <meta name="generator" content="sphinx-5.1.1, furo 2022.06.21"/>
         <title>clinicalcode.forms package - Library Code Reference Data</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=68f4518137b9aefe99b631505a2064c3c42c9852" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=40978830699223671f4072448e654b5958f38b89" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
     
     
@@ -166,7 +166,6 @@
 </ul>
 </li>
 <li class="toctree-l3 current current-page"><a class="current reference internal" href="#">clinicalcode.forms package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="clinicalcode.migrations.html">clinicalcode.migrations package</a></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="clinicalcode.models.html">clinicalcode.models package</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="clinicalcode.models.tests.html">clinicalcode.models.tests package</a></li>
 </ul>
@@ -212,7 +211,8 @@
           </svg>
           <span>Back to top</span>
         </a>
-        <div class="content-icon-container"><div class="theme-toggle-container theme-toggle-content">
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
             <button class="theme-toggle">
               <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
               <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
@@ -227,18 +227,18 @@
         </div>
         <article role="main">
           <section id="clinicalcode-forms-package">
-<h1>clinicalcode.forms package<a class="headerlink" href="#clinicalcode-forms-package" title="Permalink to this headline">#</a></h1>
+<h1>clinicalcode.forms package<a class="headerlink" href="#clinicalcode-forms-package" title="Permalink to this heading">#</a></h1>
 <section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">#</a></h2>
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">#</a></h2>
 </section>
 <section id="module-clinicalcode.forms.CodeForms">
-<span id="clinicalcode-forms-codeforms-module"></span><h2>clinicalcode.forms.CodeForms module<a class="headerlink" href="#module-clinicalcode.forms.CodeForms" title="Permalink to this headline">#</a></h2>
+<span id="clinicalcode-forms-codeforms-module"></span><h2>clinicalcode.forms.CodeForms module<a class="headerlink" href="#module-clinicalcode.forms.CodeForms" title="Permalink to this heading">#</a></h2>
 <p>CodeForms</p>
 <p>The code forms used in the application.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="clinicalcode.forms.CodeForms.CodeForm">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">clinicalcode.forms.CodeForms.</span></span><span class="sig-name descname"><span class="pre">CodeForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_id='id_%s'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_class=&lt;class</span> <span class="pre">'django.forms.utils.ErrorList'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_suffix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">empty_permitted=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instance=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_required_attribute=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">renderer=None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/forms/CodeForms.html#CodeForm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.forms.CodeForms.CodeForm" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.forms.models.ModelForm</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ModelForm</span></code></p>
 <dl class="py class">
 <dt class="sig sig-object py" id="clinicalcode.forms.CodeForms.CodeForm.Meta">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="reference internal" href="_modules/clinicalcode/forms/CodeForms.html#CodeForm.Meta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.forms.CodeForms.CodeForm.Meta" title="Permalink to this definition">#</a></dt>
@@ -247,30 +247,37 @@
 <dt class="sig sig-object py" id="clinicalcode.forms.CodeForms.CodeForm.Meta.fields">
 <span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'__all__'</span></em><a class="headerlink" href="#clinicalcode.forms.CodeForms.CodeForm.Meta.fields" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="clinicalcode.forms.CodeForms.CodeForm.Meta.model">
 <span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#clinicalcode.forms.CodeForms.CodeForm.Meta.model" title="Permalink to this definition">#</a></dt>
-<dd><p>alias of <a class="reference internal" href="clinicalcode.models.html#clinicalcode.models.Code.Code" title="clinicalcode.models.Code.Code"><code class="xref py py-class docutils literal notranslate"><span class="pre">clinicalcode.models.Code.Code</span></code></a></p>
+<dd><p>alias of <a class="reference internal" href="clinicalcode.models.html#clinicalcode.models.Code.Code" title="clinicalcode.models.Code.Code"><code class="xref py py-class docutils literal notranslate"><span class="pre">Code</span></code></a></p>
 </dd></dl>
+
 </dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="clinicalcode.forms.CodeForms.CodeForm.base_fields">
 <span class="sig-name descname"><span class="pre">base_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'code':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'code_list':</span> <span class="pre">&lt;django.forms.models.ModelChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'description':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#clinicalcode.forms.CodeForms.CodeForm.base_fields" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="clinicalcode.forms.CodeForms.CodeForm.declared_fields">
 <span class="sig-name descname"><span class="pre">declared_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'code':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'code_list':</span> <span class="pre">&lt;django.forms.models.ModelChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'description':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#clinicalcode.forms.CodeForms.CodeForm.declared_fields" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py property">
 <dt class="sig sig-object py" id="clinicalcode.forms.CodeForms.CodeForm.media">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#clinicalcode.forms.CodeForms.CodeForm.media" title="Permalink to this definition">#</a></dt>
 <dd><p>Return all media required to render the widgets on this form.</p>
 </dd></dl>
+
 </dd></dl>
+
 <dl class="py class">
 <dt class="sig sig-object py" id="clinicalcode.forms.CodeForms.CodeListForm">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">clinicalcode.forms.CodeForms.</span></span><span class="sig-name descname"><span class="pre">CodeListForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_id='id_%s'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_class=&lt;class</span> <span class="pre">'django.forms.utils.ErrorList'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_suffix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">empty_permitted=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instance=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_required_attribute=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">renderer=None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/forms/CodeForms.html#CodeListForm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.forms.CodeForms.CodeListForm" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.forms.models.ModelForm</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ModelForm</span></code></p>
 <dl class="py class">
 <dt class="sig sig-object py" id="clinicalcode.forms.CodeForms.CodeListForm.Meta">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="reference internal" href="_modules/clinicalcode/forms/CodeForms.html#CodeListForm.Meta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.forms.CodeForms.CodeListForm.Meta" title="Permalink to this definition">#</a></dt>
@@ -279,30 +286,37 @@
 <dt class="sig sig-object py" id="clinicalcode.forms.CodeForms.CodeListForm.Meta.fields">
 <span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'__all__'</span></em><a class="headerlink" href="#clinicalcode.forms.CodeForms.CodeListForm.Meta.fields" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="clinicalcode.forms.CodeForms.CodeListForm.Meta.model">
 <span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#clinicalcode.forms.CodeForms.CodeListForm.Meta.model" title="Permalink to this definition">#</a></dt>
-<dd><p>alias of <a class="reference internal" href="clinicalcode.models.html#clinicalcode.models.CodeList.CodeList" title="clinicalcode.models.CodeList.CodeList"><code class="xref py py-class docutils literal notranslate"><span class="pre">clinicalcode.models.CodeList.CodeList</span></code></a></p>
+<dd><p>alias of <a class="reference internal" href="clinicalcode.models.html#clinicalcode.models.CodeList.CodeList" title="clinicalcode.models.CodeList.CodeList"><code class="xref py py-class docutils literal notranslate"><span class="pre">CodeList</span></code></a></p>
 </dd></dl>
+
 </dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="clinicalcode.forms.CodeForms.CodeListForm.base_fields">
 <span class="sig-name descname"><span class="pre">base_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'component':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'description':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'sql_rules':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#clinicalcode.forms.CodeForms.CodeListForm.base_fields" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="clinicalcode.forms.CodeForms.CodeListForm.declared_fields">
 <span class="sig-name descname"><span class="pre">declared_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'component':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'description':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'sql_rules':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#clinicalcode.forms.CodeForms.CodeListForm.declared_fields" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py property">
 <dt class="sig sig-object py" id="clinicalcode.forms.CodeForms.CodeListForm.media">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#clinicalcode.forms.CodeForms.CodeListForm.media" title="Permalink to this definition">#</a></dt>
 <dd><p>Return all media required to render the widgets on this form.</p>
 </dd></dl>
+
 </dd></dl>
+
 <dl class="py class">
 <dt class="sig sig-object py" id="clinicalcode.forms.CodeForms.CodeRegexForm">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">clinicalcode.forms.CodeForms.</span></span><span class="sig-name descname"><span class="pre">CodeRegexForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_id='id_%s'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_class=&lt;class</span> <span class="pre">'django.forms.utils.ErrorList'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_suffix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">empty_permitted=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instance=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_required_attribute=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">renderer=None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/forms/CodeForms.html#CodeRegexForm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.forms.CodeForms.CodeRegexForm" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.forms.models.ModelForm</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ModelForm</span></code></p>
 <dl class="py class">
 <dt class="sig sig-object py" id="clinicalcode.forms.CodeForms.CodeRegexForm.Meta">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="reference internal" href="_modules/clinicalcode/forms/CodeForms.html#CodeRegexForm.Meta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.forms.CodeForms.CodeRegexForm.Meta" title="Permalink to this definition">#</a></dt>
@@ -311,35 +325,42 @@
 <dt class="sig sig-object py" id="clinicalcode.forms.CodeForms.CodeRegexForm.Meta.exclude">
 <span class="sig-name descname"><span class="pre">exclude</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['created_by',</span> <span class="pre">'modified_by']</span></em><a class="headerlink" href="#clinicalcode.forms.CodeForms.CodeRegexForm.Meta.exclude" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="clinicalcode.forms.CodeForms.CodeRegexForm.Meta.model">
 <span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#clinicalcode.forms.CodeForms.CodeRegexForm.Meta.model" title="Permalink to this definition">#</a></dt>
-<dd><p>alias of <a class="reference internal" href="clinicalcode.models.html#clinicalcode.models.CodeRegex.CodeRegex" title="clinicalcode.models.CodeRegex.CodeRegex"><code class="xref py py-class docutils literal notranslate"><span class="pre">clinicalcode.models.CodeRegex.CodeRegex</span></code></a></p>
+<dd><p>alias of <a class="reference internal" href="clinicalcode.models.html#clinicalcode.models.CodeRegex.CodeRegex" title="clinicalcode.models.CodeRegex.CodeRegex"><code class="xref py py-class docutils literal notranslate"><span class="pre">CodeRegex</span></code></a></p>
 </dd></dl>
+
 </dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="clinicalcode.forms.CodeForms.CodeRegexForm.base_fields">
 <span class="sig-name descname"><span class="pre">base_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'case_sensitive_search':</span> <span class="pre">&lt;django.forms.fields.BooleanField</span> <span class="pre">object&gt;,</span> <span class="pre">'code_list':</span> <span class="pre">&lt;django.forms.models.ModelChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'column_search':</span> <span class="pre">&lt;django.forms.fields.ChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'component':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'regex_code':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'regex_type':</span> <span class="pre">&lt;django.forms.fields.ChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'sql_rules':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#clinicalcode.forms.CodeForms.CodeRegexForm.base_fields" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="clinicalcode.forms.CodeForms.CodeRegexForm.declared_fields">
 <span class="sig-name descname"><span class="pre">declared_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'case_sensitive_search':</span> <span class="pre">&lt;django.forms.fields.BooleanField</span> <span class="pre">object&gt;,</span> <span class="pre">'code_list':</span> <span class="pre">&lt;django.forms.models.ModelChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'column_search':</span> <span class="pre">&lt;django.forms.fields.ChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'component':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'regex_code':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'regex_type':</span> <span class="pre">&lt;django.forms.fields.ChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'sql_rules':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#clinicalcode.forms.CodeForms.CodeRegexForm.declared_fields" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py property">
 <dt class="sig sig-object py" id="clinicalcode.forms.CodeForms.CodeRegexForm.media">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#clinicalcode.forms.CodeForms.CodeRegexForm.media" title="Permalink to this definition">#</a></dt>
 <dd><p>Return all media required to render the widgets on this form.</p>
 </dd></dl>
+
 </dd></dl>
+
 </section>
 <section id="module-clinicalcode.forms.ComponentForms">
-<span id="clinicalcode-forms-componentforms-module"></span><h2>clinicalcode.forms.ComponentForms module<a class="headerlink" href="#module-clinicalcode.forms.ComponentForms" title="Permalink to this headline">#</a></h2>
+<span id="clinicalcode-forms-componentforms-module"></span><h2>clinicalcode.forms.ComponentForms module<a class="headerlink" href="#module-clinicalcode.forms.ComponentForms" title="Permalink to this heading">#</a></h2>
 <section id="form-definition-for-the-components">
-<h3>Form definition for the Components.<a class="headerlink" href="#form-definition-for-the-components" title="Permalink to this headline">#</a></h3>
+<h3>Form definition for the Components.<a class="headerlink" href="#form-definition-for-the-components" title="Permalink to this heading">#</a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="clinicalcode.forms.ComponentForms.ComponentForm">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">clinicalcode.forms.ComponentForms.</span></span><span class="sig-name descname"><span class="pre">ComponentForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_id='id_%s'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_class=&lt;class</span> <span class="pre">'django.forms.utils.ErrorList'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_suffix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">empty_permitted=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instance=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_required_attribute=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">renderer=None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/forms/ComponentForms.html#ComponentForm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.forms.ComponentForms.ComponentForm" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.forms.models.ModelForm</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ModelForm</span></code></p>
 <p>Components are parts of a concept. Each component may contain codes
 which are to be added to or removed from a code-list.</p>
 <dl class="py class">
@@ -351,36 +372,43 @@ which are to be added to or removed from a code-list.</p>
 <dt class="sig sig-object py" id="clinicalcode.forms.ComponentForms.ComponentForm.Meta.exclude">
 <span class="sig-name descname"><span class="pre">exclude</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['created_by',</span> <span class="pre">'modified_by']</span></em><a class="headerlink" href="#clinicalcode.forms.ComponentForms.ComponentForm.Meta.exclude" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="clinicalcode.forms.ComponentForms.ComponentForm.Meta.model">
 <span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#clinicalcode.forms.ComponentForms.ComponentForm.Meta.model" title="Permalink to this definition">#</a></dt>
-<dd><p>alias of <a class="reference internal" href="clinicalcode.models.html#clinicalcode.models.Component.Component" title="clinicalcode.models.Component.Component"><code class="xref py py-class docutils literal notranslate"><span class="pre">clinicalcode.models.Component.Component</span></code></a></p>
+<dd><p>alias of <a class="reference internal" href="clinicalcode.models.html#clinicalcode.models.Component.Component" title="clinicalcode.models.Component.Component"><code class="xref py py-class docutils literal notranslate"><span class="pre">Component</span></code></a></p>
 </dd></dl>
+
 </dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="clinicalcode.forms.ComponentForms.ComponentForm.base_fields">
 <span class="sig-name descname"><span class="pre">base_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'comment':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'component_type':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'concept':</span> <span class="pre">&lt;django.forms.models.ModelChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'concept_ref':</span> <span class="pre">&lt;django.forms.models.ModelChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'concept_ref_history':</span> <span class="pre">&lt;django.forms.models.ModelChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'logical_type':</span> <span class="pre">&lt;django.forms.fields.ChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'name':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#clinicalcode.forms.ComponentForms.ComponentForm.base_fields" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="clinicalcode.forms.ComponentForms.ComponentForm.declared_fields">
 <span class="sig-name descname"><span class="pre">declared_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'comment':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'component_type':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'concept':</span> <span class="pre">&lt;django.forms.models.ModelChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'concept_ref':</span> <span class="pre">&lt;django.forms.models.ModelChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'concept_ref_history':</span> <span class="pre">&lt;django.forms.models.ModelChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'logical_type':</span> <span class="pre">&lt;django.forms.fields.ChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'name':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#clinicalcode.forms.ComponentForms.ComponentForm.declared_fields" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py property">
 <dt class="sig sig-object py" id="clinicalcode.forms.ComponentForms.ComponentForm.media">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#clinicalcode.forms.ComponentForms.ComponentForm.media" title="Permalink to this definition">#</a></dt>
 <dd><p>Return all media required to render the widgets on this form.</p>
 </dd></dl>
+
 </dd></dl>
+
 </section>
 </section>
 <section id="module-clinicalcode.forms.ConceptForms">
-<span id="clinicalcode-forms-conceptforms-module"></span><h2>clinicalcode.forms.ConceptForms module<a class="headerlink" href="#module-clinicalcode.forms.ConceptForms" title="Permalink to this headline">#</a></h2>
+<span id="clinicalcode-forms-conceptforms-module"></span><h2>clinicalcode.forms.ConceptForms module<a class="headerlink" href="#module-clinicalcode.forms.ConceptForms" title="Permalink to this heading">#</a></h2>
 <p>ConceptForms</p>
 <p>Forms used in managing the Concepts.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="clinicalcode.forms.ConceptForms.ConceptForm">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">clinicalcode.forms.ConceptForms.</span></span><span class="sig-name descname"><span class="pre">ConceptForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/forms/ConceptForms.html#ConceptForm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.forms.ConceptForms.ConceptForm" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.forms.models.ModelForm</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ModelForm</span></code></p>
 <dl class="py class">
 <dt class="sig sig-object py" id="clinicalcode.forms.ConceptForms.ConceptForm.Meta">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="reference internal" href="_modules/clinicalcode/forms/ConceptForms.html#ConceptForm.Meta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.forms.ConceptForms.ConceptForm.Meta" title="Permalink to this definition">#</a></dt>
@@ -389,68 +417,84 @@ which are to be added to or removed from a code-list.</p>
 <dt class="sig sig-object py" id="clinicalcode.forms.ConceptForms.ConceptForm.Meta.exclude">
 <span class="sig-name descname"><span class="pre">exclude</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['created_by',</span> <span class="pre">'modified_by',</span> <span class="pre">'deleted',</span> <span class="pre">'is_deleted',</span> <span class="pre">'deleted_by']</span></em><a class="headerlink" href="#clinicalcode.forms.ConceptForms.ConceptForm.Meta.exclude" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="clinicalcode.forms.ConceptForms.ConceptForm.Meta.model">
 <span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#clinicalcode.forms.ConceptForms.ConceptForm.Meta.model" title="Permalink to this definition">#</a></dt>
-<dd><p>alias of <a class="reference internal" href="clinicalcode.models.html#clinicalcode.models.Concept.Concept" title="clinicalcode.models.Concept.Concept"><code class="xref py py-class docutils literal notranslate"><span class="pre">clinicalcode.models.Concept.Concept</span></code></a></p>
+<dd><p>alias of <a class="reference internal" href="clinicalcode.models.html#clinicalcode.models.Concept.Concept" title="clinicalcode.models.Concept.Concept"><code class="xref py py-class docutils literal notranslate"><span class="pre">Concept</span></code></a></p>
 </dd></dl>
+
 </dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="clinicalcode.forms.ConceptForms.ConceptForm.base_fields">
 <span class="sig-name descname"><span class="pre">base_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'author':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'citation_requirements':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'code_attribute_header':</span> <span class="pre">&lt;django.contrib.postgres.forms.array.SimpleArrayField</span> <span class="pre">object&gt;,</span> <span class="pre">'coding_system':</span> <span class="pre">&lt;django.forms.models.ModelChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'description':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'entry_date':</span> <span class="pre">&lt;django.forms.fields.DateField</span> <span class="pre">object&gt;,</span> <span class="pre">'group':</span> <span class="pre">&lt;django.forms.fields.ChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'group_access':</span> <span class="pre">&lt;django.forms.fields.ChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'name':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'owner':</span> <span class="pre">&lt;django.forms.fields.ChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'owner_access':</span> <span class="pre">&lt;django.forms.fields.ChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'paper_published':</span> <span class="pre">&lt;django.forms.fields.BooleanField</span> <span class="pre">object&gt;,</span> <span class="pre">'publication_doi':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'publication_link':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'secondary_publication_links':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'source_reference':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'tags':</span> <span class="pre">&lt;django.contrib.postgres.forms.array.SimpleArrayField</span> <span class="pre">object&gt;,</span> <span class="pre">'validation_description':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'validation_performed':</span> <span class="pre">&lt;django.forms.fields.BooleanField</span> <span class="pre">object&gt;,</span> <span class="pre">'world_access':</span> <span class="pre">&lt;django.forms.fields.ChoiceField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#clinicalcode.forms.ConceptForms.ConceptForm.base_fields" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="clinicalcode.forms.ConceptForms.ConceptForm.clean_group">
 <span class="sig-name descname"><span class="pre">clean_group</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/forms/ConceptForms.html#ConceptForm.clean_group"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.forms.ConceptForms.ConceptForm.clean_group" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="clinicalcode.forms.ConceptForms.ConceptForm.clean_owner">
 <span class="sig-name descname"><span class="pre">clean_owner</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/forms/ConceptForms.html#ConceptForm.clean_owner"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.forms.ConceptForms.ConceptForm.clean_owner" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="clinicalcode.forms.ConceptForms.ConceptForm.declared_fields">
 <span class="sig-name descname"><span class="pre">declared_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'author':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'citation_requirements':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'coding_system':</span> <span class="pre">&lt;django.forms.models.ModelChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'description':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'entry_date':</span> <span class="pre">&lt;django.forms.fields.DateField</span> <span class="pre">object&gt;,</span> <span class="pre">'group':</span> <span class="pre">&lt;django.forms.fields.ChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'group_access':</span> <span class="pre">&lt;django.forms.fields.ChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'name':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'owner':</span> <span class="pre">&lt;django.forms.fields.ChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'owner_access':</span> <span class="pre">&lt;django.forms.fields.ChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'paper_published':</span> <span class="pre">&lt;django.forms.fields.BooleanField</span> <span class="pre">object&gt;,</span> <span class="pre">'publication_doi':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'publication_link':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'secondary_publication_links':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'source_reference':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'validation_description':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'validation_performed':</span> <span class="pre">&lt;django.forms.fields.BooleanField</span> <span class="pre">object&gt;,</span> <span class="pre">'world_access':</span> <span class="pre">&lt;django.forms.fields.ChoiceField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#clinicalcode.forms.ConceptForms.ConceptForm.declared_fields" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py property">
 <dt class="sig sig-object py" id="clinicalcode.forms.ConceptForms.ConceptForm.media">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#clinicalcode.forms.ConceptForms.ConceptForm.media" title="Permalink to this definition">#</a></dt>
 <dd><p>Return all media required to render the widgets on this form.</p>
 </dd></dl>
+
 </dd></dl>
+
 <dl class="py class">
 <dt class="sig sig-object py" id="clinicalcode.forms.ConceptForms.ConceptUploadForm">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">clinicalcode.forms.ConceptForms.</span></span><span class="sig-name descname"><span class="pre">ConceptUploadForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_id='id_%s'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_class=&lt;class</span> <span class="pre">'django.forms.utils.ErrorList'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_suffix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">empty_permitted=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_order=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_required_attribute=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">renderer=None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/forms/ConceptForms.html#ConceptUploadForm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.forms.ConceptForms.ConceptUploadForm" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.forms.forms.Form</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Form</span></code></p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="clinicalcode.forms.ConceptForms.ConceptUploadForm.CHOICES">
 <span class="sig-name descname"><span class="pre">CHOICES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(('1',</span> <span class="pre">'1'),</span> <span class="pre">('2',</span> <span class="pre">'2'))</span></em><a class="headerlink" href="#clinicalcode.forms.ConceptForms.ConceptUploadForm.CHOICES" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="clinicalcode.forms.ConceptForms.ConceptUploadForm.COLUMN_CHOICES">
 <span class="sig-name descname"><span class="pre">COLUMN_CHOICES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(('',</span> <span class="pre">'Please</span> <span class="pre">select'),</span> <span class="pre">('code',</span> <span class="pre">'Code'),</span> <span class="pre">('desc',</span> <span class="pre">'Code</span> <span class="pre">description'),</span> <span class="pre">('cat',</span> <span class="pre">'Category'),</span> <span class="pre">('cat_desc',</span> <span class="pre">'Category</span> <span class="pre">description'),</span> <span class="pre">('sub_cat',</span> <span class="pre">'Sub</span> <span class="pre">category'),</span> <span class="pre">('sub_cat_desc',</span> <span class="pre">'Sub</span> <span class="pre">category</span> <span class="pre">description'))</span></em><a class="headerlink" href="#clinicalcode.forms.ConceptForms.ConceptUploadForm.COLUMN_CHOICES" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="clinicalcode.forms.ConceptForms.ConceptUploadForm.base_fields">
 <span class="sig-name descname"><span class="pre">base_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'category_column':</span> <span class="pre">&lt;django.forms.fields.ChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'col_1':</span> <span class="pre">&lt;django.forms.fields.ChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'col_2':</span> <span class="pre">&lt;django.forms.fields.ChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'col_3':</span> <span class="pre">&lt;django.forms.fields.ChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'col_4':</span> <span class="pre">&lt;django.forms.fields.ChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'col_5':</span> <span class="pre">&lt;django.forms.fields.ChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'col_6':</span> <span class="pre">&lt;django.forms.fields.ChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'concept_level_depth':</span> <span class="pre">&lt;django.forms.fields.ChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'first_row_has_column_headings':</span> <span class="pre">&lt;django.forms.fields.BooleanField</span> <span class="pre">object&gt;,</span> <span class="pre">'logical_type':</span> <span class="pre">&lt;django.forms.fields.ChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'specify_delimiter':</span> <span class="pre">&lt;django.forms.fields.ChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'sub_category_column':</span> <span class="pre">&lt;django.forms.fields.ChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'upload_concept_file':</span> <span class="pre">&lt;django.forms.fields.FileField</span> <span class="pre">object&gt;,</span> <span class="pre">'upload_name':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#clinicalcode.forms.ConceptForms.ConceptUploadForm.base_fields" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="clinicalcode.forms.ConceptForms.ConceptUploadForm.declared_fields">
 <span class="sig-name descname"><span class="pre">declared_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'category_column':</span> <span class="pre">&lt;django.forms.fields.ChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'col_1':</span> <span class="pre">&lt;django.forms.fields.ChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'col_2':</span> <span class="pre">&lt;django.forms.fields.ChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'col_3':</span> <span class="pre">&lt;django.forms.fields.ChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'col_4':</span> <span class="pre">&lt;django.forms.fields.ChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'col_5':</span> <span class="pre">&lt;django.forms.fields.ChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'col_6':</span> <span class="pre">&lt;django.forms.fields.ChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'concept_level_depth':</span> <span class="pre">&lt;django.forms.fields.ChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'first_row_has_column_headings':</span> <span class="pre">&lt;django.forms.fields.BooleanField</span> <span class="pre">object&gt;,</span> <span class="pre">'logical_type':</span> <span class="pre">&lt;django.forms.fields.ChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'specify_delimiter':</span> <span class="pre">&lt;django.forms.fields.ChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'sub_category_column':</span> <span class="pre">&lt;django.forms.fields.ChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'upload_concept_file':</span> <span class="pre">&lt;django.forms.fields.FileField</span> <span class="pre">object&gt;,</span> <span class="pre">'upload_name':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#clinicalcode.forms.ConceptForms.ConceptUploadForm.declared_fields" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="clinicalcode.forms.ConceptForms.ConceptUploadForm.delimiters">
 <span class="sig-name descname"><span class="pre">delimiters</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">((',',</span> <span class="pre">','),</span> <span class="pre">(';',</span> <span class="pre">';'),</span> <span class="pre">('|',</span> <span class="pre">'|'))</span></em><a class="headerlink" href="#clinicalcode.forms.ConceptForms.ConceptUploadForm.delimiters" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py property">
 <dt class="sig sig-object py" id="clinicalcode.forms.ConceptForms.ConceptUploadForm.media">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#clinicalcode.forms.ConceptForms.ConceptUploadForm.media" title="Permalink to this definition">#</a></dt>
 <dd><p>Return all media required to render the widgets on this form.</p>
 </dd></dl>
+
 </dd></dl>
+
 <dl class="py class">
 <dt class="sig sig-object py" id="clinicalcode.forms.ConceptForms.Tag">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">clinicalcode.forms.ConceptForms.</span></span><span class="sig-name descname"><span class="pre">Tag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_id='id_%s'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_class=&lt;class</span> <span class="pre">'django.forms.utils.ErrorList'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_suffix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">empty_permitted=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instance=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_required_attribute=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">renderer=None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/forms/ConceptForms.html#Tag"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.forms.ConceptForms.Tag" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.forms.models.ModelForm</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ModelForm</span></code></p>
 <dl class="py class">
 <dt class="sig sig-object py" id="clinicalcode.forms.ConceptForms.Tag.Meta">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="reference internal" href="_modules/clinicalcode/forms/ConceptForms.html#Tag.Meta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.forms.ConceptForms.Tag.Meta" title="Permalink to this definition">#</a></dt>
@@ -459,57 +503,69 @@ which are to be added to or removed from a code-list.</p>
 <dt class="sig sig-object py" id="clinicalcode.forms.ConceptForms.Tag.Meta.exclude">
 <span class="sig-name descname"><span class="pre">exclude</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['created_by',</span> <span class="pre">'modified_by']</span></em><a class="headerlink" href="#clinicalcode.forms.ConceptForms.Tag.Meta.exclude" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="clinicalcode.forms.ConceptForms.Tag.Meta.model">
 <span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#clinicalcode.forms.ConceptForms.Tag.Meta.model" title="Permalink to this definition">#</a></dt>
-<dd><p>alias of <a class="reference internal" href="clinicalcode.models.html#clinicalcode.models.Tag.Tag" title="clinicalcode.models.Tag.Tag"><code class="xref py py-class docutils literal notranslate"><span class="pre">clinicalcode.models.Tag.Tag</span></code></a></p>
+<dd><p>alias of <a class="reference internal" href="clinicalcode.models.html#clinicalcode.models.Tag.Tag" title="clinicalcode.models.Tag.Tag"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tag</span></code></a></p>
 </dd></dl>
+
 </dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="clinicalcode.forms.ConceptForms.Tag.base_fields">
 <span class="sig-name descname"><span class="pre">base_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'collection_brand':</span> <span class="pre">&lt;django.forms.models.ModelChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'description':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'display':</span> <span class="pre">&lt;django.forms.fields.TypedChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'tag_type':</span> <span class="pre">&lt;django.forms.fields.TypedChoiceField</span> <span class="pre">object&gt;,</span> <span class="pre">'updated_by':</span> <span class="pre">&lt;django.forms.models.ModelChoiceField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#clinicalcode.forms.ConceptForms.Tag.base_fields" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="clinicalcode.forms.ConceptForms.Tag.declared_fields">
 <span class="sig-name descname"><span class="pre">declared_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'description':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#clinicalcode.forms.ConceptForms.Tag.declared_fields" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py property">
 <dt class="sig sig-object py" id="clinicalcode.forms.ConceptForms.Tag.media">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#clinicalcode.forms.ConceptForms.Tag.media" title="Permalink to this definition">#</a></dt>
 <dd><p>Return all media required to render the widgets on this form.</p>
 </dd></dl>
+
 </dd></dl>
+
 </section>
 <section id="module-clinicalcode.forms.ContactUsForm">
-<span id="clinicalcode-forms-contactusform-module"></span><h2>clinicalcode.forms.ContactUsForm module<a class="headerlink" href="#module-clinicalcode.forms.ContactUsForm" title="Permalink to this headline">#</a></h2>
+<span id="clinicalcode-forms-contactusform-module"></span><h2>clinicalcode.forms.ContactUsForm module<a class="headerlink" href="#module-clinicalcode.forms.ContactUsForm" title="Permalink to this heading">#</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="clinicalcode.forms.ContactUsForm.ContactForm">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">clinicalcode.forms.ContactUsForm.</span></span><span class="sig-name descname"><span class="pre">ContactForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_id='id_%s'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_class=&lt;class</span> <span class="pre">'django.forms.utils.ErrorList'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_suffix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">empty_permitted=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_order=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_required_attribute=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">renderer=None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/forms/ContactUsForm.html#ContactForm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.forms.ContactUsForm.ContactForm" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.forms.forms.Form</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Form</span></code></p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="clinicalcode.forms.ContactUsForm.ContactForm.base_fields">
 <span class="sig-name descname"><span class="pre">base_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'categories':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'from_email':</span> <span class="pre">&lt;django.forms.fields.EmailField</span> <span class="pre">object&gt;,</span> <span class="pre">'message':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'name':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#clinicalcode.forms.ContactUsForm.ContactForm.base_fields" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="clinicalcode.forms.ContactUsForm.ContactForm.declared_fields">
 <span class="sig-name descname"><span class="pre">declared_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'categories':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'from_email':</span> <span class="pre">&lt;django.forms.fields.EmailField</span> <span class="pre">object&gt;,</span> <span class="pre">'message':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'name':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#clinicalcode.forms.ContactUsForm.ContactForm.declared_fields" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="clinicalcode.forms.ContactUsForm.ContactForm.issuetypes">
 <span class="sig-name descname"><span class="pre">issuetypes</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[('General</span> <span class="pre">Enquiries',</span> <span class="pre">'General</span> <span class="pre">Enquiries'),</span> <span class="pre">('Website</span> <span class="pre">Support',</span> <span class="pre">'Website</span> <span class="pre">Support')]</span></em><a class="headerlink" href="#clinicalcode.forms.ContactUsForm.ContactForm.issuetypes" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py property">
 <dt class="sig sig-object py" id="clinicalcode.forms.ContactUsForm.ContactForm.media">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#clinicalcode.forms.ContactUsForm.ContactForm.media" title="Permalink to this definition">#</a></dt>
 <dd><p>Return all media required to render the widgets on this form.</p>
 </dd></dl>
+
 </dd></dl>
+
 </section>
 <section id="module-clinicalcode.forms.GroupAdminForm">
-<span id="clinicalcode-forms-groupadminform-module"></span><h2>clinicalcode.forms.GroupAdminForm module<a class="headerlink" href="#module-clinicalcode.forms.GroupAdminForm" title="Permalink to this headline">#</a></h2>
+<span id="clinicalcode-forms-groupadminform-module"></span><h2>clinicalcode.forms.GroupAdminForm module<a class="headerlink" href="#module-clinicalcode.forms.GroupAdminForm" title="Permalink to this heading">#</a></h2>
 </section>
 <section id="module-clinicalcode.forms">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-clinicalcode.forms" title="Permalink to this headline">#</a></h2>
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-clinicalcode.forms" title="Permalink to this heading">#</a></h2>
 </section>
 </section>
 
@@ -518,12 +574,12 @@ which are to be added to or removed from a code-list.</p>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="clinicalcode.migrations.html">
+          <a class="next-page" href="clinicalcode.models.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">clinicalcode.migrations package</div>
+                <div class="title">clinicalcode.models package</div>
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -595,6 +651,7 @@ which are to be added to or removed from a code-list.</p>
 </div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/scripts/furo.js"></script>
     </body>

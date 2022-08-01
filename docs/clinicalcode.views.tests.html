@@ -1,14 +1,14 @@
 <!doctype html>
-<html class="no-js">
+<html class="no-js" lang="en">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="cll package" href="cll.html" /><link rel="prev" title="clinicalcode.views package" href="clinicalcode.views.html" />
 
-    <meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/>
+    <meta name="generator" content="sphinx-5.1.1, furo 2022.06.21"/>
         <title>clinicalcode.views.tests package - Library Code Reference Data</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=68f4518137b9aefe99b631505a2064c3c42c9852" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=40978830699223671f4072448e654b5958f38b89" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
     
     
@@ -166,7 +166,6 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="clinicalcode.forms.html">clinicalcode.forms package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="clinicalcode.migrations.html">clinicalcode.migrations package</a></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="clinicalcode.models.html">clinicalcode.models package</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="clinicalcode.models.tests.html">clinicalcode.models.tests package</a></li>
 </ul>
@@ -212,7 +211,8 @@
           </svg>
           <span>Back to top</span>
         </a>
-        <div class="content-icon-container"><div class="theme-toggle-container theme-toggle-content">
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
             <button class="theme-toggle">
               <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
               <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
@@ -227,45 +227,52 @@
         </div>
         <article role="main">
           <section id="clinicalcode-views-tests-package">
-<h1>clinicalcode.views.tests package<a class="headerlink" href="#clinicalcode-views-tests-package" title="Permalink to this headline">#</a></h1>
+<h1>clinicalcode.views.tests package<a class="headerlink" href="#clinicalcode-views-tests-package" title="Permalink to this heading">#</a></h1>
 <section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">#</a></h2>
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">#</a></h2>
 </section>
 <section id="module-clinicalcode.views.tests.test_views">
-<span id="clinicalcode-views-tests-test-views-module"></span><h2>clinicalcode.views.tests.test_views module<a class="headerlink" href="#module-clinicalcode.views.tests.test_views" title="Permalink to this headline">#</a></h2>
+<span id="clinicalcode-views-tests-test-views-module"></span><h2>clinicalcode.views.tests.test_views module<a class="headerlink" href="#module-clinicalcode.views.tests.test_views" title="Permalink to this heading">#</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="clinicalcode.views.tests.test_views.ViewTest">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">clinicalcode.views.tests.test_views.</span></span><span class="sig-name descname"><span class="pre">ViewTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/views/tests/test_views.html#ViewTest"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.views.tests.test_views.ViewTest" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.test.testcases.TestCase</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="clinicalcode.views.tests.test_views.ViewTest.setUpClass">
 <em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">setUpClass</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/views/tests/test_views.html#ViewTest.setUpClass"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.views.tests.test_views.ViewTest.setUpClass" title="Permalink to this definition">#</a></dt>
 <dd><p>Hook method for setting up class fixture before running tests in the class.</p>
 </dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="clinicalcode.views.tests.test_views.ViewTest.setup">
 <span class="sig-name descname"><span class="pre">setup</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/views/tests/test_views.html#ViewTest.setup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.views.tests.test_views.ViewTest.setup" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="clinicalcode.views.tests.test_views.ViewTest.test_sqlInject_sqlWithKeywords_provideMatch">
 <span class="sig-name descname"><span class="pre">test_sqlInject_sqlWithKeywords_provideMatch</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/views/tests/test_views.html#ViewTest.test_sqlInject_sqlWithKeywords_provideMatch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.views.tests.test_views.ViewTest.test_sqlInject_sqlWithKeywords_provideMatch" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="clinicalcode.views.tests.test_views.ViewTest.test_sqlInject_sqlWithoutKeywords_doesNotProvideMatch">
 <span class="sig-name descname"><span class="pre">test_sqlInject_sqlWithoutKeywords_doesNotProvideMatch</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/views/tests/test_views.html#ViewTest.test_sqlInject_sqlWithoutKeywords_doesNotProvideMatch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.views.tests.test_views.ViewTest.test_sqlInject_sqlWithoutKeywords_doesNotProvideMatch" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="clinicalcode.views.tests.test_views.ViewTest.test_sqlInjection_noSqlMetaCharacters_doesNotProvideMatch">
 <span class="sig-name descname"><span class="pre">test_sqlInjection_noSqlMetaCharacters_doesNotProvideMatch</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/views/tests/test_views.html#ViewTest.test_sqlInjection_noSqlMetaCharacters_doesNotProvideMatch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.views.tests.test_views.ViewTest.test_sqlInjection_noSqlMetaCharacters_doesNotProvideMatch" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="clinicalcode.views.tests.test_views.ViewTest.test_sqlInjection_sqlMetaCharacters_provideMatch">
 <span class="sig-name descname"><span class="pre">test_sqlInjection_sqlMetaCharacters_provideMatch</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/views/tests/test_views.html#ViewTest.test_sqlInjection_sqlMetaCharacters_provideMatch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.views.tests.test_views.ViewTest.test_sqlInjection_sqlMetaCharacters_provideMatch" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 </dd></dl>
+
 </section>
 <section id="module-clinicalcode.views.tests">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-clinicalcode.views.tests" title="Permalink to this headline">#</a></h2>
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-clinicalcode.views.tests" title="Permalink to this heading">#</a></h2>
 </section>
 </section>
 
@@ -344,6 +351,7 @@
 </div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/scripts/furo.js"></script>
     </body>

@@ -1,14 +1,14 @@
 <!doctype html>
-<html class="no-js">
+<html class="no-js" lang="en">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="clinicalcode.api.views package" href="clinicalcode.api.views.html" /><link rel="prev" title="clinicalcode package" href="clinicalcode.html" />
 
-    <meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/>
+    <meta name="generator" content="sphinx-5.1.1, furo 2022.06.21"/>
         <title>clinicalcode.api package - Library Code Reference Data</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=68f4518137b9aefe99b631505a2064c3c42c9852" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=40978830699223671f4072448e654b5958f38b89" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
     
     
@@ -166,7 +166,6 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="clinicalcode.forms.html">clinicalcode.forms package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="clinicalcode.migrations.html">clinicalcode.migrations package</a></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="clinicalcode.models.html">clinicalcode.models package</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="clinicalcode.models.tests.html">clinicalcode.models.tests package</a></li>
 </ul>
@@ -212,7 +211,8 @@
           </svg>
           <span>Back to top</span>
         </a>
-        <div class="content-icon-container"><div class="theme-toggle-container theme-toggle-content">
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
             <button class="theme-toggle">
               <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
               <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
@@ -227,9 +227,9 @@
         </div>
         <article role="main">
           <section id="clinicalcode-api-package">
-<h1>clinicalcode.api package<a class="headerlink" href="#clinicalcode-api-package" title="Permalink to this headline">#</a></h1>
+<h1>clinicalcode.api package<a class="headerlink" href="#clinicalcode-api-package" title="Permalink to this heading">#</a></h1>
 <section id="subpackages">
-<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">#</a></h2>
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this heading">#</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="clinicalcode.api.views.html">clinicalcode.api.views package</a><ul>
@@ -246,16 +246,16 @@
 </div>
 </section>
 <section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">#</a></h2>
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">#</a></h2>
 </section>
 <section id="module-clinicalcode.api.serializers">
-<span id="clinicalcode-api-serializers-module"></span><h2>clinicalcode.api.serializers module<a class="headerlink" href="#module-clinicalcode.api.serializers" title="Permalink to this headline">#</a></h2>
+<span id="clinicalcode-api-serializers-module"></span><h2>clinicalcode.api.serializers module<a class="headerlink" href="#module-clinicalcode.api.serializers" title="Permalink to this heading">#</a></h2>
 <section id="the-base-class-serializer-allows-serialisation-to-json-api-or-xml-output">
-<h3>The base class serializer allows serialisation to JSON, API or XML output.<a class="headerlink" href="#the-base-class-serializer-allows-serialisation-to-json-api-or-xml-output" title="Permalink to this headline">#</a></h3>
+<h3>The base class serializer allows serialisation to JSON, API or XML output.<a class="headerlink" href="#the-base-class-serializer-allows-serialisation-to-json-api-or-xml-output" title="Permalink to this heading">#</a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="clinicalcode.api.serializers.CodeSerializer">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">clinicalcode.api.serializers.</span></span><span class="sig-name descname"><span class="pre">CodeSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/serializers.html#CodeSerializer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.serializers.CodeSerializer" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">rest_framework.serializers.ModelSerializer</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ModelSerializer</span></code></p>
 <dl class="py class">
 <dt class="sig sig-object py" id="clinicalcode.api.serializers.CodeSerializer.Meta">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="reference internal" href="_modules/clinicalcode/api/serializers.html#CodeSerializer.Meta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.serializers.CodeSerializer.Meta" title="Permalink to this definition">#</a></dt>
@@ -264,17 +264,21 @@
 <dt class="sig sig-object py" id="clinicalcode.api.serializers.CodeSerializer.Meta.fields">
 <span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'__all__'</span></em><a class="headerlink" href="#clinicalcode.api.serializers.CodeSerializer.Meta.fields" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="clinicalcode.api.serializers.CodeSerializer.Meta.model">
 <span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#clinicalcode.api.serializers.CodeSerializer.Meta.model" title="Permalink to this definition">#</a></dt>
-<dd><p>alias of <a class="reference internal" href="clinicalcode.models.html#clinicalcode.models.Code.Code" title="clinicalcode.models.Code.Code"><code class="xref py py-class docutils literal notranslate"><span class="pre">clinicalcode.models.Code.Code</span></code></a></p>
+<dd><p>alias of <a class="reference internal" href="clinicalcode.models.html#clinicalcode.models.Code.Code" title="clinicalcode.models.Code.Code"><code class="xref py py-class docutils literal notranslate"><span class="pre">Code</span></code></a></p>
 </dd></dl>
+
 </dd></dl>
+
 </dd></dl>
+
 <dl class="py class">
 <dt class="sig sig-object py" id="clinicalcode.api.serializers.CodingSystemSerializer">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">clinicalcode.api.serializers.</span></span><span class="sig-name descname"><span class="pre">CodingSystemSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/serializers.html#CodingSystemSerializer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.serializers.CodingSystemSerializer" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">rest_framework.serializers.ModelSerializer</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ModelSerializer</span></code></p>
 <dl class="py class">
 <dt class="sig sig-object py" id="clinicalcode.api.serializers.CodingSystemSerializer.Meta">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="reference internal" href="_modules/clinicalcode/api/serializers.html#CodingSystemSerializer.Meta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.serializers.CodingSystemSerializer.Meta" title="Permalink to this definition">#</a></dt>
@@ -283,17 +287,21 @@
 <dt class="sig sig-object py" id="clinicalcode.api.serializers.CodingSystemSerializer.Meta.fields">
 <span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('id',</span> <span class="pre">'name',</span> <span class="pre">'description',</span> <span class="pre">'codingsystem_id')</span></em><a class="headerlink" href="#clinicalcode.api.serializers.CodingSystemSerializer.Meta.fields" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="clinicalcode.api.serializers.CodingSystemSerializer.Meta.model">
 <span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#clinicalcode.api.serializers.CodingSystemSerializer.Meta.model" title="Permalink to this definition">#</a></dt>
-<dd><p>alias of <a class="reference internal" href="clinicalcode.models.html#clinicalcode.models.CodingSystem.CodingSystem" title="clinicalcode.models.CodingSystem.CodingSystem"><code class="xref py py-class docutils literal notranslate"><span class="pre">clinicalcode.models.CodingSystem.CodingSystem</span></code></a></p>
+<dd><p>alias of <a class="reference internal" href="clinicalcode.models.html#clinicalcode.models.CodingSystem.CodingSystem" title="clinicalcode.models.CodingSystem.CodingSystem"><code class="xref py py-class docutils literal notranslate"><span class="pre">CodingSystem</span></code></a></p>
 </dd></dl>
+
 </dd></dl>
+
 </dd></dl>
+
 <dl class="py class">
 <dt class="sig sig-object py" id="clinicalcode.api.serializers.ConceptSerializer">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">clinicalcode.api.serializers.</span></span><span class="sig-name descname"><span class="pre">ConceptSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/serializers.html#ConceptSerializer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.serializers.ConceptSerializer" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">rest_framework.serializers.ModelSerializer</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ModelSerializer</span></code></p>
 <dl class="py class">
 <dt class="sig sig-object py" id="clinicalcode.api.serializers.ConceptSerializer.Meta">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="reference internal" href="_modules/clinicalcode/api/serializers.html#ConceptSerializer.Meta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.serializers.ConceptSerializer.Meta" title="Permalink to this definition">#</a></dt>
@@ -302,17 +310,21 @@
 <dt class="sig sig-object py" id="clinicalcode.api.serializers.ConceptSerializer.Meta.fields">
 <span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'__all__'</span></em><a class="headerlink" href="#clinicalcode.api.serializers.ConceptSerializer.Meta.fields" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="clinicalcode.api.serializers.ConceptSerializer.Meta.model">
 <span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#clinicalcode.api.serializers.ConceptSerializer.Meta.model" title="Permalink to this definition">#</a></dt>
-<dd><p>alias of <a class="reference internal" href="clinicalcode.models.html#clinicalcode.models.Concept.Concept" title="clinicalcode.models.Concept.Concept"><code class="xref py py-class docutils literal notranslate"><span class="pre">clinicalcode.models.Concept.Concept</span></code></a></p>
+<dd><p>alias of <a class="reference internal" href="clinicalcode.models.html#clinicalcode.models.Concept.Concept" title="clinicalcode.models.Concept.Concept"><code class="xref py py-class docutils literal notranslate"><span class="pre">Concept</span></code></a></p>
 </dd></dl>
+
 </dd></dl>
+
 </dd></dl>
+
 <dl class="py class">
 <dt class="sig sig-object py" id="clinicalcode.api.serializers.DataSourceSerializer">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">clinicalcode.api.serializers.</span></span><span class="sig-name descname"><span class="pre">DataSourceSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/serializers.html#DataSourceSerializer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.serializers.DataSourceSerializer" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">rest_framework.serializers.ModelSerializer</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ModelSerializer</span></code></p>
 <dl class="py class">
 <dt class="sig sig-object py" id="clinicalcode.api.serializers.DataSourceSerializer.Meta">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="reference internal" href="_modules/clinicalcode/api/serializers.html#DataSourceSerializer.Meta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.serializers.DataSourceSerializer.Meta" title="Permalink to this definition">#</a></dt>
@@ -321,17 +333,21 @@
 <dt class="sig sig-object py" id="clinicalcode.api.serializers.DataSourceSerializer.Meta.fields">
 <span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('id',</span> <span class="pre">'name',</span> <span class="pre">'uid',</span> <span class="pre">'url',</span> <span class="pre">'description',</span> <span class="pre">'datasource_id')</span></em><a class="headerlink" href="#clinicalcode.api.serializers.DataSourceSerializer.Meta.fields" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="clinicalcode.api.serializers.DataSourceSerializer.Meta.model">
 <span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#clinicalcode.api.serializers.DataSourceSerializer.Meta.model" title="Permalink to this definition">#</a></dt>
-<dd><p>alias of <a class="reference internal" href="clinicalcode.models.html#clinicalcode.models.DataSource.DataSource" title="clinicalcode.models.DataSource.DataSource"><code class="xref py py-class docutils literal notranslate"><span class="pre">clinicalcode.models.DataSource.DataSource</span></code></a></p>
+<dd><p>alias of <a class="reference internal" href="clinicalcode.models.html#clinicalcode.models.DataSource.DataSource" title="clinicalcode.models.DataSource.DataSource"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataSource</span></code></a></p>
 </dd></dl>
+
 </dd></dl>
+
 </dd></dl>
+
 <dl class="py class">
 <dt class="sig sig-object py" id="clinicalcode.api.serializers.TagSerializer">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">clinicalcode.api.serializers.</span></span><span class="sig-name descname"><span class="pre">TagSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/serializers.html#TagSerializer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.serializers.TagSerializer" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">rest_framework.serializers.ModelSerializer</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ModelSerializer</span></code></p>
 <dl class="py class">
 <dt class="sig sig-object py" id="clinicalcode.api.serializers.TagSerializer.Meta">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="reference internal" href="_modules/clinicalcode/api/serializers.html#TagSerializer.Meta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.serializers.TagSerializer.Meta" title="Permalink to this definition">#</a></dt>
@@ -340,45 +356,51 @@
 <dt class="sig sig-object py" id="clinicalcode.api.serializers.TagSerializer.Meta.fields">
 <span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('id',</span> <span class="pre">'description',</span> <span class="pre">'display',</span> <span class="pre">'get_display_display',</span> <span class="pre">'tag_type',</span> <span class="pre">'get_tag_type_display',</span> <span class="pre">'collection_brand')</span></em><a class="headerlink" href="#clinicalcode.api.serializers.TagSerializer.Meta.fields" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="clinicalcode.api.serializers.TagSerializer.Meta.model">
 <span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#clinicalcode.api.serializers.TagSerializer.Meta.model" title="Permalink to this definition">#</a></dt>
-<dd><p>alias of <a class="reference internal" href="clinicalcode.models.html#clinicalcode.models.Tag.Tag" title="clinicalcode.models.Tag.Tag"><code class="xref py py-class docutils literal notranslate"><span class="pre">clinicalcode.models.Tag.Tag</span></code></a></p>
+<dd><p>alias of <a class="reference internal" href="clinicalcode.models.html#clinicalcode.models.Tag.Tag" title="clinicalcode.models.Tag.Tag"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tag</span></code></a></p>
 </dd></dl>
+
 </dd></dl>
+
 </dd></dl>
+
 </section>
 </section>
 <section id="module-clinicalcode.api.urls">
-<span id="clinicalcode-api-urls-module"></span><h2>clinicalcode.api.urls module<a class="headerlink" href="#module-clinicalcode.api.urls" title="Permalink to this headline">#</a></h2>
-<hr class="docutils"/>
+<span id="clinicalcode-api-urls-module"></span><h2>clinicalcode.api.urls module<a class="headerlink" href="#module-clinicalcode.api.urls" title="Permalink to this heading">#</a></h2>
+<hr class="docutils" />
 <dl class="py class">
 <dt class="sig sig-object py" id="clinicalcode.api.urls.SchemaGenerator">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">clinicalcode.api.urls.</span></span><span class="sig-name descname"><span class="pre">SchemaGenerator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">info</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">patterns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">urlconf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/urls.html#SchemaGenerator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.urls.SchemaGenerator" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">drf_yasg.generators.OpenAPISchemaGenerator</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">OpenAPISchemaGenerator</span></code></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="clinicalcode.api.urls.SchemaGenerator.get_schema">
 <span class="sig-name descname"><span class="pre">get_schema</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">public</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/urls.html#SchemaGenerator.get_schema"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.urls.SchemaGenerator.get_schema" title="Permalink to this definition">#</a></dt>
 <dd><p>Generate a <code class="xref py py-class docutils literal notranslate"><span class="pre">Swagger</span></code> object representing the API schema.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>request</strong> (<em>rest_framework.request.Request</em><em> or </em><em>None</em>) – the request used for filtering accessible endpoints and finding the spec URI</p></li>
 <li><p><strong>public</strong> (<em>bool</em>) – if True, all endpoints are included regardless of access through <cite>request</cite></p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>the generated Swagger specification</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>openapi.Swagger</p>
 </dd>
 </dl>
 </dd></dl>
+
 </dd></dl>
+
 </section>
 <section id="module-clinicalcode.api">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-clinicalcode.api" title="Permalink to this headline">#</a></h2>
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-clinicalcode.api" title="Permalink to this heading">#</a></h2>
 </section>
 </section>
 
@@ -462,6 +484,7 @@
 </div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/scripts/furo.js"></script>
     </body>

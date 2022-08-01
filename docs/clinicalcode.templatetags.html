@@ -1,14 +1,14 @@
 <!doctype html>
-<html class="no-js">
+<html class="no-js" lang="en">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="clinicalcode.tests package" href="clinicalcode.tests.html" /><link rel="prev" title="clinicalcode.models.tests package" href="clinicalcode.models.tests.html" />
 
-    <meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/>
+    <meta name="generator" content="sphinx-5.1.1, furo 2022.06.21"/>
         <title>clinicalcode.templatetags package - Library Code Reference Data</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=68f4518137b9aefe99b631505a2064c3c42c9852" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=40978830699223671f4072448e654b5958f38b89" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
     
     
@@ -166,7 +166,6 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="clinicalcode.forms.html">clinicalcode.forms package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="clinicalcode.migrations.html">clinicalcode.migrations package</a></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="clinicalcode.models.html">clinicalcode.models package</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="clinicalcode.models.tests.html">clinicalcode.models.tests package</a></li>
 </ul>
@@ -212,7 +211,8 @@
           </svg>
           <span>Back to top</span>
         </a>
-        <div class="content-icon-container"><div class="theme-toggle-container theme-toggle-content">
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
             <button class="theme-toggle">
               <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
               <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
@@ -227,57 +227,66 @@
         </div>
         <article role="main">
           <section id="clinicalcode-templatetags-package">
-<h1>clinicalcode.templatetags package<a class="headerlink" href="#clinicalcode-templatetags-package" title="Permalink to this headline">#</a></h1>
+<h1>clinicalcode.templatetags package<a class="headerlink" href="#clinicalcode-templatetags-package" title="Permalink to this heading">#</a></h1>
 <section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">#</a></h2>
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">#</a></h2>
 </section>
 <section id="module-clinicalcode.templatetags.cl_extras">
-<span id="clinicalcode-templatetags-cl-extras-module"></span><h2>clinicalcode.templatetags.cl_extras module<a class="headerlink" href="#module-clinicalcode.templatetags.cl_extras" title="Permalink to this headline">#</a></h2>
+<span id="clinicalcode-templatetags-cl-extras-module"></span><h2>clinicalcode.templatetags.cl_extras module<a class="headerlink" href="#module-clinicalcode.templatetags.cl_extras" title="Permalink to this heading">#</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.templatetags.cl_extras.addStr">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.templatetags.cl_extras.</span></span><span class="sig-name descname"><span class="pre">addStr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/templatetags/cl_extras.html#addStr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.templatetags.cl_extras.addStr" title="Permalink to this definition">#</a></dt>
 <dd><p>concatenate value &amp; arg</p>
 </dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.templatetags.cl_extras.cut">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.templatetags.cl_extras.</span></span><span class="sig-name descname"><span class="pre">cut</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/templatetags/cl_extras.html#cut"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.templatetags.cl_extras.cut" title="Permalink to this definition">#</a></dt>
 <dd><p>Removes all occurrences of arg from the given string</p>
 </dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.templatetags.cl_extras.has_group">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.templatetags.cl_extras.</span></span><span class="sig-name descname"><span class="pre">has_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/templatetags/cl_extras.html#has_group"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.templatetags.cl_extras.has_group" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.templatetags.cl_extras.islist">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.templatetags.cl_extras.</span></span><span class="sig-name descname"><span class="pre">islist</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/templatetags/cl_extras.html#islist"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.templatetags.cl_extras.islist" title="Permalink to this definition">#</a></dt>
 <dd><p>Check if value is of type list</p>
 </dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.templatetags.cl_extras.legacy">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.templatetags.cl_extras.</span></span><span class="sig-name descname"><span class="pre">legacy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/templatetags/cl_extras.html#legacy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.templatetags.cl_extras.legacy" title="Permalink to this definition">#</a></dt>
 <dd><p>Function used to transform old style settings to new style settings</p>
 </dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.templatetags.cl_extras.markdownify">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.templatetags.cl_extras.</span></span><span class="sig-name descname"><span class="pre">markdownify</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_settings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/templatetags/cl_extras.html#markdownify"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.templatetags.cl_extras.markdownify" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.templatetags.cl_extras.markdownify00">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.templatetags.cl_extras.</span></span><span class="sig-name descname"><span class="pre">markdownify00</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/templatetags/cl_extras.html#markdownify00"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.templatetags.cl_extras.markdownify00" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.templatetags.cl_extras.toString">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.templatetags.cl_extras.</span></span><span class="sig-name descname"><span class="pre">toString</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/templatetags/cl_extras.html#toString"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.templatetags.cl_extras.toString" title="Permalink to this definition">#</a></dt>
 <dd><p>Convert value to string</p>
 </dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.templatetags.cl_extras.tolist">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.templatetags.cl_extras.</span></span><span class="sig-name descname"><span class="pre">tolist</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/templatetags/cl_extras.html#tolist"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.templatetags.cl_extras.tolist" title="Permalink to this definition">#</a></dt>
 <dd><p>Convert comma separated value to a list of type arg</p>
 </dd></dl>
+
 </section>
 <section id="module-clinicalcode.templatetags">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-clinicalcode.templatetags" title="Permalink to this headline">#</a></h2>
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-clinicalcode.templatetags" title="Permalink to this heading">#</a></h2>
 </section>
 </section>
 
@@ -356,6 +365,7 @@
 </div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/scripts/furo.js"></script>
     </body>

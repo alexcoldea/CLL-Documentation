@@ -1,14 +1,14 @@
 <!doctype html>
-<html class="no-js">
+<html class="no-js" lang="en">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="clinicalcode.forms package" href="clinicalcode.forms.html" /><link rel="prev" title="clinicalcode.api package" href="clinicalcode.api.html" />
 
-    <meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/>
+    <meta name="generator" content="sphinx-5.1.1, furo 2022.06.21"/>
         <title>clinicalcode.api.views package - Library Code Reference Data</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=68f4518137b9aefe99b631505a2064c3c42c9852" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=40978830699223671f4072448e654b5958f38b89" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
     
     
@@ -166,7 +166,6 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="clinicalcode.forms.html">clinicalcode.forms package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="clinicalcode.migrations.html">clinicalcode.migrations package</a></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="clinicalcode.models.html">clinicalcode.models package</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="clinicalcode.models.tests.html">clinicalcode.models.tests package</a></li>
 </ul>
@@ -212,7 +211,8 @@
           </svg>
           <span>Back to top</span>
         </a>
-        <div class="content-icon-container"><div class="theme-toggle-container theme-toggle-content">
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
             <button class="theme-toggle">
               <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
               <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
@@ -227,22 +227,37 @@
         </div>
         <article role="main">
           <section id="clinicalcode-api-views-package">
-<h1>clinicalcode.api.views package<a class="headerlink" href="#clinicalcode-api-views-package" title="Permalink to this headline">#</a></h1>
+<h1>clinicalcode.api.views package<a class="headerlink" href="#clinicalcode-api-views-package" title="Permalink to this heading">#</a></h1>
 <section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">#</a></h2>
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">#</a></h2>
 </section>
 <section id="module-clinicalcode.api.views.Concept">
-<span id="clinicalcode-api-views-concept-module"></span><h2>clinicalcode.api.views.Concept module<a class="headerlink" href="#module-clinicalcode.api.views.Concept" title="Permalink to this headline">#</a></h2>
+<span id="clinicalcode-api-views-concept-module"></span><h2>clinicalcode.api.views.Concept module<a class="headerlink" href="#module-clinicalcode.api.views.Concept" title="Permalink to this heading">#</a></h2>
 <p>permitted) and to access the data structure and components of groups of
 data types.
 —————————————————————————</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="clinicalcode.api.views.Concept.CodeViewSet">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">clinicalcode.api.views.Concept.</span></span><span class="sig-name descname"><span class="pre">CodeViewSet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/Concept.html#CodeViewSet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.Concept.CodeViewSet" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">rest_framework.viewsets.ReadOnlyModelViewSet</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ReadOnlyModelViewSet</span></code></p>
 <p>Get the API output for the list of codes.
 For the specified code_list_id.
 (work only on live version since it is used in edit form)</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="clinicalcode.api.views.Concept.CodeViewSet.basename">
+<span class="sig-name descname"><span class="pre">basename</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#clinicalcode.api.views.Concept.CodeViewSet.basename" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="clinicalcode.api.views.Concept.CodeViewSet.description">
+<span class="sig-name descname"><span class="pre">description</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#clinicalcode.api.views.Concept.CodeViewSet.description" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="clinicalcode.api.views.Concept.CodeViewSet.detail">
+<span class="sig-name descname"><span class="pre">detail</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#clinicalcode.api.views.Concept.CodeViewSet.detail" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="clinicalcode.api.views.Concept.CodeViewSet.filter_queryset">
 <span class="sig-name descname"><span class="pre">filter_queryset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">queryset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/Concept.html#CodeViewSet.filter_queryset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.Concept.CodeViewSet.filter_queryset" title="Permalink to this definition">#</a></dt>
@@ -251,31 +266,62 @@ By default we get codes ordered by creation date even if
 we provide sorted data from get_queryset(). We have to sort the
 data here.</p>
 </dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="clinicalcode.api.views.Concept.CodeViewSet.get_queryset">
 <span class="sig-name descname"><span class="pre">get_queryset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/Concept.html#CodeViewSet.get_queryset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.Concept.CodeViewSet.get_queryset" title="Permalink to this definition">#</a></dt>
 <dd><p>Provide the dataset for the view.
 Restrict this to just those codes that are visible to the user.</p>
 </dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="clinicalcode.api.views.Concept.CodeViewSet.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#clinicalcode.api.views.Concept.CodeViewSet.name" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="clinicalcode.api.views.Concept.CodeViewSet.queryset">
 <span class="sig-name descname"><span class="pre">queryset</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;QuerySet</span> <span class="pre">[]&gt;</span></em><a class="headerlink" href="#clinicalcode.api.views.Concept.CodeViewSet.queryset" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="clinicalcode.api.views.Concept.CodeViewSet.serializer_class">
 <span class="sig-name descname"><span class="pre">serializer_class</span></span><a class="headerlink" href="#clinicalcode.api.views.Concept.CodeViewSet.serializer_class" title="Permalink to this definition">#</a></dt>
-<dd><p>alias of <a class="reference internal" href="clinicalcode.api.html#clinicalcode.api.serializers.CodeSerializer" title="clinicalcode.api.serializers.CodeSerializer"><code class="xref py py-class docutils literal notranslate"><span class="pre">clinicalcode.api.serializers.CodeSerializer</span></code></a></p>
+<dd><p>alias of <a class="reference internal" href="clinicalcode.api.html#clinicalcode.api.serializers.CodeSerializer" title="clinicalcode.api.serializers.CodeSerializer"><code class="xref py py-class docutils literal notranslate"><span class="pre">CodeSerializer</span></code></a></p>
 </dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="clinicalcode.api.views.Concept.CodeViewSet.suffix">
+<span class="sig-name descname"><span class="pre">suffix</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#clinicalcode.api.views.Concept.CodeViewSet.suffix" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="clinicalcode.api.views.Concept.CodeViewSet.swagger_schema">
 <span class="sig-name descname"><span class="pre">swagger_schema</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#clinicalcode.api.views.Concept.CodeViewSet.swagger_schema" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 </dd></dl>
+
 <dl class="py class">
 <dt class="sig sig-object py" id="clinicalcode.api.views.Concept.ConceptViewSet">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">clinicalcode.api.views.Concept.</span></span><span class="sig-name descname"><span class="pre">ConceptViewSet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/Concept.html#ConceptViewSet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.Concept.ConceptViewSet" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">rest_framework.viewsets.ReadOnlyModelViewSet</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ReadOnlyModelViewSet</span></code></p>
 <p>Get the API output for the list of concepts.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="clinicalcode.api.views.Concept.ConceptViewSet.basename">
+<span class="sig-name descname"><span class="pre">basename</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#clinicalcode.api.views.Concept.ConceptViewSet.basename" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="clinicalcode.api.views.Concept.ConceptViewSet.description">
+<span class="sig-name descname"><span class="pre">description</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#clinicalcode.api.views.Concept.ConceptViewSet.description" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="clinicalcode.api.views.Concept.ConceptViewSet.detail">
+<span class="sig-name descname"><span class="pre">detail</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#clinicalcode.api.views.Concept.ConceptViewSet.detail" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="clinicalcode.api.views.Concept.ConceptViewSet.filter_queryset">
 <span class="sig-name descname"><span class="pre">filter_queryset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">queryset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/Concept.html#ConceptViewSet.filter_queryset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.Concept.ConceptViewSet.filter_queryset" title="Permalink to this definition">#</a></dt>
@@ -284,59 +330,82 @@ By default we get concepts ordered by creation date even if
 we provide sorted data from get_queryset(). We have to sort the
 data here.</p>
 </dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="clinicalcode.api.views.Concept.ConceptViewSet.get_queryset">
 <span class="sig-name descname"><span class="pre">get_queryset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/Concept.html#ConceptViewSet.get_queryset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.Concept.ConceptViewSet.get_queryset" title="Permalink to this definition">#</a></dt>
 <dd><p>Provide the dataset for the view.
 Restrict this to just those concepts that are visible to the user.</p>
 </dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="clinicalcode.api.views.Concept.ConceptViewSet.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#clinicalcode.api.views.Concept.ConceptViewSet.name" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="clinicalcode.api.views.Concept.ConceptViewSet.queryset">
 <span class="sig-name descname"><span class="pre">queryset</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;QuerySet</span> <span class="pre">[]&gt;</span></em><a class="headerlink" href="#clinicalcode.api.views.Concept.ConceptViewSet.queryset" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="clinicalcode.api.views.Concept.ConceptViewSet.serializer_class">
 <span class="sig-name descname"><span class="pre">serializer_class</span></span><a class="headerlink" href="#clinicalcode.api.views.Concept.ConceptViewSet.serializer_class" title="Permalink to this definition">#</a></dt>
-<dd><p>alias of <a class="reference internal" href="clinicalcode.api.html#clinicalcode.api.serializers.ConceptSerializer" title="clinicalcode.api.serializers.ConceptSerializer"><code class="xref py py-class docutils literal notranslate"><span class="pre">clinicalcode.api.serializers.ConceptSerializer</span></code></a></p>
+<dd><p>alias of <a class="reference internal" href="clinicalcode.api.html#clinicalcode.api.serializers.ConceptSerializer" title="clinicalcode.api.serializers.ConceptSerializer"><code class="xref py py-class docutils literal notranslate"><span class="pre">ConceptSerializer</span></code></a></p>
 </dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="clinicalcode.api.views.Concept.ConceptViewSet.suffix">
+<span class="sig-name descname"><span class="pre">suffix</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#clinicalcode.api.views.Concept.ConceptViewSet.suffix" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="clinicalcode.api.views.Concept.ConceptViewSet.swagger_schema">
 <span class="sig-name descname"><span class="pre">swagger_schema</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#clinicalcode.api.views.Concept.ConceptViewSet.swagger_schema" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 </dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.api.views.Concept.api_concept_create">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.api.views.Concept.</span></span><span class="sig-name descname"><span class="pre">api_concept_create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/Concept.html#api_concept_create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.Concept.api_concept_create" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.api.views.Concept.api_concept_update">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.api.views.Concept.</span></span><span class="sig-name descname"><span class="pre">api_concept_update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/Concept.html#api_concept_update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.Concept.api_concept_update" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.api.views.Concept.child_concepts">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.api.views.Concept.</span></span><span class="sig-name descname"><span class="pre">child_concepts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/Concept.html#child_concepts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.Concept.child_concepts" title="Permalink to this definition">#</a></dt>
 <dd><p>Return the children of the specified concept (pk).</p>
 </dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.api.views.Concept.concept_detail">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.api.views.Concept.</span></span><span class="sig-name descname"><span class="pre">concept_detail</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/Concept.html#concept_detail"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.Concept.concept_detail" title="Permalink to this definition">#</a></dt>
 <dd><p>Display the detail of a concept at a point in time.</p>
 </dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.api.views.Concept.concept_detail_PUBLIC">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.api.views.Concept.</span></span><span class="sig-name descname"><span class="pre">concept_detail_PUBLIC</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/Concept.html#concept_detail_PUBLIC"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.Concept.concept_detail_PUBLIC" title="Permalink to this definition">#</a></dt>
 <dd><p>Display the detail of a published concept at a point in time.</p>
 </dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.api.views.Concept.concepts_live_and_published">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.api.views.Concept.</span></span><span class="sig-name descname"><span class="pre">concepts_live_and_published</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/Concept.html#concepts_live_and_published"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.Concept.concepts_live_and_published" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.api.views.Concept.export_concept_codes">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.api.views.Concept.</span></span><span class="sig-name descname"><span class="pre">export_concept_codes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/Concept.html#export_concept_codes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.Concept.export_concept_codes" title="Permalink to this definition">#</a></dt>
 <dd><p>Return the unique set of codes and descriptions for the specified
 concept (pk).</p>
 </dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.api.views.Concept.export_concept_codes_byVersionID">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.api.views.Concept.</span></span><span class="sig-name descname"><span class="pre">export_concept_codes_byVersionID</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/Concept.html#export_concept_codes_byVersionID"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.Concept.export_concept_codes_byVersionID" title="Permalink to this definition">#</a></dt>
@@ -344,6 +413,7 @@ concept (pk).</p>
 concept (pk),
 for a specific historical concept version (concept_history_id).</p>
 </dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.api.views.Concept.export_published_concept_codes">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.api.views.Concept.</span></span><span class="sig-name descname"><span class="pre">export_published_concept_codes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/Concept.html#export_published_concept_codes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.Concept.export_published_concept_codes" title="Permalink to this definition">#</a></dt>
@@ -351,23 +421,28 @@ for a specific historical concept version (concept_history_id).</p>
 concept (pk),
 for a specific historical concept version (concept_history_id).</p>
 </dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.api.views.Concept.getConceptDetail">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.api.views.Concept.</span></span><span class="sig-name descname"><span class="pre">getConceptDetail</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pk</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">history_id=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_authenticated_user=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">get_versions_only=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">set_class=&lt;class</span> <span class="pre">'clinicalcode.models.Concept.Concept'&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/Concept.html#getConceptDetail"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.Concept.getConceptDetail" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.api.views.Concept.getConcepts">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.api.views.Concept.</span></span><span class="sig-name descname"><span class="pre">getConcepts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_authenticated_user=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pk=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">set_class=&lt;class</span> <span class="pre">'clinicalcode.models.Concept.Concept'&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/Concept.html#getConcepts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.Concept.getConcepts" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.api.views.Concept.get_historical_concept_codes">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.api.views.Concept.</span></span><span class="sig-name descname"><span class="pre">get_historical_concept_codes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pk</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concept_history_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/Concept.html#get_historical_concept_codes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.Concept.get_historical_concept_codes" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.api.views.Concept.parent_concepts">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.api.views.Concept.</span></span><span class="sig-name descname"><span class="pre">parent_concepts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/Concept.html#parent_concepts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.Concept.parent_concepts" title="Permalink to this definition">#</a></dt>
 <dd><p>Return the parents of the specified concept (pk).</p>
 </dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.api.views.Concept.published_concepts">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.api.views.Concept.</span></span><span class="sig-name descname"><span class="pre">published_concepts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/Concept.html#published_concepts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.Concept.published_concepts" title="Permalink to this definition">#</a></dt>
@@ -408,6 +483,7 @@ User can search with criteria using a combinations of querystring parameters:
 <div><p>do not show concepts versions (by default, all concept’s version ids are shown)</p>
 </div></blockquote>
 </dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.api.views.Concept.user_concepts">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.api.views.Concept.</span></span><span class="sig-name descname"><span class="pre">user_concepts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/Concept.html#user_concepts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.Concept.user_concepts" title="Permalink to this definition">#</a></dt>
@@ -434,46 +510,55 @@ do not show concepts versions (by default, all concept’s version ids are shown
 -   &lt;code&gt;?must_have_published_versions=1&lt;/code&gt;  
 show only concepts which have a published version(by default, all concepts are shown)</p>
 </dd></dl>
+
 </section>
 <section id="module-clinicalcode.api.views.DataSource">
-<span id="clinicalcode-api-views-datasource-module"></span><h2>clinicalcode.api.views.DataSource module<a class="headerlink" href="#module-clinicalcode.api.views.DataSource" title="Permalink to this headline">#</a></h2>
+<span id="clinicalcode-api-views-datasource-module"></span><h2>clinicalcode.api.views.DataSource module<a class="headerlink" href="#module-clinicalcode.api.views.DataSource" title="Permalink to this heading">#</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.api.views.DataSource.api_datasource_create">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.api.views.DataSource.</span></span><span class="sig-name descname"><span class="pre">api_datasource_create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/DataSource.html#api_datasource_create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.DataSource.api_datasource_create" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.api.views.DataSource.data_sources">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.api.views.DataSource.</span></span><span class="sig-name descname"><span class="pre">data_sources</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/DataSource.html#data_sources"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.DataSource.data_sources" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the API output for the list of user data sources.</p>
 </dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.api.views.DataSource.get_HISTORICAl_phenotypes_associated_with_data_source">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.api.views.DataSource.</span></span><span class="sig-name descname"><span class="pre">get_HISTORICAl_phenotypes_associated_with_data_source</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_source_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">brand_phenotypes_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_published_data_only</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/DataSource.html#get_HISTORICAl_phenotypes_associated_with_data_source"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.DataSource.get_HISTORICAl_phenotypes_associated_with_data_source" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.api.views.DataSource.get_LIVE_phenotypes_associated_with_data_source">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.api.views.DataSource.</span></span><span class="sig-name descname"><span class="pre">get_LIVE_phenotypes_associated_with_data_source</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_source_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">brand_phenotypes_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_published_data_only</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/DataSource.html#get_LIVE_phenotypes_associated_with_data_source"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.DataSource.get_LIVE_phenotypes_associated_with_data_source" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.api.views.DataSource.get_data_sources">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.api.views.DataSource.</span></span><span class="sig-name descname"><span class="pre">get_data_sources</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pk</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">get_live_phenotypes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_published_data_only</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_authenticated_user</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/DataSource.html#get_data_sources"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.DataSource.get_data_sources" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.api.views.DataSource.published_data_sources">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.api.views.DataSource.</span></span><span class="sig-name descname"><span class="pre">published_data_sources</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/DataSource.html#published_data_sources"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.DataSource.published_data_sources" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the API output for the list of data sources included in published phenotypes.</p>
 </dd></dl>
+
 </section>
 <section id="module-clinicalcode.api.views.Phenotype">
-<span id="clinicalcode-api-views-phenotype-module"></span><h2>clinicalcode.api.views.Phenotype module<a class="headerlink" href="#module-clinicalcode.api.views.Phenotype" title="Permalink to this headline">#</a></h2>
+<span id="clinicalcode-api-views-phenotype-module"></span><h2>clinicalcode.api.views.Phenotype module<a class="headerlink" href="#module-clinicalcode.api.views.Phenotype" title="Permalink to this heading">#</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.api.views.Phenotype.api_phenotype_create">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.api.views.Phenotype.</span></span><span class="sig-name descname"><span class="pre">api_phenotype_create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/Phenotype.html#api_phenotype_create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.Phenotype.api_phenotype_create" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.api.views.Phenotype.api_phenotype_update">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.api.views.Phenotype.</span></span><span class="sig-name descname"><span class="pre">api_phenotype_update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/Phenotype.html#api_phenotype_update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.Phenotype.api_phenotype_update" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.api.views.Phenotype.export_phenotype_codes_byVersionID">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.api.views.Phenotype.</span></span><span class="sig-name descname"><span class="pre">export_phenotype_codes_byVersionID</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/Phenotype.html#export_phenotype_codes_byVersionID"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.Phenotype.export_phenotype_codes_byVersionID" title="Permalink to this definition">#</a></dt>
@@ -481,6 +566,7 @@ show only concepts which have a published version(by default, all concepts are s
 phenotype (pk),
 for a specific historical phenotype version (phenotype_history_id).</p>
 </dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.api.views.Phenotype.export_published_phenotype_codes">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.api.views.Phenotype.</span></span><span class="sig-name descname"><span class="pre">export_published_phenotype_codes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/Phenotype.html#export_published_phenotype_codes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.Phenotype.export_published_phenotype_codes" title="Permalink to this definition">#</a></dt>
@@ -488,24 +574,29 @@ for a specific historical phenotype version (phenotype_history_id).</p>
 phenotype (pk),
 for a specific historical phenotype version (phenotype_history_id).</p>
 </dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.api.views.Phenotype.getPhenotypeDetail">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.api.views.Phenotype.</span></span><span class="sig-name descname"><span class="pre">getPhenotypeDetail</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pk</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">history_id=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_authenticated_user=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">get_versions_only=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">set_class=&lt;class</span> <span class="pre">'clinicalcode.models.Phenotype.Phenotype'&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/Phenotype.html#getPhenotypeDetail"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.Phenotype.getPhenotypeDetail" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.api.views.Phenotype.getPhenotypes">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.api.views.Phenotype.</span></span><span class="sig-name descname"><span class="pre">getPhenotypes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_authenticated_user=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pk=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">set_class=&lt;class</span> <span class="pre">'clinicalcode.models.Phenotype.Phenotype'&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/Phenotype.html#getPhenotypes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.Phenotype.getPhenotypes" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.api.views.Phenotype.phenotype_detail">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.api.views.Phenotype.</span></span><span class="sig-name descname"><span class="pre">phenotype_detail</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/Phenotype.html#phenotype_detail"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.Phenotype.phenotype_detail" title="Permalink to this definition">#</a></dt>
 <dd><p>Display the detail of a phenotype at a point in time.</p>
 </dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.api.views.Phenotype.phenotype_detail_PUBLIC">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.api.views.Phenotype.</span></span><span class="sig-name descname"><span class="pre">phenotype_detail_PUBLIC</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/Phenotype.html#phenotype_detail_PUBLIC"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.Phenotype.phenotype_detail_PUBLIC" title="Permalink to this definition">#</a></dt>
 <dd><p>Display the detail of a published phenotype at a point in time.</p>
 </dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.api.views.Phenotype.phenotypes">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.api.views.Phenotype.</span></span><span class="sig-name descname"><span class="pre">phenotypes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/Phenotype.html#phenotypes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.Phenotype.phenotypes" title="Permalink to this definition">#</a></dt>
@@ -532,6 +623,7 @@ do not show phenotypes versions (by default, all phenotype’s version ids are s
 -  &lt;code&gt;?must_have_published_versions=1&lt;/code&gt;  
 show only phenotypes which have a published version(by default, all phenotypes are shown)</p>
 </dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.api.views.Phenotype.published_phenotypes">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.api.views.Phenotype.</span></span><span class="sig-name descname"><span class="pre">published_phenotypes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/Phenotype.html#published_phenotypes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.Phenotype.published_phenotypes" title="Permalink to this definition">#</a></dt>
@@ -550,27 +642,45 @@ search by part of the author name
 -  &lt;code&gt;?do_not_show_versions=1&lt;/code&gt;  
 do not show phenotypes versions (by default, all phenotype’s version ids are shown)</p>
 </dd></dl>
+
 </section>
 <section id="module-clinicalcode.api.views.View">
-<span id="clinicalcode-api-views-view-module"></span><h2>clinicalcode.api.views.View module<a class="headerlink" href="#module-clinicalcode.api.views.View" title="Permalink to this headline">#</a></h2>
+<span id="clinicalcode-api-views-view-module"></span><h2>clinicalcode.api.views.View module<a class="headerlink" href="#module-clinicalcode.api.views.View" title="Permalink to this heading">#</a></h2>
 <p>permitted) and to access the data structure and components of groups of
 data types.
 —————————————————————————</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="clinicalcode.api.views.View.CodingSystemViewSet">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">clinicalcode.api.views.View.</span></span><span class="sig-name descname"><span class="pre">CodingSystemViewSet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/View.html#CodingSystemViewSet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.View.CodingSystemViewSet" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">rest_framework.viewsets.ReadOnlyModelViewSet</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ReadOnlyModelViewSet</span></code></p>
 <p>Get the API output for the list of Coding Systems (no permissions involved).</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="clinicalcode.api.views.View.CodingSystemViewSet.authentication_classes">
 <span class="sig-name descname"><span class="pre">authentication_classes</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="headerlink" href="#clinicalcode.api.views.View.CodingSystemViewSet.authentication_classes" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="clinicalcode.api.views.View.CodingSystemViewSet.basename">
+<span class="sig-name descname"><span class="pre">basename</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#clinicalcode.api.views.View.CodingSystemViewSet.basename" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="clinicalcode.api.views.View.CodingSystemViewSet.description">
+<span class="sig-name descname"><span class="pre">description</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#clinicalcode.api.views.View.CodingSystemViewSet.description" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="clinicalcode.api.views.View.CodingSystemViewSet.detail">
+<span class="sig-name descname"><span class="pre">detail</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#clinicalcode.api.views.View.CodingSystemViewSet.detail" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="clinicalcode.api.views.View.CodingSystemViewSet.dispatch">
 <span class="sig-name descname"><span class="pre">dispatch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#clinicalcode.api.views.View.CodingSystemViewSet.dispatch" title="Permalink to this definition">#</a></dt>
 <dd><p><cite>.dispatch()</cite> is pretty much the same as Django’s regular dispatch,
 but with extra hooks for startup, finalize, and exception handling.</p>
 </dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="clinicalcode.api.views.View.CodingSystemViewSet.filter_queryset">
 <span class="sig-name descname"><span class="pre">filter_queryset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">queryset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/View.html#CodingSystemViewSet.filter_queryset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.View.CodingSystemViewSet.filter_queryset" title="Permalink to this definition">#</a></dt>
@@ -579,41 +689,74 @@ By default we get Coding Systems ordered by creation date even if
 we provide sorted data from get_queryset(). We have to sort the
 data here.</p>
 </dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="clinicalcode.api.views.View.CodingSystemViewSet.get_queryset">
 <span class="sig-name descname"><span class="pre">get_queryset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/View.html#CodingSystemViewSet.get_queryset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.View.CodingSystemViewSet.get_queryset" title="Permalink to this definition">#</a></dt>
 <dd><p>Provide the Coding Systems for the view.
 Get all the Coding Systems but limit if we are searching.</p>
 </dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="clinicalcode.api.views.View.CodingSystemViewSet.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#clinicalcode.api.views.View.CodingSystemViewSet.name" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="clinicalcode.api.views.View.CodingSystemViewSet.permission_classes">
 <span class="sig-name descname"><span class="pre">permission_classes</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="headerlink" href="#clinicalcode.api.views.View.CodingSystemViewSet.permission_classes" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="clinicalcode.api.views.View.CodingSystemViewSet.queryset">
 <span class="sig-name descname"><span class="pre">queryset</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;CodingSystemQuerySet</span> <span class="pre">[]&gt;</span></em><a class="headerlink" href="#clinicalcode.api.views.View.CodingSystemViewSet.queryset" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="clinicalcode.api.views.View.CodingSystemViewSet.serializer_class">
 <span class="sig-name descname"><span class="pre">serializer_class</span></span><a class="headerlink" href="#clinicalcode.api.views.View.CodingSystemViewSet.serializer_class" title="Permalink to this definition">#</a></dt>
-<dd><p>alias of <a class="reference internal" href="clinicalcode.api.html#clinicalcode.api.serializers.CodingSystemSerializer" title="clinicalcode.api.serializers.CodingSystemSerializer"><code class="xref py py-class docutils literal notranslate"><span class="pre">clinicalcode.api.serializers.CodingSystemSerializer</span></code></a></p>
+<dd><p>alias of <a class="reference internal" href="clinicalcode.api.html#clinicalcode.api.serializers.CodingSystemSerializer" title="clinicalcode.api.serializers.CodingSystemSerializer"><code class="xref py py-class docutils literal notranslate"><span class="pre">CodingSystemSerializer</span></code></a></p>
 </dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="clinicalcode.api.views.View.CodingSystemViewSet.suffix">
+<span class="sig-name descname"><span class="pre">suffix</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#clinicalcode.api.views.View.CodingSystemViewSet.suffix" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
 </dd></dl>
+
 <dl class="py class">
 <dt class="sig sig-object py" id="clinicalcode.api.views.View.DataSourceViewSet">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">clinicalcode.api.views.View.</span></span><span class="sig-name descname"><span class="pre">DataSourceViewSet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/View.html#DataSourceViewSet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.View.DataSourceViewSet" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">rest_framework.viewsets.ReadOnlyModelViewSet</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ReadOnlyModelViewSet</span></code></p>
 <p>Get the API output for the list of data sources (no permissions involved).</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="clinicalcode.api.views.View.DataSourceViewSet.authentication_classes">
 <span class="sig-name descname"><span class="pre">authentication_classes</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="headerlink" href="#clinicalcode.api.views.View.DataSourceViewSet.authentication_classes" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="clinicalcode.api.views.View.DataSourceViewSet.basename">
+<span class="sig-name descname"><span class="pre">basename</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#clinicalcode.api.views.View.DataSourceViewSet.basename" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="clinicalcode.api.views.View.DataSourceViewSet.description">
+<span class="sig-name descname"><span class="pre">description</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#clinicalcode.api.views.View.DataSourceViewSet.description" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="clinicalcode.api.views.View.DataSourceViewSet.detail">
+<span class="sig-name descname"><span class="pre">detail</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#clinicalcode.api.views.View.DataSourceViewSet.detail" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="clinicalcode.api.views.View.DataSourceViewSet.dispatch">
 <span class="sig-name descname"><span class="pre">dispatch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#clinicalcode.api.views.View.DataSourceViewSet.dispatch" title="Permalink to this definition">#</a></dt>
 <dd><p><cite>.dispatch()</cite> is pretty much the same as Django’s regular dispatch,
 but with extra hooks for startup, finalize, and exception handling.</p>
 </dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="clinicalcode.api.views.View.DataSourceViewSet.filter_queryset">
 <span class="sig-name descname"><span class="pre">filter_queryset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">queryset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/View.html#DataSourceViewSet.filter_queryset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.View.DataSourceViewSet.filter_queryset" title="Permalink to this definition">#</a></dt>
@@ -622,31 +765,62 @@ By default we get data sources ordered by creation date even if
 we provide sorted data from get_queryset(). We have to sort the
 data here.</p>
 </dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="clinicalcode.api.views.View.DataSourceViewSet.get_queryset">
 <span class="sig-name descname"><span class="pre">get_queryset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/View.html#DataSourceViewSet.get_queryset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.View.DataSourceViewSet.get_queryset" title="Permalink to this definition">#</a></dt>
 <dd><p>Provide the dataset for the view.
 Get all the data sources but limit if we are searching.</p>
 </dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="clinicalcode.api.views.View.DataSourceViewSet.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#clinicalcode.api.views.View.DataSourceViewSet.name" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="clinicalcode.api.views.View.DataSourceViewSet.permission_classes">
 <span class="sig-name descname"><span class="pre">permission_classes</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="headerlink" href="#clinicalcode.api.views.View.DataSourceViewSet.permission_classes" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="clinicalcode.api.views.View.DataSourceViewSet.queryset">
 <span class="sig-name descname"><span class="pre">queryset</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;QuerySet</span> <span class="pre">[]&gt;</span></em><a class="headerlink" href="#clinicalcode.api.views.View.DataSourceViewSet.queryset" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="clinicalcode.api.views.View.DataSourceViewSet.serializer_class">
 <span class="sig-name descname"><span class="pre">serializer_class</span></span><a class="headerlink" href="#clinicalcode.api.views.View.DataSourceViewSet.serializer_class" title="Permalink to this definition">#</a></dt>
-<dd><p>alias of <a class="reference internal" href="clinicalcode.api.html#clinicalcode.api.serializers.DataSourceSerializer" title="clinicalcode.api.serializers.DataSourceSerializer"><code class="xref py py-class docutils literal notranslate"><span class="pre">clinicalcode.api.serializers.DataSourceSerializer</span></code></a></p>
+<dd><p>alias of <a class="reference internal" href="clinicalcode.api.html#clinicalcode.api.serializers.DataSourceSerializer" title="clinicalcode.api.serializers.DataSourceSerializer"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataSourceSerializer</span></code></a></p>
 </dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="clinicalcode.api.views.View.DataSourceViewSet.suffix">
+<span class="sig-name descname"><span class="pre">suffix</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#clinicalcode.api.views.View.DataSourceViewSet.suffix" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
 </dd></dl>
+
 <dl class="py class">
 <dt class="sig sig-object py" id="clinicalcode.api.views.View.TagViewSet">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">clinicalcode.api.views.View.</span></span><span class="sig-name descname"><span class="pre">TagViewSet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/View.html#TagViewSet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.View.TagViewSet" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">rest_framework.viewsets.ReadOnlyModelViewSet</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ReadOnlyModelViewSet</span></code></p>
 <p>Get the API output for the list of tags (no permissions involved).</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="clinicalcode.api.views.View.TagViewSet.basename">
+<span class="sig-name descname"><span class="pre">basename</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#clinicalcode.api.views.View.TagViewSet.basename" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="clinicalcode.api.views.View.TagViewSet.description">
+<span class="sig-name descname"><span class="pre">description</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#clinicalcode.api.views.View.TagViewSet.description" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="clinicalcode.api.views.View.TagViewSet.detail">
+<span class="sig-name descname"><span class="pre">detail</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#clinicalcode.api.views.View.TagViewSet.detail" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="clinicalcode.api.views.View.TagViewSet.filter_queryset">
 <span class="sig-name descname"><span class="pre">filter_queryset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">queryset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/View.html#TagViewSet.filter_queryset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.View.TagViewSet.filter_queryset" title="Permalink to this definition">#</a></dt>
@@ -655,58 +829,82 @@ By default we get tags ordered by creation date even if
 we provide sorted data from get_queryset(). We have to sort the
 data here.</p>
 </dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="clinicalcode.api.views.View.TagViewSet.get_queryset">
 <span class="sig-name descname"><span class="pre">get_queryset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/View.html#TagViewSet.get_queryset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.View.TagViewSet.get_queryset" title="Permalink to this definition">#</a></dt>
 <dd><p>Provide the dataset for the view.
 Get all the tags but limit if we are searching.</p>
 </dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="clinicalcode.api.views.View.TagViewSet.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#clinicalcode.api.views.View.TagViewSet.name" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="clinicalcode.api.views.View.TagViewSet.queryset">
 <span class="sig-name descname"><span class="pre">queryset</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;QuerySet</span> <span class="pre">[]&gt;</span></em><a class="headerlink" href="#clinicalcode.api.views.View.TagViewSet.queryset" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="clinicalcode.api.views.View.TagViewSet.serializer_class">
 <span class="sig-name descname"><span class="pre">serializer_class</span></span><a class="headerlink" href="#clinicalcode.api.views.View.TagViewSet.serializer_class" title="Permalink to this definition">#</a></dt>
-<dd><p>alias of <a class="reference internal" href="clinicalcode.api.html#clinicalcode.api.serializers.TagSerializer" title="clinicalcode.api.serializers.TagSerializer"><code class="xref py py-class docutils literal notranslate"><span class="pre">clinicalcode.api.serializers.TagSerializer</span></code></a></p>
+<dd><p>alias of <a class="reference internal" href="clinicalcode.api.html#clinicalcode.api.serializers.TagSerializer" title="clinicalcode.api.serializers.TagSerializer"><code class="xref py py-class docutils literal notranslate"><span class="pre">TagSerializer</span></code></a></p>
 </dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="clinicalcode.api.views.View.TagViewSet.suffix">
+<span class="sig-name descname"><span class="pre">suffix</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#clinicalcode.api.views.View.TagViewSet.suffix" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="clinicalcode.api.views.View.TagViewSet.swagger_schema">
 <span class="sig-name descname"><span class="pre">swagger_schema</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#clinicalcode.api.views.View.TagViewSet.swagger_schema" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 </dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.api.views.View.chk_code_attribute_header">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.api.views.View.</span></span><span class="sig-name descname"><span class="pre">chk_code_attribute_header</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code_attribute_header</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/View.html#chk_code_attribute_header"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.View.chk_code_attribute_header" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.api.views.View.chk_coding_system">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.api.views.View.</span></span><span class="sig-name descname"><span class="pre">chk_coding_system</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coding_system_input</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/View.html#chk_coding_system"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.View.chk_coding_system" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.api.views.View.chk_components_and_codes">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.api.views.View.</span></span><span class="sig-name descname"><span class="pre">chk_components_and_codes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">components_inputs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/View.html#chk_components_and_codes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.View.chk_components_and_codes" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.api.views.View.chk_concept_ids_list">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.api.views.View.</span></span><span class="sig-name descname"><span class="pre">chk_concept_ids_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concept_ids_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">item_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/View.html#chk_concept_ids_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.View.chk_concept_ids_list" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.api.views.View.chk_data_sources">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.api.views.View.</span></span><span class="sig-name descname"><span class="pre">chk_data_sources</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_sources</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/View.html#chk_data_sources"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.View.chk_data_sources" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.api.views.View.chk_group">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.api.views.View.</span></span><span class="sig-name descname"><span class="pre">chk_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group_input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_groups</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/View.html#chk_group"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.View.chk_group" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.api.views.View.chk_group_access">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.api.views.View.</span></span><span class="sig-name descname"><span class="pre">chk_group_access</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group_access_input</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/View.html#chk_group_access"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.View.chk_group_access" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.api.views.View.chk_tags">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.api.views.View.</span></span><span class="sig-name descname"><span class="pre">chk_tags</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tags_input</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/View.html#chk_tags"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.View.chk_tags" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.api.views.View.chk_valid_id">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.api.views.View.</span></span><span class="sig-name descname"><span class="pre">chk_valid_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">set_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pk</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/View.html#chk_valid_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.View.chk_valid_id" title="Permalink to this definition">#</a></dt>
@@ -714,39 +912,47 @@ Get all the tags but limit if we are searching.</p>
 passed to the API.
 (accepts both integers and with prefixes ‘C/PH/WS’)</p>
 </dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.api.views.View.chk_world_access">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.api.views.View.</span></span><span class="sig-name descname"><span class="pre">chk_world_access</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">world_access_input</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/View.html#chk_world_access"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.View.chk_world_access" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.api.views.View.getTagsOrCollections">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.api.views.View.</span></span><span class="sig-name descname"><span class="pre">getTagsOrCollections</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/View.html#getTagsOrCollections"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.View.getTagsOrCollections" title="Permalink to this definition">#</a></dt>
 <dd><p>return the list of tags or collections</p>
 </dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.api.views.View.get_canonical_path">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.api.views.View.</span></span><span class="sig-name descname"><span class="pre">get_canonical_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_HDRUK_rel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/View.html#get_canonical_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.View.get_canonical_path" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.api.views.View.get_canonical_path_by_brand">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.api.views.View.</span></span><span class="sig-name descname"><span class="pre">get_canonical_path_by_brand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">set_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pk</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">history_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/View.html#get_canonical_path_by_brand"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.View.get_canonical_path_by_brand" title="Permalink to this definition">#</a></dt>
 <dd><p>if a concept/phenotype belongs to HDRUK and opened in default site
 set canonical link to phenotypes.healthdatagateway.org</p>
 </dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.api.views.View.get_versions_list">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.api.views.View.</span></span><span class="sig-name descname"><span class="pre">get_versions_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">set_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pk</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/View.html#get_versions_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.View.get_versions_list" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.api.views.View.get_visible_versions_list">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.api.views.View.</span></span><span class="sig-name descname"><span class="pre">get_visible_versions_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">set_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pk</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_authenticated_user</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/View.html#get_visible_versions_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.View.get_visible_versions_list" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.api.views.View.isValidConcept">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.api.views.View.</span></span><span class="sig-name descname"><span class="pre">isValidConcept</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concept</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/View.html#isValidConcept"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.View.isValidConcept" title="Permalink to this definition">#</a></dt>
 <dd><p>Check that the concept data is valid.</p>
-<p>MUST have the first parameter as a request for the @login_required decorator.</p>
+<p>MUST have the first parameter as a request for the &#64;login_required decorator.</p>
 </dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.api.views.View.publish_entity">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.api.views.View.</span></span><span class="sig-name descname"><span class="pre">publish_entity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">set_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pk</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/View.html#publish_entity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.View.publish_entity" title="Permalink to this definition">#</a></dt>
@@ -754,21 +960,24 @@ set canonical link to phenotypes.healthdatagateway.org</p>
 for HDR-UK testing
 (No validation done here)</p>
 </dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.api.views.View.robots">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.api.views.View.</span></span><span class="sig-name descname"><span class="pre">robots</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">content</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'all'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/View.html#robots"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.View.robots" title="Permalink to this definition">#</a></dt>
 <dd><p>not to index demo site API
 and add the canonical link</p>
 </dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.api.views.View.robots2">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.api.views.View.</span></span><span class="sig-name descname"><span class="pre">robots2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">content</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'all'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/View.html#robots2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.View.robots2" title="Permalink to this definition">#</a></dt>
 <dd><p>not to index demo site API
 and add the canonical link after checking the brand</p>
 </dd></dl>
+
 </section>
 <section id="module-clinicalcode.api.views.WorkingSet">
-<span id="clinicalcode-api-views-workingset-module"></span><h2>clinicalcode.api.views.WorkingSet module<a class="headerlink" href="#module-clinicalcode.api.views.WorkingSet" title="Permalink to this headline">#</a></h2>
+<span id="clinicalcode-api-views-workingset-module"></span><h2>clinicalcode.api.views.WorkingSet module<a class="headerlink" href="#module-clinicalcode.api.views.WorkingSet" title="Permalink to this heading">#</a></h2>
 <p>permitted) and to access the data structure and components of groups of
 data types.
 —————————————————————————</p>
@@ -776,16 +985,19 @@ data types.
 <dt class="sig sig-object py" id="clinicalcode.api.views.WorkingSet.api_workingset_create">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.api.views.WorkingSet.</span></span><span class="sig-name descname"><span class="pre">api_workingset_create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/WorkingSet.html#api_workingset_create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.WorkingSet.api_workingset_create" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.api.views.WorkingSet.api_workingset_update">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.api.views.WorkingSet.</span></span><span class="sig-name descname"><span class="pre">api_workingset_update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/WorkingSet.html#api_workingset_update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.WorkingSet.api_workingset_update" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.api.views.WorkingSet.export_workingset_codes">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.api.views.WorkingSet.</span></span><span class="sig-name descname"><span class="pre">export_workingset_codes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/WorkingSet.html#export_workingset_codes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.WorkingSet.export_workingset_codes" title="Permalink to this definition">#</a></dt>
 <dd><p>Returns the unique set of codes and descriptions for the specified working set saved concepts.
 Returns concepts codes + attributes for a workingset.</p>
 </dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.api.views.WorkingSet.export_workingset_codes_byVersionID">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.api.views.WorkingSet.</span></span><span class="sig-name descname"><span class="pre">export_workingset_codes_byVersionID</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/WorkingSet.html#export_workingset_codes_byVersionID"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.WorkingSet.export_workingset_codes_byVersionID" title="Permalink to this definition">#</a></dt>
@@ -793,11 +1005,13 @@ Returns concepts codes + attributes for a workingset.</p>
 Returns concepts codes + attributes for a workingset
 for a specific version.</p>
 </dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.api.views.WorkingSet.get_workingset_codes">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.api.views.WorkingSet.</span></span><span class="sig-name descname"><span class="pre">get_workingset_codes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pk</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">workingset_history_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/WorkingSet.html#get_workingset_codes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.WorkingSet.get_workingset_codes" title="Permalink to this definition">#</a></dt>
 <dd><p>Return codes+attributes for a working set for a specific historical version.</p>
 </dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.api.views.WorkingSet.get_workingset_codes_byVersionID">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.api.views.WorkingSet.</span></span><span class="sig-name descname"><span class="pre">get_workingset_codes_byVersionID</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pk</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">workingset_history_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/WorkingSet.html#get_workingset_codes_byVersionID"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.WorkingSet.get_workingset_codes_byVersionID" title="Permalink to this definition">#</a></dt>
@@ -805,24 +1019,28 @@ for a specific version.</p>
 Returns concepts codes + attributes for a workingset
 for a specific version.</p>
 </dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.api.views.WorkingSet.get_workingset_concepts">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.api.views.WorkingSet.</span></span><span class="sig-name descname"><span class="pre">get_workingset_concepts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pk</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">workingset_history_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/WorkingSet.html#get_workingset_concepts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.WorkingSet.get_workingset_concepts" title="Permalink to this definition">#</a></dt>
 <dd><p>Return concepts info for a working set for a specific historical version.</p>
 </dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.api.views.WorkingSet.workingset_detail">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.api.views.WorkingSet.</span></span><span class="sig-name descname"><span class="pre">workingset_detail</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/WorkingSet.html#workingset_detail"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.WorkingSet.workingset_detail" title="Permalink to this definition">#</a></dt>
 <dd><p>Display the detail of a working set at a point in time.</p>
 </dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="clinicalcode.api.views.WorkingSet.workingsets">
 <span class="sig-prename descclassname"><span class="pre">clinicalcode.api.views.WorkingSet.</span></span><span class="sig-name descname"><span class="pre">workingsets</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/clinicalcode/api/views/WorkingSet.html#workingsets"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#clinicalcode.api.views.WorkingSet.workingsets" title="Permalink to this definition">#</a></dt>
 <dd><p>Get the API output for the list of my Working Sets.</p>
 </dd></dl>
+
 </section>
 <section id="module-clinicalcode.api.views">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-clinicalcode.api.views" title="Permalink to this headline">#</a></h2>
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-clinicalcode.api.views" title="Permalink to this heading">#</a></h2>
 </section>
 </section>
 
@@ -905,6 +1123,7 @@ for a specific version.</p>
 </div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/scripts/furo.js"></script>
     </body>
