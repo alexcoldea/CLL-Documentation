@@ -2,7 +2,7 @@ name: Codebase Sphinx Documentation
 
 on:
   push:
-    branches: [ cll-test ]
+    branches: [ gh-pages ]
     # change to on merge when completed
 jobs:
   build_docs_job:
